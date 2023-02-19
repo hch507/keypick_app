@@ -2,9 +2,7 @@ package com.example.keyword_miner
 
 import com.google.gson.annotations.SerializedName
 
-data class RelKwdStatResponse(
-    @SerializedName("keywordList") val keywordList: List<KeywordInfo>
-)
+
 data class KeywordInfo(
     @SerializedName("relKeyword") val relKeyword: String,
     @SerializedName("monthlyPcQcCnt") val monthlyPcQcCnt: Int,
