@@ -1,5 +1,6 @@
 package com.example.keyword_miner
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,20 +26,20 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다.")
 
             val userSearchInput = binding.keywordName.text.toString()
-            RetrofitManager.instance.searchPhotos(searchTerm = userSearchInput) { responseState ->
+            RetrofitManager.instance.searchPhotos(searchTerm = userSearchInput) { responseState, responseArrayList ->
                 when (responseState) {
                     RESPONSE_STATE.OKAY -> {
-                        Log.d(TAG, "api 호출에 성공하였습니다 ")
+                        Log.d(TAG, "api 호출에 성공하였습니다 ${responseArrayList?.get(0)}")
                         //Arraylist 전달하기
                         //bundle에 넣어서 전달하기
-//                        val intent = Intent(this,photoActivity::class.java )
-//
-//                        val bundle = Bundle()
-//                        bundle.putSerializable("array_list",responseArrayList)
-//                        intent.putExtra("bundle_array",bundle)
-//                        intent.putExtra("searchTerm",userSearchInput)
-//
-//                        startActivity(intent)
+                        val intent = Intent(this,KeywordActivity::class.java )
+
+                        val bundle = Bundle()
+                        bundle.putSerializable("array_list",responseArrayList)
+                        intent.putExtra("bundle_array",bundle)
+                        intent.putExtra("searchTerm",userSearchInput)
+
+                        startActivity(intent)
 
                     }
                     RESPONSE_STATE.FAIL -> {
