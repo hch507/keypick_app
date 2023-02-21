@@ -14,12 +14,13 @@ object constant {
 }
 
 object API {
-    const val BASE_URL : String = "https://api.openai.com/v1/"
-    const val token ="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"
-    const val temperature = 0.7
-    const val maxTokens = 300
-    const val model ="text-davinci-003"
-    val stop = listOf("===")
+    const val BASE_URL : String = "https://openapi.naver.com/v1/datalab/"
+    const val Content_Type: String= "application/json"
+    const val Client_id : String ="oKQNT8007_pUD1FBJv0a"
+    const val Client_pw : String ="Cp7YEq41hc"
+    const val start_date : String ="2020-01-01"
+    const val end_date : String ="2023-01-01"
+    const val timeunit : String ="month"
 
 }
 
@@ -27,4 +28,4 @@ enum class RESPONSE_STATE{
     OKAY,
     FAIL
 }
-
+data class Keyword(val groupName: String, val keywords: List<String>)

@@ -9,15 +9,11 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
     private  var retrofitClient : Retrofit? = null
 
-    var okHttpClient = OkHttpClient().newBuilder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .build()
+
     fun getRetrifitClient(base_url:String): Retrofit?{
         retrofitClient = Retrofit.Builder()
             .baseUrl(base_url)
-            .client(okHttpClient)
+
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

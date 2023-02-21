@@ -48,7 +48,6 @@
         android:id="@+id/findButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:onClick="@{()->loginactivity.login()}"
         android:text="Find" />
 
 

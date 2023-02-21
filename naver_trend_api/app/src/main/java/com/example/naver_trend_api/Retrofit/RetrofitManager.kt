@@ -1,10 +1,9 @@
 package com.example.keyword_miner.Retrofit
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.example.chatgpt_api.Retrofit.ChatGPTRequest
-import com.example.keyword_miner.KeywordInfo
+import com.example.chatgpt_api.Retrofit.Keyword
+
 import com.example.keyword_miner.utils.API
 
 import com.example.keyword_miner.utils.RESPONSE_STATE
@@ -21,9 +20,13 @@ class RetrofitManager {
     private var iRetrofit : IRetrofit? = RetrofitClient.getRetrifitClient(API.BASE_URL)?.create(IRetrofit::class.java)
 
     fun searchPhotos(searchTerm: String?, completion: (RESPONSE_STATE) -> Unit){
-        var prompt = "${searchTerm} 키워드를 넣어 블로그 주제와 간략한 전략을 만들어줘"
-        val request = ChatGPTRequest(API.model, prompt, API.maxTokens, API.temperature, API.stop)
-        val call = iRetrofit?.getRelKwdStat(auth = "Bearer ${API.token}", request = request).let{
+        var item : String? = searchTerm
+
+        var keywordGroups= listOf(item, listOf(item))
+        val request = ChatGPTRequest(API.start_date, API.end_date, API.timeunit,
+            keywordGroups as List<Keyword>
+        )
+        val call = iRetrofit?.getRelKwdStat(API.Content_Type,API.Client_id, API.Client_pw,request).let{
             it
         }?: return
         //실제 요청 후 callback을 받

@@ -1,11 +1,12 @@
 package com.example.chatgpt_api.Retrofit
 
 import com.google.gson.annotations.SerializedName
+data class Keyword(val groupName: String, val keywords: List<String>)
 
 data class ChatGPTRequest(
-    @SerializedName ("model") val model :String,
-    @SerializedName ("prompt") val prompt: String,
-    @SerializedName ("max_tokens") val maxTokens: Int,
-    @SerializedName ("temperature") val temperature: Double,
-    @SerializedName ("stop") val stop: List<String>
+
+    @SerializedName ("startDate") val startDate: String,
+    @SerializedName("endDate") val endDate: String,
+    @SerializedName("timeUnit") val timeUnit: String,
+    @SerializedName("keywordGroups") var keywordGroups: List<Keyword>
 )
