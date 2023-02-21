@@ -17,7 +17,6 @@ interface IRetrofit {
         @Header("X-Signature") x_signature : String,
         @Query("hintKeywords") hintKeywords: String?,
         @Query("showDetail") showDetail: Int = 1,
-        @Query("grouping") grouping: Int = 1,
-        @Query("month") month: String? = null
+
     ): Call<JsonElement>
 }

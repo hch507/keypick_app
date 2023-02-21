@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                         val bundle = Bundle()
                         bundle.putSerializable("array_list",responseArrayList)
                         intent.putExtra("bundle_array",bundle)
-                        intent.putExtra("searchTerm",userSearchInput)
+
 
                         startActivity(intent)
 

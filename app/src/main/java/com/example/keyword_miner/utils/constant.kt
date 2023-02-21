@@ -15,13 +15,13 @@ object constant {
 
 object API {
     const val BASE_URL : String = "https://api.searchad.naver.com/"
-    const val Content_Type : String="application/json; charset=UTF-8"
+    const val Content_Type : String="application/json"
     var X_Timestamp = System.currentTimeMillis().toString()
     const val X_API_KEY : String = "01000000000c40d694768235be69e873bf7751c0f482f571a4fbe56f728e21f79337f18493"
     const val X_customer : String ="2776436"
     const val X_secret ="AQAAAAAMQNaUdoI1vmnoc793UcD0irzhPxbLpNHDMOxleVvqAA=="
-
 }
+
 
 enum class RESPONSE_STATE{
     OKAY,
