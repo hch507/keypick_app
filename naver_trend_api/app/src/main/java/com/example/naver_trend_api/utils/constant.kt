@@ -14,6 +14,7 @@ object constant {
 }
 
 object API {
+
     const val BASE_URL : String = "https://openapi.naver.com/v1/datalab/"
     const val Content_Type: String= "application/json"
     const val Client_id : String ="oKQNT8007_pUD1FBJv0a"
