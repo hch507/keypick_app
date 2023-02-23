@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다.")
 
-            val userSearchInput = binding.keywordName.text.toString()
+            val userSearchInput = binding.keywordName.text.toString().replace(" ", "")
             RetrofitManager.instance.searchPhotos(searchTerm = userSearchInput) { responseState, responseArrayList ->
                 when (responseState) {
                     RESPONSE_STATE.OKAY -> {
