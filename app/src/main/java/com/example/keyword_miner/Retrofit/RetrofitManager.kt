@@ -21,10 +21,15 @@ class RetrofitManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun searchPhotos(searchTerm: String?, completion: (RESPONSE_STATE, ArrayList<KeywordInfo>?) -> Unit){
 
-        val call = iRetrofit?.getRelKwdStat(content_type = API.Content_Type, x_timestamp = API.X_Timestamp, api_key = API.X_API_KEY, x_customer = API.X_customer, x_signature = Signature.generate(API.X_Timestamp,
-                                                                                                                                                                                                    Signature.method,
-                                                                                                                                                                                                    Signature.uri,
-                                                                                                                                                                                                    API.X_secret
+        val call = iRetrofit?.getRelKwdStat(
+            content_type = API.Content_Type,
+            x_timestamp = API.X_Timestamp,
+            api_key = API.X_API_KEY,
+            x_customer = API.X_customer,
+            x_signature = Signature.generate(API.X_Timestamp,
+                                             Signature.method,
+                                             Signature.uri,
+                                             API.X_secret
 
             ), hintKeywords = searchTerm).let{
             it
