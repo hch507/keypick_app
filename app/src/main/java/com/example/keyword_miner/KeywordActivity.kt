@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.keyword_miner.Model.ItemPeriod
+import com.example.keyword_miner.Model.blogData
 import com.example.keyword_miner.databinding.ActivityKeywordBinding
 import com.example.keyword_miner.databinding.ActivityMainBinding
 import com.example.keyword_miner.utils.constant.TAG
@@ -20,6 +21,7 @@ import com.github.mikephil.charting.data.BarEntry
 class KeywordActivity : AppCompatActivity() {
     var keywordList = ArrayList<KeywordInfo>()
     var PeriodList =ArrayList<ItemPeriod>()
+    var BlogCntList=ArrayList<blogData>()
     private var kbinding  : ActivityKeywordBinding? = null
     private val binding get() = kbinding!!
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,9 @@ class KeywordActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d(TAG, "KeywordActivity-onCreate() called")
         val bundle = intent.getBundleExtra("bundle_array")
-        val bundle_data = intent.getBundleExtra("bundle_array_data")
+       // val bundle_data = intent.getBundleExtra("bundle_array_data")
+        val bundle_blogcnt = intent.getBundleExtra("bundle_array_blogcnt")
+
 
         if (bundle != null) {
             keywordList= bundle.getSerializable("array_list") as ArrayList<KeywordInfo>
@@ -39,13 +43,22 @@ class KeywordActivity : AppCompatActivity() {
             binding.moClick.text=keywordList.get(0).monthlyMobileQcCnt
 
         }
-
-        if (bundle_data != null) {
-            PeriodList= bundle_data.getSerializable("data_array_list") as ArrayList<ItemPeriod>
-            Log.d(TAG, "Recycler_view-onCreate()-graph called${PeriodList}")
+        if (bundle_blogcnt!= null) {
+            if (bundle != null) {
+                BlogCntList= bundle.getSerializable("blogcnt_array_list") as ArrayList<blogData>
+            }
+            Log.d(TAG, "KeywordActivity-onCreate()-Rel called ${keywordList.get(0)}")
+            binding.totalBlog.text=BlogCntList.get(0).total
 
         }
-        setChartView(binding)
+
+
+//        if (bundle_data != null) {
+//            PeriodList= bundle_data.getSerializable("data_array_list") as ArrayList<ItemPeriod>
+//            Log.d(TAG, "Recycler_view-onCreate()-graph called${PeriodList}")
+//
+//        }
+//        setChartView(binding)
     }
     private fun setChartView(view: ActivityKeywordBinding?) {
         var chartWeek = binding.chartWeek

@@ -6,10 +6,8 @@ import androidx.annotation.RequiresApi
 import com.example.keyword_miner.KeywordInfo
 import com.example.keyword_miner.Model.BlogKeywordParam
 import com.example.keyword_miner.Model.ItemPeriod
-import com.example.keyword_miner.utils.API
-import com.example.keyword_miner.utils.RESPONSE_STATE
-import com.example.keyword_miner.utils.Search_API
-import com.example.keyword_miner.utils.Signature
+import com.example.keyword_miner.Model.blogData
+import com.example.keyword_miner.utils.*
 import com.example.keyword_miner.utils.constant.TAG
 import com.google.gson.JsonElement
 import retrofit2.Call
@@ -21,7 +19,9 @@ class RetrofitManager {
     }
     private var iRetrofit : IRetrofit? = RetrofitClient.getRetrifitClient(API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_search : IRetrofit? = RetrofitClient.getRetrifitClient(Search_API.BASE_URL)?.create(IRetrofit::class.java)
+    private var iRetrofit_blog : IRetrofit? = RetrofitClient.getRetrifitClient(Blog_API.BASE_URL)?.create(IRetrofit::class.java)
 
+    // 연관 검색어 및 월 피씨 모바일 컴생량
     @RequiresApi(Build.VERSION_CODES.O)
     fun searchKeywordRel(searchTerm: String?, completion: (RESPONSE_STATE, ArrayList<KeywordInfo>?) -> Unit){
 
@@ -59,7 +59,6 @@ class RetrofitManager {
                         //모바일 클릭수 가져오기
                         val monthlyMobileQcCnt = itemObject.get("monthlyMobileQcCnt").asString
 
-
                         val keywordItem = KeywordInfo(relKeyword = relkeyword, monthlyPcQcCnt = monthlyPcQcCnt, monthlyMobileQcCnt = monthlyMobileQcCnt)
                         parseRelArray.add(keywordItem)
                     }
@@ -77,6 +76,8 @@ class RetrofitManager {
         })
     }
 
+
+    //검색어에 대한 월별 그래프
     fun searcKData(searchTerm: String?, completion: (RESPONSE_STATE, Any?) -> Unit){
         var item : String? = searchTerm
 
@@ -135,5 +136,50 @@ class RetrofitManager {
                 completion(RESPONSE_STATE.FAIL,null)
             }
         })
+    }
+
+
+    //검색어에 대한 총 블로그 수
+    fun searchBlogCnt(searchTerm : String?, completion :(RESPONSE_STATE, ArrayList<blogData>?) -> Unit){
+        var parseBlogDataArray = ArrayList<blogData>()
+        var parseDate = ArrayList<String>()
+
+        val call = iRetrofit_blog?.getBlogCnt(client_id = Blog_API.CLIENT_ID, client_secret = Blog_API.CLIENT_PW , display = 100 ,searhTerm =searchTerm, sort=Blog_API.SORT).let{
+            it
+        }?: return
+        //실제 요청 후 callback을 받₩
+        call.enqueue(object:retrofit2.Callback<JsonElement>{
+            //응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                Log.d(TAG, "RetrofitManager-onResponse() called ")
+
+                response.body()?.let{
+                    val body = it.asJsonObject
+                    val total = body.get("total").asString
+                    val results = body.getAsJsonArray("items")
+
+                    results.forEach{
+                            item->
+                        val itemObject = item.asJsonObject
+                        // 키워드 네임
+                        val postdate = itemObject.get("postdate").asString
+                        //pc클릭수 가져오기
+
+                        parseDate.add(postdate)
+                    }
+                    val ItemData= blogData(total = total, data = parseDate)
+                    parseBlogDataArray.add(ItemData)
+                }
+                completion(RESPONSE_STATE.OKAY,parseBlogDataArray)
+            }
+            //응답실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
+                completion(RESPONSE_STATE.FAIL,null)
+            }
+        })
+
     }
 }

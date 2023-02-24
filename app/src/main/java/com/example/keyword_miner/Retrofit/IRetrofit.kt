@@ -26,4 +26,13 @@ interface IRetrofit {
         @Header("X-Naver-Client-Secret") clientSecret: String,
         @Body request: BlogKeywordParam
     ):Call<JsonElement>
+
+    @GET("search/blog.json")
+    fun getBlogCnt(
+        @Header("X-Naver-Client-Id") client_id: String,
+        @Header("X-Naver-Client-Secret") client_secret: String,
+        @Query("display") display: Int,
+        @Query("query") searhTerm: String?,
+        @Query("sort") sort: String
+    ):Call<JsonElement>
 }
