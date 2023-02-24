@@ -9,13 +9,12 @@ import com.example.naver_trend_api.Model.ItemPeriod
 import com.example.naver_trend_api.databinding.ActivityItemBinding
 import com.example.naver_trend_api.databinding.ActivityMainBinding
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 
 class ItemActivity : AppCompatActivity() {
     var PeriodList =ArrayList<ItemPeriod>()
@@ -56,13 +55,18 @@ class ItemActivity : AppCompatActivity() {
         barChart.setScaleEnabled(false) //Zoom In/Out
 
         val valueList : ArrayList<Double> = PeriodList[0].rate
-        val entries: ArrayList<String> = PeriodList[0].period
+        val entries: ArrayList<BarEntry> = ArrayList()
+
+
         val title = PeriodList[0].title
 
         //input data
 
 
-
+        for (i in 0 until valueList.size) {
+            val barEntry = BarEntry(i.toFloat(), valueList[i].toFloat())
+            entries.add(barEntry)
+        }
 
         val barDataSet = BarDataSet(entries, title)
         val data = BarData(barDataSet)
@@ -71,6 +75,7 @@ class ItemActivity : AppCompatActivity() {
     }
 
     private fun initBarChart(barChart: BarChart) {
+        val dateList: ArrayList<String> = PeriodList[0].period
         //hiding the grey background of the chart, default false if not set
         barChart.setDrawGridBackground(false)
         //remove the bar shadow, default false if not set
@@ -100,7 +105,7 @@ class ItemActivity : AppCompatActivity() {
         //hiding the vertical grid lines, default true if not set
         xAxis.setDrawGridLines(false)
 
-
+        xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
         //좌측 값 hiding the left y-axis line, default true if not set
         val leftAxis: YAxis = barChart.getAxisLeft()
         leftAxis.setDrawAxisLine(false)
@@ -119,7 +124,7 @@ class ItemActivity : AppCompatActivity() {
         legend.form = Legend.LegendForm.LINE
         //setting the text size of the legend
         legend.textSize = 11f
-        legend.textColor = Color.YELLOW
+        legend.textColor = Color.BLACK
         //setting the alignment of legend toward the chart
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
@@ -128,4 +133,11 @@ class ItemActivity : AppCompatActivity() {
         //setting the location of legend outside the chart, default false if not set
         legend.setDrawInside(false)
     }
+
+//    inner class MyXAxisFormatter : ValueFormatter() {
+//        private val days = PeriodList[0].period
+//        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+//            return days.getOrNull(value.toInt()-1) ?: value.toString()
+//        }
+//    }
 }
