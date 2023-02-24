@@ -29,4 +29,4 @@ enum class RESPONSE_STATE{
     OKAY,
     FAIL
 }
-data class Keyword(val groupName: String, val keywords: List<String>)
+

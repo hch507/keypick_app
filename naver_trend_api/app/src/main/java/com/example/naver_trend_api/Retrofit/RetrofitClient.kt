@@ -19,4 +19,5 @@ object RetrofitClient {
 
         return retrofitClient
     }
+
 }

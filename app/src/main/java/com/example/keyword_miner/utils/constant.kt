@@ -22,6 +22,18 @@ object API {
     const val X_secret ="AQAAAAAMQNaUdoI1vmnoc793UcD0irzhPxbLpNHDMOxleVvqAA=="
 }
 
+object Search_API {
+
+    const val BASE_URL : String = "https://openapi.naver.com/v1/datalab/"
+    const val Content_Type: String= "application/json"
+    const val Client_id : String ="oKQNT8007_pUD1FBJv0a"
+    const val Client_pw : String ="Cp7YEq41hc"
+    const val start_date : String ="2020-01-01"
+    const val end_date : String ="2023-01-01"
+    const val timeunit : String ="month"
+
+}
+
 
 enum class RESPONSE_STATE{
     OKAY,

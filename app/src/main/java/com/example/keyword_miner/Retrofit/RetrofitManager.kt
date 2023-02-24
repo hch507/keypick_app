@@ -4,8 +4,11 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.keyword_miner.KeywordInfo
+import com.example.keyword_miner.Model.BlogKeywordParam
+import com.example.keyword_miner.Model.ItemPeriod
 import com.example.keyword_miner.utils.API
 import com.example.keyword_miner.utils.RESPONSE_STATE
+import com.example.keyword_miner.utils.Search_API
 import com.example.keyword_miner.utils.Signature
 import com.example.keyword_miner.utils.constant.TAG
 import com.google.gson.JsonElement
@@ -17,9 +20,10 @@ class RetrofitManager {
         val instance = RetrofitManager()
     }
     private var iRetrofit : IRetrofit? = RetrofitClient.getRetrifitClient(API.BASE_URL)?.create(IRetrofit::class.java)
+    private var iRetrofit_search : IRetrofit? = RetrofitClient.getRetrifitClient(Search_API.BASE_URL)?.create(IRetrofit::class.java)
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun searchPhotos(searchTerm: String?, completion: (RESPONSE_STATE, ArrayList<KeywordInfo>?) -> Unit){
+    fun searchKeywordRel(searchTerm: String?, completion: (RESPONSE_STATE, ArrayList<KeywordInfo>?) -> Unit){
 
         val call = iRetrofit?.getRelKwdStat(
             content_type = API.Content_Type,
@@ -39,8 +43,8 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-                Log.d(TAG, "RetrofitManager-onResponse() called / response : ${response.body()}")
-                var parseDataArray = ArrayList<KeywordInfo>()
+                Log.d(TAG, "RetrofitManager-onResponse() called-rel/ response : ")
+                var parseRelArray = ArrayList<KeywordInfo>()
                 response.body()?.let{
                     val body = it.asJsonObject
                     val results = body.getAsJsonArray("keywordList")
@@ -57,11 +61,11 @@ class RetrofitManager {
 
 
                         val keywordItem = KeywordInfo(relKeyword = relkeyword, monthlyPcQcCnt = monthlyPcQcCnt, monthlyMobileQcCnt = monthlyMobileQcCnt)
-                        parseDataArray.add(keywordItem)
+                        parseRelArray.add(keywordItem)
                     }
 
                 }
-                completion(RESPONSE_STATE.OKAY, parseDataArray)
+                completion(RESPONSE_STATE.OKAY, parseRelArray)
             }
             //응답실패시
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
@@ -70,6 +74,66 @@ class RetrofitManager {
                 completion(RESPONSE_STATE.FAIL, null)
             }
 
+        })
+    }
+
+    fun searcKData(searchTerm: String?, completion: (RESPONSE_STATE, Any?) -> Unit){
+        var item : String? = searchTerm
+
+        val keywordGroups = listOf(
+            mapOf("groupName" to item, "keywords" to listOf(item))
+        )
+        val request = BlogKeywordParam(Search_API.start_date, Search_API.end_date, Search_API.timeunit,
+            keywordGroups as List<Map<String, String?>>
+        )
+
+        val call = iRetrofit_search?.getKeywordData(API.Content_Type,Search_API.Client_id,Search_API.Client_pw,request).let{
+            it
+        }?: return
+        //실제 요청 후 callback을 받
+        call.enqueue(object:retrofit2.Callback<JsonElement>{
+            //응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                Log.d(TAG, "RetrofitManager-onResponse-graph() called")
+                var parseDataArray = ArrayList<ItemPeriod>()
+                var parsePeriod = ArrayList<String>()
+                var parseRate = ArrayList<Double>()
+                response.body()?.let{
+                    val body = it.asJsonObject
+                    val results = body.getAsJsonArray("results")
+
+                    results.forEach{
+                            item->
+                        val itemObject = item.asJsonObject
+                        // 키워드 네임
+                        val title = itemObject.get("title").asString
+                        //pc클릭수 가져오기
+                        val data = itemObject.getAsJsonArray("data")
+
+                        data.forEach{
+                                date ->
+                            val dateObjects = date.asJsonObject
+                            // period
+                            val period = dateObjects.get("period").asString
+                            val ratio = dateObjects.get(("ratio")).asDouble
+                            parsePeriod.add(period)
+                            parseRate.add((ratio))
+                        }
+
+                        val ItemData= ItemPeriod(title = title, period = parsePeriod, rate = parseRate)
+                        parseDataArray.add(ItemData)
+                    }
+
+                }
+                completion(RESPONSE_STATE.OKAY,parseDataArray)
+            }
+            //응답실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
+                completion(RESPONSE_STATE.FAIL,null)
+            }
         })
     }
 }
