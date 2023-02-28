@@ -4,14 +4,18 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
 import com.example.keyword_miner.Retrofit.RetrofitManager
 import com.example.keyword_miner.databinding.ActivityMainBinding
 import com.example.keyword_miner.utils.RESPONSE_STATE
 import com.example.keyword_miner.utils.constant
 import com.example.keyword_miner.utils.constant.TAG
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다.")
             val intent = Intent(this, KeywordActivity::class.java)
             val userSearchInput = binding.keywordName.text.toString().replace(" ", "")
+            val bundle = Bundle()
 
             //연관 검색 api 호출
             RetrofitManager.instance.searchKeywordRel(searchTerm = userSearchInput) { responseState, responseArrayList ->
@@ -37,11 +42,10 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "api 호출에 성공하였습니다 ${responseArrayList?.get(0)}")
                         //Arraylist 전달하기
                         //bundle에 넣어서 전달하기
-                        val bundle = Bundle()
                         bundle.putSerializable("array_list", responseArrayList)
                         intent.putExtra("bundle_array", bundle)
 
-                        startActivity(intent)
+   //                     startActivity(intent)
                     }
                     RESPONSE_STATE.FAIL -> {
                         Toast.makeText(this, "api 호출 오류 입니다", Toast.LENGTH_SHORT).show()
@@ -51,42 +55,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             //검색어 그래프
-//            RetrofitManager.instance.searcKData(searchTerm = userSearchInput) { responseState, responseData ->
-//                when (responseState) {
-//                    RESPONSE_STATE.OKAY -> {
-//                        Log.d(constant.TAG, "api 호출에 성공하였습니다 ${responseData}")
-//                        //Arraylist 전달하기
-//                        //bundle에 넣어서 전달하기
-//
-//
-//                        val bundle = Bundle()
-//                        bundle.putSerializable("data_array_list", responseData as Serializable?)
-//                        intent.putExtra("bundle_array_data", bundle)
-//
-//                        startActivity(intent)
-//
-//
-//                    }
-//                    RESPONSE_STATE.FAIL -> {
-//                        Toast.makeText(this, "api 호출 오류 입니다", Toast.LENGTH_SHORT).show()
-//                        Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-//                    }
-//                }
-//            }
-
-
-            RetrofitManager.instance.searchBlogCnt(searchTerm = userSearchInput) { responseState, responseData ->
+            RetrofitManager.instance.searcKData(searchTerm = userSearchInput) { responseState, responseData ->
                 when (responseState) {
                     RESPONSE_STATE.OKAY -> {
                         Log.d(constant.TAG, "api 호출에 성공하였습니다 ${responseData}")
                         //Arraylist 전달하기
                         //bundle에 넣어서 전달하기
 
-                        val bundle = Bundle()
-                        bundle.putSerializable("blogcnt_array_list", responseData as Serializable)
-                        intent.putExtra("bundle_array_blogcnt", bundle)
-
-                        startActivity(intent)
+                        bundle.putSerializable("data_array_list", responseData as Serializable?)
+                        intent.putExtra("bundle_array_data", bundle)
 
 
                     }
@@ -94,10 +71,38 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "api 호출 오류 입니다", Toast.LENGTH_SHORT).show()
                         Log.d(constant.TAG, "api 호충에 실패 하였습니다")
                     }
+                }
+            }
+
+            RetrofitManager.instance.searchBlogCnt(searchTerm = userSearchInput) { responseState, responseData ->
+                when (responseState) {
+                    RESPONSE_STATE.OKAY -> {
+                        Log.d(constant.TAG, "api 호출에 성공하였습니다 ${responseData}")
+                        Log.d("LHH", "api 호출에 성공하였습니다 ${responseData}")
+
+                        //Arraylist 전달하기
+                        //bundle에 넣어서 전달하기
+
+                        val temp = responseData as Serializable
+                        bundle.putSerializable("blogcnt_array_list",temp)
+                        intent.putExtra("bundle_array_blogcnt", bundle)
+
+
+                    }
+                    RESPONSE_STATE.FAIL -> {
+                        Toast.makeText(this, "api 호출 오류 입니다", Toast.LENGTH_SHORT).show()
+                        Log.d(constant.TAG, "api 호충에 실패 하였습니다")
+                        Log.d("LHH", "api 호충에 실패 하였습니다")
+
+                    }
 
                 }
 
             }
+            Handler().postDelayed({
+                startActivity(intent)
+            }, 2000)
         }
+
     }
 }

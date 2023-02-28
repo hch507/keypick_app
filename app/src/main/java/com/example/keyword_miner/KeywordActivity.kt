@@ -1,9 +1,13 @@
 package com.example.keyword_miner
 
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.keyword_miner.Model.ItemPeriod
 import com.example.keyword_miner.Model.blogData
 import com.example.keyword_miner.databinding.ActivityKeywordBinding
@@ -17,20 +21,31 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class KeywordActivity : AppCompatActivity() {
     var keywordList = ArrayList<KeywordInfo>()
     var PeriodList =ArrayList<ItemPeriod>()
     var BlogCntList=ArrayList<blogData>()
+
+
+
     private var kbinding  : ActivityKeywordBinding? = null
     private val binding get() = kbinding!!
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         kbinding = ActivityKeywordBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
         Log.d(TAG, "KeywordActivity-onCreate() called")
         val bundle = intent.getBundleExtra("bundle_array")
-       // val bundle_data = intent.getBundleExtra("bundle_array_data")
+        val bundle_data = intent.getBundleExtra("bundle_array_data")
         val bundle_blogcnt = intent.getBundleExtra("bundle_array_blogcnt")
 
 
@@ -44,37 +59,34 @@ class KeywordActivity : AppCompatActivity() {
 
         }
         if (bundle_blogcnt!= null) {
-            if (bundle != null) {
-                BlogCntList= bundle.getSerializable("blogcnt_array_list") as ArrayList<blogData>
-            }
+            BlogCntList= bundle_blogcnt.getSerializable("blogcnt_array_list") as ArrayList<blogData>
             Log.d(TAG, "KeywordActivity-onCreate()-Rel called ${keywordList.get(0)}")
             binding.totalBlog.text=BlogCntList.get(0).total
+            var monthCnt = MonthCnt(BlogCntList.get(0).data)
+            binding.monthBlog.text=monthCnt
 
         }
 
 
-//        if (bundle_data != null) {
-//            PeriodList= bundle_data.getSerializable("data_array_list") as ArrayList<ItemPeriod>
-//            Log.d(TAG, "Recycler_view-onCreate()-graph called${PeriodList}")
-//
-//        }
-//        setChartView(binding)
+        if (bundle_data != null) {
+            PeriodList= bundle_data.getSerializable("data_array_list") as ArrayList<ItemPeriod>
+            Log.d(TAG, "Recycler_view-onCreate()-graph called${PeriodList}")
+
+        }
+        if(PeriodList.size==0) {
+            Log.d(TAG, "KeywordActivity - onCreate() - called")
+        }else{
+            setChartView(binding)
+        }
+
+
     }
     private fun setChartView(view: ActivityKeywordBinding?) {
         var chartWeek = binding.chartWeek
         setWeek(chartWeek)
 
     }
-    private fun initBarDataSet(barDataSet: BarDataSet) {
-        //Changing the color of the bar
-        barDataSet.color = Color.parseColor("#304567")
-        //Setting the size of the form in the legend
-        barDataSet.formSize = 15f
-        //showing the value of the bar, default true if not set
-        barDataSet.setDrawValues(false)
-        //setting the text size of the value of the bar
-        barDataSet.valueTextSize = 8f
-    }
+
 
     private fun setWeek(barChart: BarChart) {
         initBarChart(barChart)
@@ -101,6 +113,7 @@ class KeywordActivity : AppCompatActivity() {
     }
 
     private fun initBarChart(barChart: BarChart) {
+        val dateList: ArrayList<String> = PeriodList[0].period
         //hiding the grey background of the chart, default false if not set
         barChart.setDrawGridBackground(false)
         //remove the bar shadow, default false if not set
@@ -130,7 +143,7 @@ class KeywordActivity : AppCompatActivity() {
         //hiding the vertical grid lines, default true if not set
         xAxis.setDrawGridLines(false)
 
-
+        xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
         //좌측 값 hiding the left y-axis line, default true if not set
         val leftAxis: YAxis = barChart.getAxisLeft()
         leftAxis.setDrawAxisLine(false)
@@ -149,7 +162,7 @@ class KeywordActivity : AppCompatActivity() {
         legend.form = Legend.LegendForm.LINE
         //setting the text size of the legend
         legend.textSize = 11f
-        legend.textColor = Color.YELLOW
+        legend.textColor = Color.BLACK
         //setting the alignment of legend toward the chart
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
@@ -157,5 +170,19 @@ class KeywordActivity : AppCompatActivity() {
         legend.orientation = Legend.LegendOrientation.HORIZONTAL
         //setting the location of legend outside the chart, default false if not set
         legend.setDrawInside(false)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun MonthCnt(list: ArrayList<String>):String{
+        val list: List<String> = list.toList()
+        val thirtyDaysAgo = LocalDate.now().minusDays(30)
+        val count = list.filter { LocalDate.parse("$it", DateTimeFormatter.ofPattern("yyyyMMdd")) >= thirtyDaysAgo }.count()
+        Log.d(TAG, "KeywordActivity - MonthCnt() - called $count")
+        return if (count == 100) {
+            "+$count"
+        } else {
+            count.toString()
+        }
+
     }
 }

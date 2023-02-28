@@ -55,30 +55,19 @@ class ItemActivity : AppCompatActivity() {
         barChart.setScaleEnabled(false) //Zoom In/Out
 
         val valueList : ArrayList<Double> = PeriodList[0].rate
-<<<<<<< HEAD
+
         //val entries: ArrayList<String> = PeriodList[0].period
         val entries: ArrayList<BarEntry> = ArrayList()
-=======
-        val entries: ArrayList<BarEntry> = ArrayList()
 
 
->>>>>>> e2a11cb5274846ac2f73812f79891bf2f9dce562
         val title = PeriodList[0].title
 
         //input data
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e2a11cb5274846ac2f73812f79891bf2f9dce562
         for (i in 0 until valueList.size) {
             val barEntry = BarEntry(i.toFloat(), valueList[i].toFloat())
             entries.add(barEntry)
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> e2a11cb5274846ac2f73812f79891bf2f9dce562
 
         val barDataSet = BarDataSet(entries, title)
         val data = BarData(barDataSet)
