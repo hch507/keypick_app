@@ -1,17 +1,22 @@
-package com.example.keyword_miner
+package com.example.keyword_miner.KeywordSearch
 
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.keyword_miner.KeywordInfo
 import com.example.keyword_miner.Model.ItemPeriod
 import com.example.keyword_miner.Model.blogData
-import com.example.keyword_miner.databinding.ActivityKeywordBinding
-import com.example.keyword_miner.databinding.ActivityMainBinding
+import com.example.keyword_miner.R
+import com.example.keyword_miner.databinding.FragmentKeywordBinding
 import com.example.keyword_miner.utils.constant.TAG
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
@@ -25,67 +30,48 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class KeywordActivity : AppCompatActivity() {
+
+class KeywordFragment : Fragment() {
     var keywordList = ArrayList<KeywordInfo>()
-    var PeriodList =ArrayList<ItemPeriod>()
-    var BlogCntList=ArrayList<blogData>()
+    var PeriodList = ArrayList<ItemPeriod>()
+    var BlogCntList = ArrayList<blogData>()
 
+    lateinit var binding: FragmentKeywordBinding
 
-
-    private var kbinding  : ActivityKeywordBinding? = null
-    private val binding get() = kbinding!!
-
-
+    val keywordViewModel by activityViewModels<KeywordViewModel>()
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        kbinding = ActivityKeywordBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentKeywordBinding.inflate(layoutInflater)
+        //keywordViewModel = ViewModelProvider(requireActivity()).get(KeywordViewModel::class.java)
+        Log.d("HCH", "KeywordFragment - onCreateView() - called")
+        keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
+            Log.d(TAG, "KeywordFragment - onCreateView() - called${KeywordInfoList}")
+            binding.apply {
+            binding.keyword.text = KeywordInfoList.get(0).relKeyword
+            binding.pcClick.text = KeywordInfoList.get(0).monthlyPcQcCnt
+            binding.moClick.text = KeywordInfoList.get(0).monthlyMobileQcCnt}
+        })
 
-
-        Log.d(TAG, "KeywordActivity-onCreate() called")
-        val bundle = intent.getBundleExtra("bundle_array")
-        val bundle_data = intent.getBundleExtra("bundle_array_data")
-        val bundle_blogcnt = intent.getBundleExtra("bundle_array_blogcnt")
-
-
-        if (bundle != null) {
-            keywordList= bundle.getSerializable("array_list") as ArrayList<KeywordInfo>
-            Log.d(TAG, "KeywordActivity-onCreate()-Rel called ${keywordList.get(0)}")
-
-            binding.keyword.text=keywordList.get(0).relKeyword
-            binding.pcClick.text=keywordList.get(0).monthlyPcQcCnt
-            binding.moClick.text=keywordList.get(0).monthlyMobileQcCnt
-
-        }
-        if (bundle_blogcnt!= null) {
-            BlogCntList= bundle_blogcnt.getSerializable("blogcnt_array_list") as ArrayList<blogData>
-            Log.d(TAG, "KeywordActivity-onCreate()-Rel called ${keywordList.get(0)}")
-            binding.totalBlog.text=BlogCntList.get(0).total
-            var monthCnt = MonthCnt(BlogCntList.get(0).data)
-            binding.monthBlog.text=monthCnt
-
-        }
-
-
-        if (bundle_data != null) {
-            PeriodList= bundle_data.getSerializable("data_array_list") as ArrayList<ItemPeriod>
-            Log.d(TAG, "Recycler_view-onCreate()-graph called${PeriodList}")
-
-        }
-        if(PeriodList.size==0) {
-            Log.d(TAG, "KeywordActivity - onCreate() - called")
-        }else{
+        keywordViewModel.currentBlogDate.observe(viewLifecycleOwner, Observer{
+            PeriodList=it
             setChartView(binding)
-        }
+        })
 
-
+        keywordViewModel.currentMonthCnt.observe(viewLifecycleOwner, Observer{
+            var monthCnt = MonthCnt(it.get(0).data)
+            binding.monthBlog.text=monthCnt
+            binding.totalBlog.text=it.get(0).total
+        })
+        return binding.root
     }
-    private fun setChartView(view: ActivityKeywordBinding?) {
+
+    private fun setChartView(view: FragmentKeywordBinding?) {
         var chartWeek = binding.chartWeek
         setWeek(chartWeek)
 
     }
+
 
 
     private fun setWeek(barChart: BarChart) {

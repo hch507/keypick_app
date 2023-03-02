@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Keyword_miner"
         tools:targetApi="31">
         <activity
-            android:name=".KeywordActivity"
+            android:name=".KeywordSearch.KeywordActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
