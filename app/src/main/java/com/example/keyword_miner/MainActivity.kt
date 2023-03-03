@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, KeywordActivity::class.java)
 
 //            val bundle = Bundle()
-            val userSearchInput = binding.keywordName.text.toString().replace(" ", "")
+            var userSearchInput = binding.keywordName.text.toString().replace(" ", "")
+            userSearchInput=convertToUpperCase(userSearchInput)
+            Log.d("HCH", "MainActivity - onCreate() - called ${userSearchInput}")
             intent.putExtra("searchterm", userSearchInput)
 
 //            //연관 검색 api 호출
@@ -105,4 +107,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    fun convertToUpperCase(input: String): String {
+        return if (input.matches("[a-zA-Z]+".toRegex()) && input.contains("[a-z]".toRegex())) {
+            input.toUpperCase()
+        } else {
+            input
+        }
+    }
+
 }
