@@ -32,9 +32,9 @@ import java.time.format.DateTimeFormatter
 
 
 class KeywordFragment : Fragment() {
-    var keywordList = ArrayList<KeywordInfo>()
+
     var PeriodList = ArrayList<ItemPeriod>()
-    var BlogCntList = ArrayList<blogData>()
+
 
     lateinit var binding: FragmentKeywordBinding
 
