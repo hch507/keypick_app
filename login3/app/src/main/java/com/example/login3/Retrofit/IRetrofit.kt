@@ -12,4 +12,10 @@ interface IRetrofit {
     fun getBlogCnt(
         @Header("Authorization") authorization: String,
     ):Call<JsonElement>
+
+
+    @GET
+    fun getMyBlog(
+        @Query("blogId") blogId : String
+    ):Call<JsonElement>
 }

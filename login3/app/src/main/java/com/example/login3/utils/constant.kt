@@ -16,7 +16,7 @@ object constant {
 
 object Blog_API{
     const val BASE_URL : String = "https://openapi.naver.com/v1/"
-
+    const val MY_BASE_URL : String ="https://blog.naver.com/NVisitorgp4Ajax.nhn"
 }
 
 
