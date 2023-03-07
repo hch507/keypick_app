@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //어답터와 뷰페이저 연결
         binding.ViewPage.adapter = pageAdapter
         //탭 레이아웃 타이틀 설정
-        val titles = listOf("검색어", "연관검색어")
+        val titles = listOf("Home", "Ranking")
         //탭 레이아웃과 뷰페이저 연걸
         TabLayoutMediator(binding.tabLayout, binding.ViewPage) { tab, position ->
             tab.text = titles.get(position)
