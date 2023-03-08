@@ -186,6 +186,7 @@ class RetrofitManager {
 
     //user data 가져오기
     fun userData(header : String, completion :(RESPONSE_STATE, ArrayList<UserBlog>?) -> Unit){
+        Log.d("HHH", "RetrofitManager-userData() called")
         var parseUserData = ArrayList<UserBlog>()
 
 
