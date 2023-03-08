@@ -16,7 +16,6 @@ import com.example.keyword_miner.utils.constant
 class KeywordViewModel : ViewModel() {
 
     private val _currentRelData = MutableLiveData <ArrayList<KeywordInfo>>()
-
     val currentRelData : LiveData<ArrayList<KeywordInfo>>
         get() = _currentRelData
 

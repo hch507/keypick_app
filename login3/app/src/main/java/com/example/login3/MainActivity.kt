@@ -41,19 +41,19 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "MainActivity - onCreate() - called ${responseArrayList}")
                         when(responseState) {
                             RESPONSE_STATE.OKAY -> {
-//                                if (responseArrayList != null) {
-//                                    itemlist=responseArrayList
-//                                }
-//                                val username = itemlist.get(0).email?.substring(0, itemlist.get(0).email!!.indexOf('@'))
-//                                binding.email.text=username
-//                                binding.name.text=itemlist.get(0).name
-                                val intent = Intent(this@MainActivity,UserActivity::class.java)
-                                //arraylist를 bundle에 담아 보내기
-                                val bundle = Bundle()
-                                bundle.putSerializable("Array_List",responseArrayList)
-                                intent.putExtra("Bundle_Array_List", bundle)
-
-                                startActivity(intent)
+                                if (responseArrayList != null) {
+                                    itemlist=responseArrayList
+                                }
+                                val username = itemlist.get(0).email?.substring(0, itemlist.get(0).email!!.indexOf('@'))
+                                binding.email.text=username
+                                binding.name.text=itemlist.get(0).name
+//                                val intent = Intent(this@MainActivity,UserActivity::class.java)
+//                                //arraylist를 bundle에 담아 보내기
+//                                val bundle = Bundle()
+//                                bundle.putSerializable("Array_List",responseArrayList)
+//                                intent.putExtra("Bundle_Array_List", bundle)
+//
+//                                startActivity(intent)
                             }
                             RESPONSE_STATE.FAIL->{
 

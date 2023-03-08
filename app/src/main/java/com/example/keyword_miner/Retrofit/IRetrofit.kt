@@ -35,4 +35,14 @@ interface IRetrofit {
         @Query("query") searhTerm: String?,
         @Query("sort") sort: String
     ):Call<JsonElement>
+
+    @GET("nid/me")
+    fun getUserBlog(
+        @Header("Authorization") authorization: String,
+    ):Call<JsonElement>
+
+    @GET
+    fun getBlogData(
+        @Query("blogId") blogId : String
+    ):Call<JsonElement>
 }

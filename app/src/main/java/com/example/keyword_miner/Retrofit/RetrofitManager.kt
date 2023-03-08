@@ -4,9 +4,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.keyword_miner.KeywordInfo
-import com.example.keyword_miner.Model.BlogKeywordParam
-import com.example.keyword_miner.Model.ItemPeriod
-import com.example.keyword_miner.Model.blogData
+import com.example.keyword_miner.Model.*
 import com.example.keyword_miner.utils.*
 import com.example.keyword_miner.utils.constant.TAG
 import com.google.gson.JsonElement
@@ -20,6 +18,8 @@ class RetrofitManager {
     private var iRetrofit : IRetrofit? = RetrofitClient.getRetrifitClient(API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_search : IRetrofit? = RetrofitClient.getRetrifitClient(Search_API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_blog : IRetrofit? = RetrofitClient.getRetrifitClient(Blog_API.BASE_URL)?.create(IRetrofit::class.java)
+    private var iRetrofit_user : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.BASE_URL)?.create(IRetrofit::class.java)
+    private var iRetrofit_blog_data : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.MY_BASE_URL)?.create(IRetrofit::class.java)
 
     // 연관 검색어 및 월 피씨 모바일 컴생량
     @RequiresApi(Build.VERSION_CODES.O)
@@ -182,4 +182,85 @@ class RetrofitManager {
         })
 
     }
+
+
+    //user data 가져오기
+    fun userData(header : String, completion :(RESPONSE_STATE, ArrayList<UserBlog>?) -> Unit){
+        var parseUserData = ArrayList<UserBlog>()
+
+
+        val call = iRetrofit_user?.getUserBlog(authorization = header).let{
+            it
+        }?: return
+        //실제 요청 후 callback을 받₩
+        call.enqueue(object:retrofit2.Callback<JsonElement>{
+            //응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - onResponse() - called ${header}")
+
+                response.body()?.let{
+                    val body = it.asJsonObject
+                    val results = body.getAsJsonObject("response")
+                    Log.d(TAG, "RetrofitManager-onResponse() called${results}")
+                    val email = results.get("email").asString
+                    val name = results.get("name").asString
+
+                    Log.d(TAG, "RetrofitManager-onResponse() called${email},${name}")
+
+                    val ItemData= UserBlog(email=email, name=name)
+                    parseUserData.add(ItemData)
+                }
+                completion(RESPONSE_STATE.OKAY,parseUserData)
+            }
+            //응답실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
+                completion(RESPONSE_STATE.FAIL,null)
+            }
+        })
+
+    }
+
+
+    //내 블로그 방문자 수
+    fun blogData(email : String, completion :(RESPONSE_STATE, ArrayList<MyBlogData>?) -> Unit){
+        var parseBlogDataArray = ArrayList<MyBlogData>()
+
+
+        val call = iRetrofit_blog_data?.getBlogData(blogId = email).let{
+            it
+        }?: return
+        //실제 요청 후 callback을 받₩
+        call.enqueue(object:retrofit2.Callback<JsonElement>{
+            //응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                Log.d("HHH", "RetrofitManager-onResponse() called${response.body()}")
+//                response.body()?.let{
+//                    val body = it.asJsonObject
+//                    val results = body.getAsJsonObject("response")
+//                    Log.d(TAG, "RetrofitManager-onResponse() called${results}")
+//                    val email = results.get("email").asString
+//                    val name = results.get("name").asString
+//
+//                    Log.d(TAG, "RetrofitManager-onResponse() called${email},${name}")
+//
+//                    val ItemData= Item(email=email, name=name)
+//                    parseBlogDataArray.add(ItemData)
+//                }
+                completion(RESPONSE_STATE.OKAY,null)
+            }
+            //응답실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
+                completion(RESPONSE_STATE.FAIL,null)
+            }
+        })
+
+    }
+
+
+
 }

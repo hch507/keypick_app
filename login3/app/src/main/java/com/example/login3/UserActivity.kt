@@ -21,7 +21,6 @@ class UserActivity : AppCompatActivity() {
         if (bundle != null) {
             shoplist= bundle.getSerializable("Array_List") as ArrayList<Item>
 
-
         }
         Log.d(TAG, "UserActivity-onCreate() called${shoplist}")
     }
