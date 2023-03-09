@@ -19,7 +19,7 @@ class RetrofitManager {
     private var iRetrofit_search : IRetrofit? = RetrofitClient.getRetrifitClient(Search_API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_blog : IRetrofit? = RetrofitClient.getRetrifitClient(Blog_API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_user : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.BASE_URL)?.create(IRetrofit::class.java)
-    private var iRetrofit_blog_data : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.MY_BASE_URL)?.create(IRetrofit::class.java)
+    private var iRetrofit_blog_data : IRetrofit? = RetrofitClient.getGsonRetrifitClient(MY_BLOG.MY_BASE_URL)?.create(IRetrofit::class.java)
 
     // 연관 검색어 및 월 피씨 모바일 컴생량
     @RequiresApi(Build.VERSION_CODES.O)
@@ -224,7 +224,7 @@ class RetrofitManager {
     }
 
 
-    //내 블로그 방문자 수
+//    내 블로그 방문자 수
     fun blogData(email : String, completion :(RESPONSE_STATE, ArrayList<MyBlogData>?) -> Unit){
         var parseBlogDataArray = ArrayList<MyBlogData>()
 
@@ -233,9 +233,9 @@ class RetrofitManager {
             it
         }?: return
         //실제 요청 후 callback을 받₩
-        call.enqueue(object:retrofit2.Callback<JsonElement>{
+        call.enqueue(object:retrofit2.Callback<String>{
             //응답 성공시
-            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
 
                 Log.d("HHH", "RetrofitManager-onResponse() called${response.body()}")
 //                response.body()?.let{
@@ -253,7 +253,7 @@ class RetrofitManager {
                 completion(RESPONSE_STATE.OKAY,null)
             }
             //응답실패시
-            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+            override fun onFailure(call: Call<String>, t: Throwable) {
 
                 Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
                 completion(RESPONSE_STATE.FAIL,null)

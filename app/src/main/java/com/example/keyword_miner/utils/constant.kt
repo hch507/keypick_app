@@ -48,7 +48,7 @@ enum class RESPONSE_STATE{
 }
 object MY_BLOG{
     const val BASE_URL : String = "https://openapi.naver.com/v1/"
-    const val MY_BASE_URL : String ="https://blog.naver.com/NVisitorgp4Ajax.nhn"
+    const val MY_BASE_URL : String ="https://blog.naver.com/"
 }
 
 

@@ -41,8 +41,8 @@ interface IRetrofit {
         @Header("Authorization") authorization: String,
     ):Call<JsonElement>
 
-    @GET
+    @GET("NVisitorgp4Ajax.nhn")
     fun getBlogData(
         @Query("blogId") blogId : String
-    ):Call<JsonElement>
+    ):Call<String>
 }

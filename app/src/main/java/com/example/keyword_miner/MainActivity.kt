@@ -52,20 +52,20 @@ class MainActivity : AppCompatActivity() {
         }
         val username = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
 
-//        if (username != null) {
-//            RetrofitManager.instance.blogData(email = username) { responseState, responseArrayList ->
-//                when (responseState) {
-//                    RESPONSE_STATE.OKAY -> {
-//                        Log.d("HHH", "api 호출에 성공하였습니다 ${responseArrayList?.get(0)}")
-//
-//                    }
-//                    RESPONSE_STATE.FAIL -> {
-//
-//                        Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-//                    }
-//                }
-//            }
-//        }
+        if (username != null) {
+            RetrofitManager.instance.blogData(email = username) { responseState, responseArrayList ->
+                when (responseState) {
+                    RESPONSE_STATE.OKAY -> {
+                        Log.d("HHH", "api 호출에 성공하였습니다 ${responseArrayList}")
+
+                    }
+                    RESPONSE_STATE.FAIL -> {
+
+                        Log.d(constant.TAG, "api 호충에 실패 하였습니다")
+                    }
+                }
+            }
+        }
 
         val intent = Intent(this, KeywordActivity::class.java)
 
@@ -92,6 +92,22 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
+//val xmlString = "<visitorcnts><visitorcnt id=\"20230305\" cnt=\"0\" /><visitorcnt id=\"20230306\" cnt=\"0\" /><visitorcnt id=\"20230307\" cnt=\"0\" /><visitorcnt id=\"20230308\" cnt=\"0\" /><visitorcnt id=\"20230309\" cnt=\"0\" /></visitorcnts>"
+//
+//val doc = Jsoup.parse(xmlString, "", Parser.xmlParser())
+//val visitorCnts = doc.getElementsByTag("visitorcnt")
+//
+//val idList = mutableListOf<String>()
+//val cntList = mutableListOf<String>()
+//
+//for (visitorCnt in visitorCnts) {
+//    val id = visitorCnt.attr("id")
+//    val cnt = visitorCnt.attr("cnt")
+//    idList.add(id)
+//    cntList.add(cnt)
+//}
+//
+//println("id list: $idList")
+//println("cnt list: $cntList")
 
 
