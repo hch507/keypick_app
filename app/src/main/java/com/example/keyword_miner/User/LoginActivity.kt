@@ -28,53 +28,7 @@ class LoginActivity : AppCompatActivity() {
         NaverIdLoginSDK.initialize(this, "CYg05Le49trbKuuQtJmj", "MjzgIUOP2F", "keyword_miner")
         binding.buttonOAuthLoginImg.setOnClickListener{
             startNaverLogin()
-//            val oauthLoginCallback = object : OAuthLoginCallback {
-//                override fun onSuccess() {
-//                    token = NaverIdLoginSDK.getAccessToken().toString()
-//
-//                    NidOAuthLogin().callProfileApi(nidProfileCallback)
-////                    var header = "Bearer $token"
-////                    Log.d("HHH", "LoginActivity-onSuccess() called${header}")
-////                    RetrofitManager.instance.userData(header = header, completion = { responseState, responseArrayList ->
-////                            Log.d(constant.TAG, "MainActivity - onCreate() - called ${responseArrayList}")
-////                            when(responseState) {
-////                                RESPONSE_STATE.OKAY -> {
-////                                if (responseArrayList != null) {
-////                                    userdata=responseArrayList
-////                                }
-////                                val username = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
-////                                binding.email.text=username
-////                                binding.name.text=userdata.get(0).name
-//////                                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//////                                    //arraylist를 bundle에 담아 보내기
-//////                                    val bundle = Bundle()
-//////                                    bundle.putSerializable("Array_List",responseArrayList)
-//////                                    intent.putExtra("Bundle_Array_List", bundle)
-//////
-//////                                    startActivity(intent)
-////                                }
-////                                RESPONSE_STATE.FAIL->{
-////                                    Log.d("HHH", "LoginActivity-onSuccess() called Fail")
-////                                }
-////                            }
-////                        })
-//                }
-//
-//
-//                override fun onFailure(httpStatus: Int, message: String) {
-//                    val errorCode = NaverIdLoginSDK.getLastErrorCode().code
-//                    val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
-//                    Toast.makeText(this@LoginActivity,"errorCode:$errorCode, errorDesc:$errorDescription",
-//                        Toast.LENGTH_SHORT).show()
-//                }
-//                override fun onError(errorCode: Int, message: String) {
-//                    onFailure(errorCode, message)
-//                }
-//            }
-//            NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
-//
-//            var header = "Bearer $token"
-//            Log.d("HHH", "LoginActivity-onSuccess() called${header}")
+
         }
     }
 

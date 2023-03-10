@@ -10,6 +10,7 @@ import com.example.keyword_miner.KeywordInfo
 import com.example.keyword_miner.Model.ItemPeriod
 import com.example.keyword_miner.Model.blogData
 import com.example.keyword_miner.Retrofit.RetrofitManager
+import com.example.keyword_miner.utils.Blog_API
 import com.example.keyword_miner.utils.RESPONSE_STATE
 import com.example.keyword_miner.utils.constant
 
@@ -62,7 +63,7 @@ class KeywordViewModel : ViewModel() {
             }
         }
 
-        RetrofitManager.instance.searchBlogCnt(searchTerm = searchTerm) { responseState, responseData ->
+        RetrofitManager.instance.searchBlogCnt(searchTerm = searchTerm, sort = Blog_API.SORT) { responseState, responseData ->
             when (responseState) {
                 RESPONSE_STATE.OKAY -> {
                     Log.d("HCH", "api 호출에 성공하였습니다 ${responseData}")

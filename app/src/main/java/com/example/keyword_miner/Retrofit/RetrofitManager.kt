@@ -140,11 +140,12 @@ class RetrofitManager {
 
 
     //검색어에 대한 총 블로그 수
-    fun searchBlogCnt(searchTerm : String?, completion :(RESPONSE_STATE, ArrayList<blogData>?) -> Unit){
+    fun searchBlogCnt(searchTerm : String?, sort :String, completion :(RESPONSE_STATE, ArrayList<blogData>?) -> Unit){
         var parseBlogDataArray = ArrayList<blogData>()
         var parseDate = ArrayList<String>()
+        var parsetitle = ArrayList<String>()
 
-        val call = iRetrofit_blog?.getBlogCnt(client_id = Blog_API.CLIENT_ID, client_secret = Blog_API.CLIENT_PW , display = 100 ,searhTerm =searchTerm, sort=Blog_API.SORT).let{
+        val call = iRetrofit_blog?.getBlogCnt(client_id = Blog_API.CLIENT_ID, client_secret = Blog_API.CLIENT_PW , display = 100 ,searhTerm =searchTerm, sort=sort).let{
             it
         }?: return
         //실제 요청 후 callback을 받₩
@@ -165,10 +166,12 @@ class RetrofitManager {
                         // 키워드 네임
                         val postdate = itemObject.get("postdate").asString
                         //pc클릭수 가져오기
-
+                        val title = itemObject.get("bloggerlink").asString
                         parseDate.add(postdate)
+                        parsetitle.add(title)
                     }
-                    val ItemData= blogData(total = total, data = parseDate)
+                    val ItemData= blogData(total = total, data = parseDate , blogname = parsetitle )
+                    Log.d(TAG, "RetrofitManager - onResponse() - called${ItemData}")
                     parseBlogDataArray.add(ItemData)
                 }
                 completion(RESPONSE_STATE.OKAY,parseBlogDataArray)
@@ -199,18 +202,7 @@ class RetrofitManager {
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
                 Log.d("HHH", "RetrofitManager-onResponse() called${response.body()}")
-//                response.body()?.let{
-//                    val body = it.asJsonObject
-//                    val results = body.getAsJsonObject("response")
-//                    Log.d(TAG, "RetrofitManager-onResponse() called${results}")
-//                    val email = results.get("email").asString
-//                    val name = results.get("name").asString
-//
-//                    Log.d(TAG, "RetrofitManager-onResponse() called${email},${name}")
-//
-//                    val ItemData= Item(email=email, name=name)
-//                    parseBlogDataArray.add(ItemData)
-//                }
+
                 completion(RESPONSE_STATE.OKAY,response.body())
             }
             //응답실패시

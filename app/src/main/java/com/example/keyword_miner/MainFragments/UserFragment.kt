@@ -41,7 +41,6 @@ class UserFragment : Fragment() {
         binding = FragmentUserBinding.inflate(layoutInflater)
 
         userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
-            binding.email.text=userdata.email
             binding.name.text=userdata.name
         })
 

@@ -7,21 +7,18 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".User.LoginActivity">
-
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="안녕하세요!"/>
     <com.navercorp.nid.oauth.view.NidOAuthLoginButton
         android:id="@+id/buttonOAuthLoginImg"
         android:layout_width="wrap_content"
         android:layout_height="50dp" />
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="null"/>
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:text="null"
-        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

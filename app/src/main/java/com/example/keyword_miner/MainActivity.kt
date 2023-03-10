@@ -84,22 +84,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-//val xmlString = "<visitorcnts><visitorcnt id=\"20230305\" cnt=\"0\" /><visitorcnt id=\"20230306\" cnt=\"0\" /><visitorcnt id=\"20230307\" cnt=\"0\" /><visitorcnt id=\"20230308\" cnt=\"0\" /><visitorcnt id=\"20230309\" cnt=\"0\" /></visitorcnts>"
-//
-//val doc = Jsoup.parse(xmlString, "", Parser.xmlParser())
-//val visitorCnts = doc.getElementsByTag("visitorcnt")
-//
-//val idList = mutableListOf<String>()
-//val cntList = mutableListOf<String>()
-//
-//for (visitorCnt in visitorCnts) {
-//    val id = visitorCnt.attr("id")
-//    val cnt = visitorCnt.attr("cnt")
-//    idList.add(id)
-//    cntList.add(cnt)
-//}
-//
-//println("id list: $idList")
-//println("cnt list: $cntList")
+
 
 
