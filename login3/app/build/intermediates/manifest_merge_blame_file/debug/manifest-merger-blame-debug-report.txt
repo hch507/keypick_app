@@ -1,0 +1,184 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.login3"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="27"
+8-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:5:5-67
+11-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:10:5-79
+12-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:10:22-76
+13
+14    <queries>
+14-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:13:5-23:15
+15
+16        <!-- 네이버앱 : 로그인, 스킴로그인 -->
+17        <package android:name="com.nhn.android.search" />
+17-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:16:9-58
+17-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:16:18-55
+18        <!-- 커스텀탭 로그인 -->
+19        <intent>
+19-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:18:9-20:18
+20            <action android:name="android.support.customtabs.action.CustomTabsService" />
+20-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:19:13-90
+20-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:19:21-87
+21        </intent>
+22
+23        <package android:name="com.android.chrome" />
+23-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:22:9-54
+23-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:22:18-51
+24    </queries>
+25
+26    <permission
+26-->[androidx.core:core:1.9.0] /Users/chung/.gradle/caches/transforms-3/f3889f18d4f26e70cef4e17d11226053/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+27        android:name="com.example.login3.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+27-->[androidx.core:core:1.9.0] /Users/chung/.gradle/caches/transforms-3/f3889f18d4f26e70cef4e17d11226053/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+28        android:protectionLevel="signature" />
+28-->[androidx.core:core:1.9.0] /Users/chung/.gradle/caches/transforms-3/f3889f18d4f26e70cef4e17d11226053/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+29
+30    <uses-permission android:name="com.example.login3.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+30-->[androidx.core:core:1.9.0] /Users/chung/.gradle/caches/transforms-3/f3889f18d4f26e70cef4e17d11226053/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+30-->[androidx.core:core:1.9.0] /Users/chung/.gradle/caches/transforms-3/f3889f18d4f26e70cef4e17d11226053/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+31
+32    <application
+32-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:7:5-33:19
+33        android:allowBackup="true"
+33-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:8:9-35
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.9.0] /Users/chung/.gradle/caches/transforms-3/f3889f18d4f26e70cef4e17d11226053/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+35        android:dataExtractionRules="@xml/data_extraction_rules"
+35-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:9:9-65
+36        android:debuggable="true"
+37        android:extractNativeLibs="false"
+38        android:fullBackupContent="@xml/backup_rules"
+38-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:10:9-54
+39        android:icon="@mipmap/ic_launcher"
+39-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:11:9-43
+40        android:label="@string/app_name"
+40-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:12:9-41
+41        android:roundIcon="@mipmap/ic_launcher_round"
+41-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:13:9-54
+42        android:supportsRtl="true"
+42-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:14:9-35
+43        android:testOnly="true"
+44        android:theme="@style/Theme.Login3" >
+44-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:15:9-44
+45        <activity
+45-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:17:9-19:40
+46            android:name="com.example.login3.UserActivity"
+46-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:18:13-41
+47            android:exported="false" />
+47-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:19:13-37
+48        <activity
+48-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:20:9-32:20
+49            android:name="com.example.login3.MainActivity"
+49-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:21:13-41
+50            android:exported="true" >
+50-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:22:13-36
+51            <intent-filter>
+51-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:23:13-27:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:24:17-69
+52-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:24:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:26:17-77
+54-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:26:27-74
+55            </intent-filter>
+56
+57            <meta-data
+57-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:29:13-31:36
+58                android:name="android.app.lib_name"
+58-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:30:17-52
+59                android:value="" />
+59-->/Users/chung/AndroidStudioProjects/keyword_App2/keyword_App/login3/app/src/main/AndroidManifest.xml:31:17-33
+60        </activity>
+61        <!-- <activity -->
+62        <!-- android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity" -->
+63        <!-- android:configChanges="orientation|screenSize" -->
+64        <!-- android:theme="@style/Theme.AppCompat.Light.Dialog" /> -->
+65        <activity
+65-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:32:9-35:78
+66            android:name="com.navercorp.nid.oauth.NidOAuthBridgeActivity"
+66-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:33:13-74
+67            android:configChanges="orientation|screenSize"
+67-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:34:13-59
+68            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" /> <!-- <activity -->
+68-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:35:13-75
+69        <!-- android:name="com.navercorp.nid.oauth.activity.NidOAuthWebViewActivity" -->
+70        <!-- android:configChanges="orientation|screenSize" -->
+71        <!-- android:screenOrientation="behind" -->
+72        <!-- android:label="OAuth2.0 by WebView" -->
+73        <!-- android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"/> -->
+74        <activity
+74-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:44:9-63:20
+75            android:name="com.navercorp.nid.oauth.activity.NidOAuthCustomTabActivity"
+75-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:45:13-86
+76            android:configChanges="orientation|screenSize"
+76-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:46:13-59
+77            android:exported="true"
+77-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:47:13-36
+78            android:label="OAuth2.0 by Custom tabs"
+78-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:48:13-52
+79            android:launchMode="singleTask"
+79-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:49:13-44
+80            android:screenOrientation="behind"
+80-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:50:13-47
+81            android:theme="@style/Theme.AppCompat.NoActionBar" >
+81-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:51:13-63
+82            <intent-filter>
+82-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:52:13-62:29
+83                <action android:name="android.intent.action.VIEW" />
+83-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:53:17-69
+83-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:53:25-66
+84
+85                <category android:name="android.intent.category.DEFAULT" />
+85-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:55:17-76
+85-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:55:27-73
+86                <category android:name="android.intent.category.BROWSABLE" />
+86-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:56:17-78
+86-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:56:27-75
+87                <!-- Intent URL 에서 로그인 액티비티를 실행하기 위해 설정 -->
+88                <data
+88-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:58:17-61:59
+89                    android:host="authorize"
+89-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:59:21-45
+90                    android:path="/"
+90-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:60:21-37
+91                    android:scheme="naver3rdpartylogin" />
+91-->[oauth-5.4.0.aar] /Users/chung/.gradle/caches/transforms-3/3aab14e7f84019757308f124353d1e1b/transformed/oauth-5.4.0/AndroidManifest.xml:61:21-56
+92            </intent-filter>
+93        </activity>
+94
+95        <provider
+95-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+96            android:name="androidx.startup.InitializationProvider"
+96-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+97            android:authorities="com.example.login3.androidx-startup"
+97-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+98            android:exported="false" >
+98-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+99            <meta-data
+99-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+100                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+100-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+101                android:value="androidx.startup" />
+101-->[androidx.emoji2:emoji2:1.2.0] /Users/chung/.gradle/caches/transforms-3/412372332f980a5c4ef0364c55a99af0/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+102            <meta-data
+102-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/chung/.gradle/caches/transforms-3/a8199b6bb025d711471524267dd78014/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+103                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+103-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/chung/.gradle/caches/transforms-3/a8199b6bb025d711471524267dd78014/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+104                android:value="androidx.startup" />
+104-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/chung/.gradle/caches/transforms-3/a8199b6bb025d711471524267dd78014/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+105        </provider>
+106    </application>
+107
+108</manifest>

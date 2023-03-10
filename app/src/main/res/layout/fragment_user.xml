@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.068">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="name"
@@ -34,6 +34,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="150dp"
         android:layout_height="33dp"
         android:orientation="horizontal"
@@ -45,13 +46,14 @@
         app:layout_constraintVertical_bias="0.025">
 
         <TextView
-            android:id="@+id/text"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="email :"
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" null"
@@ -59,4 +61,14 @@
 
     </LinearLayout>
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/blog_chart_week"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.16" />
 </androidx.constraintlayout.widget.ConstraintLayout>

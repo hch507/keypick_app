@@ -72,8 +72,6 @@ class KeywordFragment : Fragment() {
 
     }
 
-
-
     private fun setWeek(barChart: BarChart) {
         initBarChart(barChart)
 

@@ -68,7 +68,6 @@ class KeywordViewModel : ViewModel() {
                     Log.d("HCH", "api 호출에 성공하였습니다 ${responseData}")
 
 
-
                     _currentMonthCnt.value=responseData
 
                 }

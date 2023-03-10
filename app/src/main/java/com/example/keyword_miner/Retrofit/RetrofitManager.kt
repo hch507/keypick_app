@@ -184,48 +184,9 @@ class RetrofitManager {
     }
 
 
-    //user data 가져오기
-    fun userData(header : String, completion :(RESPONSE_STATE, ArrayList<UserBlog>?) -> Unit){
-        Log.d("HHH", "RetrofitManager-userData() called")
-        var parseUserData = ArrayList<UserBlog>()
-
-
-        val call = iRetrofit_user?.getUserBlog(authorization = header).let{
-            it
-        }?: return
-        //실제 요청 후 callback을 받₩
-        call.enqueue(object:retrofit2.Callback<JsonElement>{
-            //응답 성공시
-            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                Log.d(TAG, "RetrofitManager - onResponse() - called ${header}")
-
-                response.body()?.let{
-                    val body = it.asJsonObject
-                    val results = body.getAsJsonObject("response")
-                    Log.d(TAG, "RetrofitManager-onResponse() called${results}")
-                    val email = results.get("email").asString
-                    val name = results.get("name").asString
-
-                    Log.d(TAG, "RetrofitManager-onResponse() called${email},${name}")
-
-                    val ItemData= UserBlog(email=email, name=name)
-                    parseUserData.add(ItemData)
-                }
-                completion(RESPONSE_STATE.OKAY,parseUserData)
-            }
-            //응답실패시
-            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-
-                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
-                completion(RESPONSE_STATE.FAIL,null)
-            }
-        })
-
-    }
-
 
 //    내 블로그 방문자 수
-    fun blogData(email : String, completion :(RESPONSE_STATE, ArrayList<MyBlogData>?) -> Unit){
+    fun blogData(email : String, completion :(RESPONSE_STATE, String?) -> Unit){
         var parseBlogDataArray = ArrayList<MyBlogData>()
 
 
@@ -250,7 +211,7 @@ class RetrofitManager {
 //                    val ItemData= Item(email=email, name=name)
 //                    parseBlogDataArray.add(ItemData)
 //                }
-                completion(RESPONSE_STATE.OKAY,null)
+                completion(RESPONSE_STATE.OKAY,response.body())
             }
             //응답실패시
             override fun onFailure(call: Call<String>, t: Throwable) {

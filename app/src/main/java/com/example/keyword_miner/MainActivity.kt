@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import com.example.keyword_miner.KeywordSearch.*
@@ -14,6 +15,7 @@ import com.example.keyword_miner.MainFragments.UserFragment
 import com.example.keyword_miner.Model.UserBlog
 import com.example.keyword_miner.Model.blogData
 import com.example.keyword_miner.Retrofit.RetrofitManager
+import com.example.keyword_miner.User.UserBlogViewmodel
 import com.example.keyword_miner.databinding.ActivityMainBinding
 import com.example.keyword_miner.utils.RESPONSE_STATE
 import com.example.keyword_miner.utils.constant
@@ -23,6 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : AppCompatActivity() {
     private var mbinding: ActivityMainBinding? = null
     private val binding get() = mbinding!!
+    val userBlogViewModel: UserBlogViewmodel by viewModels()
 
     var userdata =ArrayList<UserBlog>()
     @RequiresApi(Build.VERSION_CODES.O)
@@ -50,22 +53,11 @@ class MainActivity : AppCompatActivity() {
             Log.d("HHH", "MainActivity - onCreate() - called${userdata.get(0).email}")
 
         }
-        val username = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
+        val userEmail = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
+        val username =userdata.get(0).name
 
-        if (username != null) {
-            RetrofitManager.instance.blogData(email = username) { responseState, responseArrayList ->
-                when (responseState) {
-                    RESPONSE_STATE.OKAY -> {
-                        Log.d("HHH", "api 호출에 성공하였습니다 ${responseArrayList}")
-
-                    }
-                    RESPONSE_STATE.FAIL -> {
-
-                        Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-                    }
-                }
-            }
-        }
+        userBlogViewModel.UserSet(userEmail!!,username!!)
+        userBlogViewModel.BlogCntUpdate(userEmail)
 
         val intent = Intent(this, KeywordActivity::class.java)
 
