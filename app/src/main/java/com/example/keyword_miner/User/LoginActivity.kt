@@ -1,5 +1,6 @@
 package com.example.keyword_miner.User
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import com.example.keyword_miner.MainActivity
 import com.example.keyword_miner.Model.UserBlog
 import com.example.keyword_miner.Retrofit.RetrofitManager
 import com.example.keyword_miner.databinding.ActivityLoginBinding
+import com.example.keyword_miner.sharePref.App
 import com.example.keyword_miner.utils.RESPONSE_STATE
 import com.example.keyword_miner.utils.constant
 import com.navercorp.nid.NaverIdLoginSDK
@@ -22,10 +24,21 @@ class LoginActivity : AppCompatActivity() {
     private var token :String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
+
         var userdata =ArrayList<UserBlog>()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         NaverIdLoginSDK.initialize(this, "CYg05Le49trbKuuQtJmj", "MjzgIUOP2F", "keyword_miner")
+        if (App.prefs.getboolean("isLoggedIn",false)) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // LoginActivity를 종료한다
+            return // 이후의 코드는 실행하지 않는다
+        }else{
+            NaverIdLoginSDK.logout()
+            Log.d("HHH", "LoginActivity - onCreate() - called 로그아웃")
+        }
+
         binding.buttonOAuthLoginImg.setOnClickListener{
             startNaverLogin()
 
@@ -38,20 +51,28 @@ class LoginActivity : AppCompatActivity() {
         Log.d("HHH", "LoginActivity-startNaverLogin() called")
         val profileCallback = object : NidProfileCallback<NidProfileResponse> {
             override fun onSuccess(response: NidProfileResponse) {
+
                 val userEmail = response.profile?.email
                 val userName = response.profile?.name
                 var userDataItem = UserBlog(userEmail,userName)
                 userData.add(userDataItem)
-                Log.d("HHH", "LoginActivity-onSuccess() called ${userEmail}")
-                Log.d("HHH", "LoginActivity-onSuccess() called ${userName}")
                 Toast.makeText(this@LoginActivity, "네이버 아이디 로그인 성공!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                     //arraylist를 bundle에 담아 보내기
-                val bundle = Bundle()
-                bundle.putSerializable("Array_List",userData)
-                intent.putExtra("Bundle_Array_List", bundle)
+//                val preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+//                preferences.edit().putBoolean("isLoggedIn", true).apply()
+                App.prefs.setboolean("isLoggedIn",true)
+                Log.d("HHH", "LoginActivity - onSuccess() - called${userEmail}")
+                App.prefs.setEmail("userEmail",userEmail!!)
+                App.prefs.setName("userName",userName!!)
+
+                Log.d("HHH", "LoginActivity - onSuccess() - called${App.prefs.getEmail("userEmail","")}")
+//                val bundle = Bundle()
+//                bundle.putSerializable("Array_List",userData)
+//                intent.putExtra("Bundle_Array_List", bundle)
 
                 startActivity(intent)
+                finish()
                 //   binding.tvResult.text = "id: ${userId} \ntoken: ${naverToken}"
 
             }
@@ -91,5 +112,7 @@ class LoginActivity : AppCompatActivity() {
 
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
     }
+
+
 
 }

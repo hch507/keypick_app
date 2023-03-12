@@ -9,8 +9,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 object RetrofitClient {
     private  var retrofitClient : Retrofit? = null
 
-
-
     val gson : Gson = GsonBuilder()
         .setLenient()
         .create()

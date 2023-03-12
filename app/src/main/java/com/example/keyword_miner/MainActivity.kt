@@ -16,12 +16,15 @@ import com.example.keyword_miner.Model.UserBlog
 import com.example.keyword_miner.Model.blogData
 import com.example.keyword_miner.Repository.RepositoryActivity
 import com.example.keyword_miner.Retrofit.RetrofitManager
+import com.example.keyword_miner.User.LoginActivity
 import com.example.keyword_miner.User.UserBlogViewmodel
 import com.example.keyword_miner.databinding.ActivityMainBinding
+import com.example.keyword_miner.sharePref.App
 import com.example.keyword_miner.utils.RESPONSE_STATE
 import com.example.keyword_miner.utils.constant
 
 import com.google.android.material.tabs.TabLayoutMediator
+import com.navercorp.nid.NaverIdLoginSDK
 
 class MainActivity : AppCompatActivity() {
     private var mbinding: ActivityMainBinding? = null
@@ -48,19 +51,21 @@ class MainActivity : AppCompatActivity() {
             tab.text = titles.get(position)
         }.attach()
 
-        val bundle = intent.getBundleExtra("Bundle_Array_List")
-        if (bundle != null) {
-            userdata= bundle.getSerializable("Array_List") as ArrayList<UserBlog>
-            Log.d("HHH", "MainActivity - onCreate() - called${userdata.get(0).email}")
+//        val bundle = intent.getBundleExtra("Bundle_Array_List")
+//        if (bundle != null) {
+//            userdata= bundle.getSerializable("Array_List") as ArrayList<UserBlog>
+//            Log.d("HHH", "MainActivity - onCreate() - called${userdata.get(0).email}")
 
-        }
-        val userEmail = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
-        val username =userdata.get(0).name
+//        }
+      //  val userEmail = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
+      //  val username =userdata.get(0).name
 
-        userBlogViewModel.UserSet(userEmail!!,username!!)
-        userBlogViewModel.BlogCntUpdate(userEmail)
-
-
+        val userEmail = App.prefs.getEmail("userEmail","").substring(0, App.prefs.getEmail("userEmail","").indexOf('@'))
+        Log.d("HHH", "MainActivity - onCreate() - called ${userEmail}")
+        val username =App.prefs.getName("userName","")
+        Log.d("HHH", "MainActivity - onCreate() - called ${username}")
+          userBlogViewModel.UserSet(userEmail!!,username!!)
+          userBlogViewModel.BlogCntUpdate(userEmail)
 //        intent = Intent(this, KeywordActivity::class.java)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -87,6 +92,12 @@ class MainActivity : AppCompatActivity() {
         binding.repository.setOnClickListener {
             intent = Intent(this@MainActivity, RepositoryActivity::class.java)
             startActivity(intent)
+        }
+        binding.userBtn.setOnClickListener{
+            App.prefs.setboolean("isLoggedIn",false)
+            intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
