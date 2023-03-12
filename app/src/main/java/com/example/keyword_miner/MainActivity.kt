@@ -14,6 +14,7 @@ import com.example.keyword_miner.MainFragments.RankFragment
 import com.example.keyword_miner.MainFragments.UserFragment
 import com.example.keyword_miner.Model.UserBlog
 import com.example.keyword_miner.Model.blogData
+import com.example.keyword_miner.Repository.RepositoryActivity
 import com.example.keyword_miner.Retrofit.RetrofitManager
 import com.example.keyword_miner.User.UserBlogViewmodel
 import com.example.keyword_miner.databinding.ActivityMainBinding
@@ -59,10 +60,12 @@ class MainActivity : AppCompatActivity() {
         userBlogViewModel.UserSet(userEmail!!,username!!)
         userBlogViewModel.BlogCntUpdate(userEmail)
 
-        val intent = Intent(this, KeywordActivity::class.java)
 
+//        intent = Intent(this, KeywordActivity::class.java)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextSubmit(query: String?): Boolean {
+                intent = Intent(this@MainActivity, KeywordActivity::class.java)
                 var userSearchInput = query?.replace(" ", "")
 
  //               userSearchInput = userSearchInput?.let { convertToUpperCase(it) }
@@ -81,6 +84,10 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+        binding.repository.setOnClickListener {
+            intent = Intent(this@MainActivity, RepositoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
