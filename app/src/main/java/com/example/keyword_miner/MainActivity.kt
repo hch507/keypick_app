@@ -26,19 +26,34 @@ import com.example.keyword_miner.utils.constant
 import com.google.android.material.tabs.TabLayoutMediator
 import com.navercorp.nid.NaverIdLoginSDK
 
-class MainActivity : AppCompatActivity() {
-    private var mbinding: ActivityMainBinding? = null
-    private val binding get() = mbinding!!
+class MainActivity : AppCompatActivity(){
+    lateinit var binding: ActivityMainBinding
+
     val userBlogViewModel: UserBlogViewmodel by viewModels()
 
-    var userdata =ArrayList<UserBlog>()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-        mbinding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val intent = Intent(this@MainActivity, KeywordActivity::class.java)
+                val userSearchInput = query?.replace(" ", "")
+                if (userSearchInput != null) {
+                    intent.putExtra("searchterm", userSearchInput)
+                }
+                startActivity(intent)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
         val list = listOf(UserFragment(), RankFragment())
         //어답터 생성
         val pageAdapter = FragmentPageAdapter(list, this)
@@ -61,34 +76,14 @@ class MainActivity : AppCompatActivity() {
       //  val username =userdata.get(0).name
 
         val userEmail = App.prefs.getEmail("userEmail","").substring(0, App.prefs.getEmail("userEmail","").indexOf('@'))
-        Log.d("HHH", "MainActivity - onCreate() - called ${userEmail}")
+        Log.d("AAA", "MainActivity - onCreate() - called ${userEmail}")
         val username =App.prefs.getName("userName","")
         Log.d("HHH", "MainActivity - onCreate() - called ${username}")
           userBlogViewModel.UserSet(userEmail!!,username!!)
           userBlogViewModel.BlogCntUpdate(userEmail)
 //        intent = Intent(this, KeywordActivity::class.java)
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                intent = Intent(this@MainActivity, KeywordActivity::class.java)
-                var userSearchInput = query?.replace(" ", "")
-
- //               userSearchInput = userSearchInput?.let { convertToUpperCase(it) }
-                Log.d("HHH", "MainActivity - onQueryTextSubmit() - called${userSearchInput}")
-                if (userSearchInput != null) {
-                    intent.putExtra("searchterm", userSearchInput)
-                }
-                startActivity(intent)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-                // 검색창에서 글자가 변경이 일어날 때마다 호출
-
-                return true
-            }
-        })
         binding.repository.setOnClickListener {
             intent = Intent(this@MainActivity, RepositoryActivity::class.java)
             startActivity(intent)
@@ -101,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+ //       })
 }
 
 

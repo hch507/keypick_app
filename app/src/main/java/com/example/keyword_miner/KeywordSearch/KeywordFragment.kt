@@ -12,11 +12,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.keyword_miner.KeywordInfo
 import com.example.keyword_miner.Model.ItemPeriod
-import com.example.keyword_miner.Model.blogData
-import com.example.keyword_miner.R
 import com.example.keyword_miner.Repository.RepositoryItem
 import com.example.keyword_miner.Room.Roomhelper
 import com.example.keyword_miner.databinding.FragmentKeywordBinding
@@ -90,6 +86,17 @@ class KeywordFragment : Fragment() {
 
             this.total=it.get(0).total
         })
+        keywordViewModel.currenttoken.observe(viewLifecycleOwner, Observer{
+            if(it){
+
+            }else {
+//                val intent = Intent(requireContext(), KeywordActivity::class.java)
+//                startActivity(intent)
+
+                context?.cacheDir?.deleteRecursively()
+
+            }
+        })
         binding.storeBtn.setOnClickListener {
             val date = System.currentTimeMillis()
             Log.d("HHH", "KeywordFragment-onCreateView() called${date}")
@@ -98,6 +105,7 @@ class KeywordFragment : Fragment() {
             Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
         }
         return binding.root
+
     }
 
     private fun setChartView(view: FragmentKeywordBinding?) {

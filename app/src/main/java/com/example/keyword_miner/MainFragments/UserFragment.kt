@@ -142,18 +142,6 @@ class UserFragment : Fragment() {
         legend.setDrawInside(false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun MonthCnt(list: ArrayList<String>):String{
-        val list: List<String> = list.toList()
-        val thirtyDaysAgo = LocalDate.now().minusDays(30)
-        val count = list.filter { LocalDate.parse("$it", DateTimeFormatter.ofPattern("yyyyMMdd")) >= thirtyDaysAgo }.count()
-        Log.d(constant.TAG, "KeywordActivity - MonthCnt() - called $count")
-        return if (count == 100) {
-            "+$count"
-        } else {
-            count.toString()
-        }
 
-    }
 
 }

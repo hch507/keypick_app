@@ -33,18 +33,23 @@ class KeywordActivity : AppCompatActivity() {
         TabLayoutMediator(kbinding.tabLayout, kbinding.ViewPage){tab, position ->
             tab.text= titles.get(position)
         }.attach()
-        var searchTerm = intent.getStringExtra("searchterm")
-        searchTerm= searchTerm?.let { convertToUpperCase(it) }
 
+        var searchTerm = intent.getStringExtra("searchterm")
+        Log.d("AAAA2", "KeywordActivity - onCreate() - called${searchTerm}")
+        searchTerm= searchTerm?.let { convertToUpperCase(it) }
+        Log.d("AAAA3", "KeywordActivity - onCreate() - called")
         if (searchTerm != null) {
-            Log.d("HHH", "KeywordActivity - onCreate() - called${searchTerm}")
+            Log.d("HHHH1", "KeywordActivity - onCreate() - called${searchTerm}")
             keywordViewModel.updateKeywordData(searchTerm)
         }
 
 
         kbinding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextSubmit(query: String?): Boolean {
+
                 var userSearchInput = query?.replace(" ", "")
+                Log.d("HHHH2", "KeywordActivity - onCreate() - called${userSearchInput}")
                 userSearchInput= userSearchInput?.let { convertToUpperCase(it) }
                 if (userSearchInput != null) {
                     keywordViewModel.updateKeywordData(userSearchInput)
@@ -58,7 +63,7 @@ class KeywordActivity : AppCompatActivity() {
 
                 // 검색창에서 글자가 변경이 일어날 때마다 호출
 
-                return true
+                return false
             }
         })
     }

@@ -7,6 +7,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface IRetrofit {
+    @Headers("Cache-Control: no-cache", "Pragma: no-cache")
     @GET("keywordstool")
     fun getRelKwdStat(
         @Header("Content-Type") content_type : String,

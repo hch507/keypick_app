@@ -18,13 +18,14 @@ class RetrofitManager {
     private var iRetrofit : IRetrofit? = RetrofitClient.getRetrifitClient(API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_search : IRetrofit? = RetrofitClient.getRetrifitClient(Search_API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_blog : IRetrofit? = RetrofitClient.getRetrifitClient(Blog_API.BASE_URL)?.create(IRetrofit::class.java)
-    private var iRetrofit_user : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.BASE_URL)?.create(IRetrofit::class.java)
+ //   private var iRetrofit_user : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_blog_data : IRetrofit? = RetrofitClient.getGsonRetrifitClient(MY_BLOG.MY_BASE_URL)?.create(IRetrofit::class.java)
 
     // 연관 검색어 및 월 피씨 모바일 컴생량
     @RequiresApi(Build.VERSION_CODES.O)
     fun searchKeywordRel(searchTerm: String?, completion: (RESPONSE_STATE, ArrayList<KeywordInfo>?) -> Unit){
-
+        Log.d("HHHH", "RetrofitManager - searchKeywordRel() - called${searchTerm}")
+        API.updateTimestamp()
         val call = iRetrofit?.getRelKwdStat(
             content_type = API.Content_Type,
             x_timestamp = API.X_Timestamp,
@@ -43,7 +44,7 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-                Log.d(TAG, "RetrofitManager-onResponse() called-rel/ response : ")
+                Log.d("HHHH", "RetrofitManager-onResponse() called-rel/ response :${response.body()} ")
                 var parseRelArray = ArrayList<KeywordInfo>()
                 response.body()?.let{
                     val body = it.asJsonObject
