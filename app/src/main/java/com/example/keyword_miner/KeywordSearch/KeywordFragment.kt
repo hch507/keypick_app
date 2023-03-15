@@ -1,5 +1,6 @@
 package com.example.keyword_miner.KeywordSearch
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -10,27 +11,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.keyword_miner.Model.ItemPeriod
+import com.example.keyword_miner.R
 import com.example.keyword_miner.Repository.RepositoryItem
 import com.example.keyword_miner.Room.Roomhelper
 import com.example.keyword_miner.databinding.FragmentKeywordBinding
 import com.example.keyword_miner.utils.constant.TAG
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class KeywordFragment : Fragment() {
@@ -86,24 +93,14 @@ class KeywordFragment : Fragment() {
 
             this.total=it.get(0).total
         })
-        keywordViewModel.currenttoken.observe(viewLifecycleOwner, Observer{
-            if(it){
-
-            }else {
-//                val intent = Intent(requireContext(), KeywordActivity::class.java)
-//                startActivity(intent)
-
-                context?.cacheDir?.deleteRecursively()
-
-            }
-        })
         binding.storeBtn.setOnClickListener {
-            val date = System.currentTimeMillis()
+            val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
             Log.d("HHH", "KeywordFragment-onCreateView() called${date}")
             val StoreList = RepositoryItem(keyword,monthCnt,total,date)
             insert(StoreList)
             Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
         }
+
         return binding.root
 
     }
@@ -111,91 +108,93 @@ class KeywordFragment : Fragment() {
     private fun setChartView(view: FragmentKeywordBinding?) {
         var chartWeek = binding.chartWeek
         setWeek(chartWeek)
-
+        chartWeek.setOnChartValueSelectedListener(object: OnChartValueSelectedListener{
+            override fun onValueSelected(e: Entry, h: Highlight){
+                val xAxisLabel = e.x.let{
+                    chartWeek.xAxis.valueFormatter.getAxisLabel(it, chartWeek.xAxis)
+                }
+                binding.date.text= xAxisLabel
+            }
+            override fun onNothingSelected() {
+            }
+        })
     }
 
-    private fun setWeek(barChart: BarChart) {
-        initBarChart(barChart)
+    private fun setWeek(lineChart: LineChart) {
+        initBarChart(lineChart)
 
-        barChart.setScaleEnabled(false) //Zoom In/Out
+        lineChart.setScaleEnabled(false) //Zoom In/Out
 
         val valueList : ArrayList<Double> = PeriodList[0].rate
         //val entries: ArrayList<String> = PeriodList[0].period
-        val entries: ArrayList<BarEntry> = ArrayList()
+        val entries: ArrayList<Entry> = ArrayList()
         val title = PeriodList[0].title
 
         //input data
 
         for (i in 0 until valueList.size) {
-            val barEntry = BarEntry(i.toFloat(), valueList[i].toFloat())
-            entries.add(barEntry)
+            val lineEntry = Entry(i.toFloat(), valueList[i].toFloat())
+            entries.add(lineEntry)
         }
 
 
-        val barDataSet = BarDataSet(entries, title)
-        val data = BarData(barDataSet)
-        barChart.data = data
-        barChart.invalidate()
+        val lineDataSet = LineDataSet(entries, title)
+        lineDataSet.setDrawFilled(true)
+        lineDataSet.fillDrawable= ContextCompat.getDrawable(context!!, R.drawable.linechart)
+        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet.setColor(ContextCompat.getColor(context!!, R.color.white)); //LineChart에서 Line Color 설정
+        lineDataSet.setCircleColor(ContextCompat.getColor(context!!, R.color.purple_line)); // LineChart에서 Line Circle Color 설정
+        lineDataSet.setCircleHoleColor(ContextCompat.getColor(context!!, R.color.white))
+        val data = LineData(lineDataSet)
+        lineChart.data = data
+//        lineChart.data.isHighlightEnabled = false
+        lineChart.invalidate()
+
     }
 
-    private fun initBarChart(barChart: BarChart) {
+    private fun initBarChart(lineChart: LineChart) {
         val dateList: ArrayList<String> = PeriodList[0].period
         //hiding the grey background of the chart, default false if not set
-        barChart.setDrawGridBackground(false)
+        lineChart.setDrawGridBackground(false)
         //remove the bar shadow, default false if not set
-        barChart.setDrawBarShadow(false)
+
         //remove border of the chart, default false if not set
-        barChart.setDrawBorders(false)
+        lineChart.setDrawBorders(false)
 
         //remove the description label text located at the lower right corner
         val description = Description()
         description.setEnabled(false)
-        barChart.setDescription(description)
+        lineChart.setDescription(description)
 
         //X, Y 바의 애니메이션 효과
-        barChart.animateY(1000)
-        barChart.animateX(1000)
-
+        lineChart.animateY(1000)
+        lineChart.animateX(1000)
 
         //바텀 좌표 값
-        val xAxis: XAxis = barChart.getXAxis()
+        val xAxis: XAxis = lineChart.getXAxis()
         //change the position of x-axis to the bottom
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         //set the horizontal distance of the grid line
         xAxis.granularity = 1f
-        xAxis.textColor = Color.RED
+        xAxis.textColor = Color.BLACK
         //hiding the x-axis line, default true if not set
         xAxis.setDrawAxisLine(false)
         //hiding the vertical grid lines, default true if not set
-        xAxis.setDrawGridLines(false)
+        xAxis.setDrawGridLines(true)
 
         xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
         //좌측 값 hiding the left y-axis line, default true if not set
-        val leftAxis: YAxis = barChart.getAxisLeft()
+        val leftAxis: YAxis = lineChart.getAxisLeft()
         leftAxis.setDrawAxisLine(false)
-        leftAxis.textColor = Color.RED
-
-
-        //우측 값 hiding the right y-axis line, default true if not set
-        val rightAxis: YAxis = barChart.getAxisRight()
-        rightAxis.setDrawAxisLine(false)
-        rightAxis.textColor = Color.RED
-
+        leftAxis.textColor = Color.BLACK
 
         //바차트의 타이틀
-        val legend: Legend = barChart.getLegend()
-        //setting the shape of the legend form to line, default square shape
-        legend.form = Legend.LegendForm.LINE
-        //setting the text size of the legend
+        val legend: Legend = lineChart.getLegend()
         legend.textSize = 11f
         legend.textColor = Color.BLACK
-        //setting the alignment of legend toward the chart
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        //setting the stacking direction of legend
-        legend.orientation = Legend.LegendOrientation.HORIZONTAL
-        //setting the location of legend outside the chart, default false if not set
-        legend.setDrawInside(false)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

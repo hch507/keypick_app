@@ -13,6 +13,6 @@ data class RepositoryItem (
     @ColumnInfo
     var blogCnt: String ="",
     @ColumnInfo
-    var datetime: Long? = null
+    var datetime: String? = ""
 
 )

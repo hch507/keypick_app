@@ -67,6 +67,12 @@ class KeywordActivity : AppCompatActivity() {
             }
         })
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.d("GGG", "KeywordActivity - onBackPressed() - called")
+        finish()
+    }
     fun convertToUpperCase(input: String): String {
         return if (input.matches("[a-zA-Z]+".toRegex()) && input.contains("[a-z]".toRegex())) {
             input.toUpperCase()

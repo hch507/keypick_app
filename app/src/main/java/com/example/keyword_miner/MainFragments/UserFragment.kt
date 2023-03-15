@@ -1,5 +1,6 @@
 package com.example.keyword_miner.MainFragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.example.keyword_miner.KeywordSearch.KeywordActivity
 import com.example.keyword_miner.KeywordSearch.KeywordViewModel
 import com.example.keyword_miner.Model.ItemPeriod
 import com.example.keyword_miner.Model.MyBlogData
@@ -28,18 +30,25 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class UserFragment : Fragment() {
     var CntList = listOf<MyBlogData>()
     lateinit var binding : FragmentUserBinding
     val userBlgoViewModel by activityViewModels<UserBlogViewmodel>()
+    val today = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+    val db = FirebaseFirestore.getInstance()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserBinding.inflate(layoutInflater)
-
+        var keyword=""
+        val collectionRef = db.collection("keywordDB")
         userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
             binding.name.text=userdata.name
         })
@@ -48,7 +57,23 @@ class UserFragment : Fragment() {
             CntList=blogcnt
             setChartView(binding)
         })
+        binding.recommendBtn.setOnClickListener {
+            collectionRef.whereEqualTo("date", today)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        keyword = document.getString("keyword").toString()
+                        Log.d("HHH", "Today's keyword: $keyword")
+                    }
+                    val intent = Intent(requireActivity(), KeywordActivity::class.java)
+                    intent.putExtra("searchterm", keyword)
 
+                    startActivity(intent)
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("HHH", "Error getting documents: ", exception)
+                }
+        }
 
         return binding.root
     }

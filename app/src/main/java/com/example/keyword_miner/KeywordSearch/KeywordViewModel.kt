@@ -31,9 +31,8 @@ class KeywordViewModel: ViewModel() {
     private val _currentMonthCnt = MutableLiveData<ArrayList<blogData>>()
     val currentMonthCnt : LiveData<ArrayList<blogData>>
         get() = _currentMonthCnt
-    private val _currenttoken = MutableLiveData<Boolean>()
-    val currenttoken : LiveData<Boolean>
-        get() = _currenttoken
+
+
 //    init{
 //        _currentRelData.value= ArrayList<KeywordInfo>()
 //        _currentBlogDate.value=ArrayList<ItemPeriod>()
@@ -47,12 +46,11 @@ class KeywordViewModel: ViewModel() {
             when (responseState) {
                 RESPONSE_STATE.OKAY -> {
 //                    Log.d("HHHH", "api 호출에 성공하였습니다 ${responseArrayList?.get(0)}")
-                    _currenttoken.value=true
+
                     if(responseArrayList!!.isEmpty()){
                         Log.d("BBBB", "KeywordViewModel - updateKeywordData() - called")
                         Toast.makeText( context,"잠시후 다시 검색해주세요", Toast.LENGTH_SHORT).show()
 //                        System.exit(0);
-                        _currenttoken.value=false
                     }else {
                         _currentRelData.value = responseArrayList
                     }
