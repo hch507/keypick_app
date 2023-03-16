@@ -1,5 +1,6 @@
 package com.example.keyword_miner.KeywordSearch
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import com.example.keyword_miner.Repository.RepositoryActivity
 import com.example.keyword_miner.databinding.ActivityKeywordBinding
 import com.google.android.material.tabs.TabLayoutMediator
 class KeywordActivity : AppCompatActivity() {
@@ -66,7 +68,12 @@ class KeywordActivity : AppCompatActivity() {
                 return false
             }
         })
+        kbinding.repository.setOnClickListener {
+            intent = Intent(this@KeywordActivity, RepositoryActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

@@ -12,18 +12,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="안녕하세요"
+        android:textColor="@color/black"
         android:textSize="40dp"/>
     <com.google.android.material.textfield.TextInputLayout
         android:padding="40dp"
-        android:id="@+id/search_term_text_layout"
+        android:id="@+id/input_blog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent"
         android:layout_gravity="right"
         app:counterEnabled="true"
         app:counterMaxLength="12"
-        app:boxStrokeColor="@color/black"
+        app:boxStrokeColor="@color/appbar"
         app:endIconMode="clear_text"
+        android:outlineAmbientShadowColor="@color/appbar"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:helperText="https://blog.naver.com/xxxxx/ x부분 입력"
         android:hint="BlogID를 입력히세요">
@@ -43,10 +45,14 @@
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/appbar"
+        android:textColor="@color/white"
         android:text="등록"/>
     <Button
         android:id="@+id/non_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/appbar"
+        android:textColor="@color/white"
         android:text="ID등록 없이 시작하기"/>
 </LinearLayout>

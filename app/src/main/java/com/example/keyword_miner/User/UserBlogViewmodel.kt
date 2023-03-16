@@ -35,24 +35,26 @@ class UserBlogViewmodel : ViewModel() {
         RetrofitManager.instance.blogData(email = blogId) { responseState, responsebody ->
             when (responseState) {
                 RESPONSE_STATE.OKAY -> {
-                    Log.d("HHH", "api 호출에 성공하였습니다 ${responsebody}")
 
-                    val doc = Jsoup.parse(responsebody, "", Parser.xmlParser())
-                    val visitorCnts = doc.getElementsByTag("visitorcnt")
+                        Log.d("HHH", "api 호출에 성공하였습니다 ${responsebody}")
 
-                    val idList = mutableListOf<String>()
-                    val cntList = mutableListOf<Double>()
+                        val doc = Jsoup.parse(responsebody, "", Parser.xmlParser())
+                        val visitorCnts = doc.getElementsByTag("visitorcnt")
 
-                    for (visitorCnt in visitorCnts) {
-                        val id = visitorCnt.attr("id")
-                        val cnt = visitorCnt.attr("cnt")?.toDoubleOrNull() ?: 0.0
-                        idList.add(id)
-                        cntList.add(cnt)
+                        val idList = mutableListOf<String>()
+                        val cntList = mutableListOf<Double>()
 
-                    }
-                    _currentUserBlogCnt.value= listOf(MyBlogData("최근 5일 방문자",idList,cntList))
-                    Log.d("HHH", "UserBlogViewmodel-BlogCntUpdate() called${idList}")
-                    Log.d("HHH", "UserBlogViewmodel-BlogCntUpdate() called${cntList}")
+                        for (visitorCnt in visitorCnts) {
+                            val id = visitorCnt.attr("id")
+                            val cnt = visitorCnt.attr("cnt")?.toDoubleOrNull() ?: 0.0
+                            idList.add(id)
+                            cntList.add(cnt)
+
+                        }
+                        _currentUserBlogCnt.value = listOf(MyBlogData("최근 5일 방문자", idList, cntList))
+                        Log.d("HHH", "UserBlogViewmodel-BlogCntUpdate() called${idList}")
+                        Log.d("HHH", "UserBlogViewmodel-BlogCntUpdate() called${cntList}")
+
 
                 }
                 RESPONSE_STATE.FAIL -> {

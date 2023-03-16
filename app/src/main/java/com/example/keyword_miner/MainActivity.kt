@@ -81,10 +81,6 @@ class MainActivity : AppCompatActivity(){
 //        intent = Intent(this, KeywordActivity::class.java)
 //        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-        binding.repository.setOnClickListener {
-            intent = Intent(this@MainActivity, RepositoryActivity::class.java)
-            startActivity(intent)
-        }
         binding.userBtn.setOnClickListener{
             App.prefs.setboolean("isLoggedIn",false)
             intent = Intent(this@MainActivity, BlogIdActivity::class.java)
