@@ -50,7 +50,7 @@ class UserFragment : Fragment() {
         var keyword=""
         val collectionRef = db.collection("keywordDB")
         userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
-            binding.name.text=userdata.name
+            binding.name.text=userdata
         })
 
         userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt->

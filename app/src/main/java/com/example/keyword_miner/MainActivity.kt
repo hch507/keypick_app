@@ -66,21 +66,18 @@ class MainActivity : AppCompatActivity(){
             tab.text = titles.get(position)
         }.attach()
 
-//        val bundle = intent.getBundleExtra("Bundle_Array_List")
-//        if (bundle != null) {
-//            userdata= bundle.getSerializable("Array_List") as ArrayList<UserBlog>
-//            Log.d("HHH", "MainActivity - onCreate() - called${userdata.get(0).email}")
 
-//        }
-      //  val userEmail = userdata.get(0).email?.substring(0, userdata.get(0).email!!.indexOf('@'))
-      //  val username =userdata.get(0).name
+//        val userEmail = App.prefs.getEmail("userEmail","").substring(0, App.prefs.getEmail("userEmail","").indexOf('@'))
+        val userEmail = App.prefs.getEmail("userEmail","")
 
-        val userEmail = App.prefs.getEmail("userEmail","").substring(0, App.prefs.getEmail("userEmail","").indexOf('@'))
         Log.d("AAA", "MainActivity - onCreate() - called ${userEmail}")
-        val username =App.prefs.getName("userName","")
-        Log.d("HHH", "MainActivity - onCreate() - called ${username}")
-          userBlogViewModel.UserSet(userEmail!!,username!!)
-          userBlogViewModel.BlogCntUpdate(userEmail)
+
+        userBlogViewModel.UserSet(userEmail!!)
+        userBlogViewModel.BlogCntUpdate(userEmail)
+
+//        val username =App.prefs.getName("userName","")
+//        Log.d("HHH", "MainActivity - onCreate() - called ${username}")
+
 //        intent = Intent(this, KeywordActivity::class.java)
 //        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -90,7 +87,7 @@ class MainActivity : AppCompatActivity(){
         }
         binding.userBtn.setOnClickListener{
             App.prefs.setboolean("isLoggedIn",false)
-            intent = Intent(this@MainActivity, LoginActivity::class.java)
+            intent = Intent(this@MainActivity, BlogIdActivity::class.java)
             startActivity(intent)
             finish()
         }

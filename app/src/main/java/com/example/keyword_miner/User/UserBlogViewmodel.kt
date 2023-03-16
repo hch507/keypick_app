@@ -15,20 +15,24 @@ import org.jsoup.parser.Parser
 
 class UserBlogViewmodel : ViewModel() {
 
-    private val _currentBlogData = MutableLiveData <UserBlog>()
-    val currentBlogData : LiveData<UserBlog>
+    private val _currentBlogData = MutableLiveData <String>()
+    val currentBlogData : LiveData<String>
         get() = _currentBlogData
 
     private val _currentUserBlogCnt = MutableLiveData<List<MyBlogData>>()
     val currentUserBLogCnt : LiveData<List<MyBlogData>>
         get() = _currentUserBlogCnt
 
-    fun UserSet(email : String, name : String){
-        val User = UserBlog(email,name)
+    private val _currentUserState = MutableLiveData <String>()
+    val currentUserState : LiveData<String>
+        get() = _currentUserState
+
+    fun UserSet(email : String){
+        val User = email
         _currentBlogData.value =User
     }
-    fun BlogCntUpdate(username:String){
-        RetrofitManager.instance.blogData(email = username) { responseState, responsebody ->
+    fun BlogCntUpdate(blogId:String){
+        RetrofitManager.instance.blogData(email = blogId) { responseState, responsebody ->
             when (responseState) {
                 RESPONSE_STATE.OKAY -> {
                     Log.d("HHH", "api 호출에 성공하였습니다 ${responsebody}")

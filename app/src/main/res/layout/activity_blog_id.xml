@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".BlogIdActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안녕하세요"
+        android:textSize="40dp"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:padding="40dp"
+        android:id="@+id/search_term_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent"
+        android:layout_gravity="right"
+        app:counterEnabled="true"
+        app:counterMaxLength="12"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:helperText="https://blog.naver.com/xxxxx/ x부분 입력"
+        android:hint="BlogID를 입력히세요">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/blogID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginBottom="5dp"
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="등록"/>
+    <Button
+        android:id="@+id/non_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID등록 없이 시작하기"/>
+</LinearLayout>
