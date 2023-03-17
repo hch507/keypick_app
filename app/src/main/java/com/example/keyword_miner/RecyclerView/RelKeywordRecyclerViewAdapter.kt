@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.keyword_miner.KeywordInfo
+import com.example.keyword_miner.KeywordSearch.KeywordViewModel
 import com.example.keyword_miner.databinding.ActivityItemViewBinding
 import com.example.keyword_miner.utils.constant.TAG
 
-class RelKeywordRecyclerViewAdapter : RecyclerView.Adapter<RelKeywordViewHolder>() {
+class RelKeywordRecyclerViewAdapter(var viewModel: KeywordViewModel) : RecyclerView.Adapter<RelKeywordViewHolder>() {
     private var keywordList = ArrayList<KeywordInfo>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RelKeywordViewHolder {
         Log.d(TAG, "Adapter-onCreateViewHolder() called")
@@ -19,6 +20,9 @@ class RelKeywordRecyclerViewAdapter : RecyclerView.Adapter<RelKeywordViewHolder>
     override fun onBindViewHolder(holder: RelKeywordViewHolder, position: Int) {
         Log.d(TAG, "Adapter-onBindViewHolder() called")
         holder.bind(this.keywordList[position])
+        holder.itemView.setOnClickListener {
+            viewModel.updateKeywordData(this.keywordList[position].relKeyword)
+        }
     }
 
     override fun getItemCount(): Int {

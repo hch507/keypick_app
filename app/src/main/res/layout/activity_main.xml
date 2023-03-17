@@ -48,8 +48,8 @@
 
                 <ImageButton
                     android:id="@+id/user_btn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
                     android:backgroundTint="@color/appbar"
                     android:src="@drawable/ic_baseline_person_24"
                      />

@@ -31,7 +31,7 @@ class RelFragment : Fragment() {
             Log.d(constant.TAG, "KeywordFragment - onCreateView() - called${KeywordInfoList}")
             this.keywordList=KeywordInfoList
 
-            keywordAdapter=RelKeywordRecyclerViewAdapter()
+            keywordAdapter=RelKeywordRecyclerViewAdapter(keywordViewModel)
             keywordAdapter.submit(keywordList)
 
             binding.recyclerview.layoutManager = LinearLayoutManager(this.activity,

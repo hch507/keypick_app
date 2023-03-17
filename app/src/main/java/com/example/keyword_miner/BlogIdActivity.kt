@@ -24,12 +24,12 @@ class BlogIdActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        if (App.prefs.getboolean("isLoggedIn",false)) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish() // LoginActivity를 종료한다
-//            return // 이후의 코드는 실행하지 않는다
-//        }
+        if (App.prefs.getboolean("isLoggedIn",false)) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // LoginActivity를 종료한다
+            return // 이후의 코드는 실행하지 않는다
+        }
         binding.registerBtn.setOnClickListener {
             userEmail=binding.blogID.text.toString()
 

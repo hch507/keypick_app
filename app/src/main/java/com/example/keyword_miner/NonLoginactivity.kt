@@ -34,10 +34,7 @@ class NonLoginactivity : AppCompatActivity() {
             }
 
         })
-        binding.repository.setOnClickListener {
-            intent = Intent(this@NonLoginactivity, RepositoryActivity::class.java)
-            startActivity(intent)
-        }
+
 
         binding.returnBtn.setOnClickListener {
             intent = Intent(this@NonLoginactivity, BlogIdActivity::class.java)
