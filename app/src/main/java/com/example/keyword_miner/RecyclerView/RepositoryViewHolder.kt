@@ -12,5 +12,7 @@ class RepositoryViewHolder(val binding : ActivityRepositoryViewBinding):Recycler
         binding.monthCnt.text= item.monthCnt.toString()
         binding.blogCnt.text=item.blogCnt
         binding.datetime.text=item.datetime
+
     }
+    val btn = binding.itemClear
 }

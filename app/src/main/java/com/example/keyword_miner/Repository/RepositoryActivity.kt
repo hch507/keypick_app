@@ -4,22 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.keyword_miner.KeywordSearch.KeywordViewModel
 import com.example.keyword_miner.RecyclerView.RepositoryRecyclerViewAdapter
 import com.example.keyword_miner.Room.Roomhelper
 import com.example.keyword_miner.databinding.ActivityRepositoryBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class RepositoryActivity : AppCompatActivity() {
     lateinit var binding : ActivityRepositoryBinding
     lateinit var helper: Roomhelper
     lateinit var keywordAdapter: RepositoryRecyclerViewAdapter
-    var storeItemList =mutableListOf<RepositoryItem>()
+    var storeItemList =listOf<RepositoryItem>()
 
     val repositoryViewModel: RepositoryViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,15 +24,21 @@ class RepositoryActivity : AppCompatActivity() {
         helper= Roomhelper.getInstance(this)!!
 
         Log.d("HCH", "RepositoryFragment-onCreateView() called")
-        keywordAdapter= RepositoryRecyclerViewAdapter()
+        keywordAdapter= RepositoryRecyclerViewAdapter(repositoryViewModel)
 //        keywordAdapter.submit(storeItemList)
 
-        storeItemList = mutableListOf()
+ //       storeItemList = mutableListOf()
         repositoryViewModel.loadRepository()
 
-        repositoryViewModel.currentRepository.observe(,{
-
-        })
+        repositoryViewModel.currentRepository.observe(this) { repositoryItem ->
+            this.storeItemList = repositoryItem
+            keywordAdapter.submit(storeItemList)
+            binding.repositoryRecyclerview.layoutManager = LinearLayoutManager(
+                this@RepositoryActivity,
+                LinearLayoutManager.VERTICAL, false
+            )
+            binding.repositoryRecyclerview.adapter = keywordAdapter
+        }
 //        CoroutineScope(Dispatchers.IO).launch {
 //            val storeItems = helper.roomDao().getAll()
 //            Log.d("HCH", "RepositoryFragment-getAll() called${storeItems}")

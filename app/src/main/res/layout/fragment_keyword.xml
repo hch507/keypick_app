@@ -32,6 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:text="Null"/>
         </LinearLayout>
@@ -189,12 +190,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="날짜"
-            android:textColor="@color/black"
-            android:textSize="10dp"/>
+            android:textColor="#F41616"
+            android:textSize="13dp"/>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_margin="20dp"
             app:cardCornerRadius="20dp"
+            app:cardElevation="5dp"
             android:layout_height="wrap_content">
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart_week"
@@ -210,6 +212,7 @@
             android:id="@+id/store_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/appbar"
             android:text="키워드 저장"/>
     </LinearLayout>
 </ScrollView>

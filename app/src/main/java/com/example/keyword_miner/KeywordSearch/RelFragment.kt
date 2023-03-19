@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.keyword_miner.KeywordInfo
 import com.example.keyword_miner.R
 import com.example.keyword_miner.RecyclerView.RelKeywordRecyclerViewAdapter
@@ -19,8 +20,10 @@ class RelFragment : Fragment() {
 
     var keywordList = ArrayList<KeywordInfo>()
     lateinit var binding:FragmentRelBinding
+
     val keywordViewModel by activityViewModels<KeywordViewModel>()
     lateinit var keywordAdapter: RelKeywordRecyclerViewAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

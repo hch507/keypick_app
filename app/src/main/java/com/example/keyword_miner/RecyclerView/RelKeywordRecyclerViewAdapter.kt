@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.keyword_miner.KeywordInfo
 import com.example.keyword_miner.KeywordSearch.KeywordViewModel
 import com.example.keyword_miner.databinding.ActivityItemViewBinding

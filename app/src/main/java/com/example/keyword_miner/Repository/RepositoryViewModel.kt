@@ -25,9 +25,24 @@ class RepositoryViewModel:ViewModel() {
     fun loadRepository(){
         CoroutineScope(Dispatchers.IO).launch {
             val storeItems = helper.roomDao().getAll()
-            Log.d("HCH", "RepositoryFragment-getAll() called${storeItems}")
-
-            _currentReposioty.value=storeItems
+//            Log.d("HCH", "RepositoryFragment-getAll() called${storeItems}")
+            withContext(Dispatchers.Main) {
+                _currentReposioty.value = storeItems
+                Log.d("HCH", "RepositoryFragment-getAll() called${_currentReposioty}")
+            }
         }
     }
+    fun deleteItem(item: RepositoryItem){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            helper.roomDao().delate(item)
+            val storeItems = helper.roomDao().getAll()
+//            Log.d("HCH", "RepositoryFragment-getAll() called${storeItems}")
+            withContext(Dispatchers.Main) {
+                _currentReposioty.value = storeItems
+                Log.d("HCH", "RepositoryFragment-getAll() called${_currentReposioty}")
+            }
+        }
+    }
+
 }

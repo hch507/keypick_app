@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple_line">#DA8AF0</color>
     <color name="purple_circle">#352E39</color>
-    <color name="background">#F7F7F7</color>
+    <color name="background">#FBFBFB</color>
     <color name="appbar">#f96060</color>
 </resources>
