@@ -55,6 +55,9 @@ class UserFragment : Fragment() {
 
         userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt->
             CntList=blogcnt
+            var gapCnt = calculate(CntList[0].cnt)
+            binding.todayText.text =CntList[0].cnt[4].toInt().toString()
+            binding.gap.text=gapCnt.toInt().toString()
             setChartView(binding)
         })
         binding.recommendBtn.setOnClickListener {
@@ -76,6 +79,10 @@ class UserFragment : Fragment() {
         }
 
         return binding.root
+    }
+    private fun calculate(Cnt : List<Double>) : Double{
+        val gap = Cnt[4] - Cnt[3]
+        return gap
     }
     private fun setChartView(view: FragmentUserBinding?) {
         var chartWeek = binding.blogChartWeek
