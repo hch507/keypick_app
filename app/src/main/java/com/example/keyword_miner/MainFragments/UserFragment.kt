@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.keyword_miner.KeywordSearch.KeywordActivity
@@ -53,11 +54,18 @@ class UserFragment : Fragment() {
             binding.name.text=userdata
         })
 
-        userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt->
-            CntList=blogcnt
+        userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt ->
+            CntList = blogcnt
             var gapCnt = calculate(CntList[0].cnt)
-            binding.todayText.text =CntList[0].cnt[4].toInt().toString()
-            binding.gap.text=gapCnt.toInt().toString()
+            binding.todayText.text = CntList[0].cnt[4].toInt().toString()
+            binding.gap.text = gapCnt.toInt().toString()
+            if (gapCnt.toInt() < 0) {
+                binding.gap.setTextColor(Color.BLUE)
+            } else if (gapCnt.toInt() > 0) {
+                binding.gap.setTextColor(Color.RED)
+            }else{
+                binding.gap.setTextColor(Color.BLACK)
+            }
             setChartView(binding)
         })
         binding.recommendBtn.setOnClickListener {
@@ -110,6 +118,7 @@ class UserFragment : Fragment() {
 
         val barDataSet = BarDataSet(entries, title)
         val data = BarData(barDataSet)
+        barDataSet.setColor(ContextCompat.getColor(getContext()!!,R.color.teal_200))
         barChart.data = data
         barChart.invalidate()
     }
@@ -118,6 +127,7 @@ class UserFragment : Fragment() {
         val dateList: List<String> = CntList[0].period
         //hiding the grey background of the chart, default false if not set
         barChart.setDrawGridBackground(false)
+        barChart.setBackgroundColor(Color.TRANSPARENT)
         //remove the bar shadow, default false if not set
         barChart.setDrawBarShadow(false)
         //remove border of the chart, default false if not set
@@ -149,13 +159,13 @@ class UserFragment : Fragment() {
         //좌측 값 hiding the left y-axis line, default true if not set
         val leftAxis: YAxis = barChart.getAxisLeft()
         leftAxis.setDrawAxisLine(false)
-        leftAxis.textColor = Color.RED
+        leftAxis.textColor = Color.BLACK
 
 
         //우측 값 hiding the right y-axis line, default true if not set
         val rightAxis: YAxis = barChart.getAxisRight()
         rightAxis.setDrawAxisLine(false)
-        rightAxis.textColor = Color.RED
+        rightAxis.textColor = Color.BLACK
 
 
         //바차트의 타이틀
