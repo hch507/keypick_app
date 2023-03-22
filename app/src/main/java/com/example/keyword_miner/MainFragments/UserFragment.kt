@@ -51,18 +51,19 @@ class UserFragment : Fragment() {
         var keyword=""
         val collectionRef = db.collection("keywordDB")
         userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
-            binding.name.text=userdata
+            binding.name.text="${userdata} 님의 블로그"
         })
 
         userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt ->
             CntList = blogcnt
             var gapCnt = calculate(CntList[0].cnt)
-            binding.todayText.text = CntList[0].cnt[4].toInt().toString()
-            binding.gap.text = gapCnt.toInt().toString()
+            binding.todayText.text = "${CntList[0].cnt[4].toInt().toString()}명"
+            binding.gap.text =  "${gapCnt.toInt().toString()}명"
             if (gapCnt.toInt() < 0) {
                 binding.gap.setTextColor(Color.BLUE)
             } else if (gapCnt.toInt() > 0) {
                 binding.gap.setTextColor(Color.RED)
+                binding.gap.text =  "+${gapCnt.toInt().toString()}명"
             }else{
                 binding.gap.setTextColor(Color.BLACK)
             }
@@ -119,6 +120,7 @@ class UserFragment : Fragment() {
         val barDataSet = BarDataSet(entries, title)
         val data = BarData(barDataSet)
         barDataSet.setColor(ContextCompat.getColor(getContext()!!,R.color.teal_200))
+        barDataSet
         barChart.data = data
         barChart.invalidate()
     }
@@ -130,8 +132,10 @@ class UserFragment : Fragment() {
         barChart.setBackgroundColor(Color.TRANSPARENT)
         //remove the bar shadow, default false if not set
         barChart.setDrawBarShadow(false)
+
         //remove border of the chart, default false if not set
         barChart.setDrawBorders(false)
+
 
         //remove the description label text located at the lower right corner
         val description = Description()
@@ -149,7 +153,7 @@ class UserFragment : Fragment() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         //set the horizontal distance of the grid line
         xAxis.granularity = 1f
-        xAxis.textColor = Color.RED
+        xAxis.textColor = Color.BLACK
         //hiding the x-axis line, default true if not set
         xAxis.setDrawAxisLine(false)
         //hiding the vertical grid lines, default true if not set

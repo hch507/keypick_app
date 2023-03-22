@@ -14,11 +14,12 @@
 
         android:gravity="center">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/name"
@@ -26,22 +27,38 @@
                 android:layout_height="wrap_content"
                 android:text="name"
                 android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textFontWeight="30"
+                android:textSize="30dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text=" 님 안녕하세요!"
-                android:textSize="24dp" />
+
+                android:text="좋은 하루 되세요^^"
+                android:textSize="15dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@drawable/statistics"/>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="최근 블로그 방문자 수"
-                android:textSize="13dp" />
+                android:textColor="@color/black"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="18dp" />
+
+
+        </LinearLayout>
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -59,12 +76,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
                     android:text="TODAY"
                     android:textSize="13dp"
                     />
 
                 <TextView
                     android:id="@+id/today_text"
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -77,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -86,6 +105,7 @@
                     />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/gap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

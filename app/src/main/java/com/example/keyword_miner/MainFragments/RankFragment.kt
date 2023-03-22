@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.keyword_miner.R
 import com.example.keyword_miner.Retrofit.RetrofitManager
+import com.example.keyword_miner.User.UserBlogViewmodel
 import com.example.keyword_miner.databinding.FragmentRankBinding
 import com.example.keyword_miner.utils.Blog_API
 import com.example.keyword_miner.utils.RESPONSE_STATE
@@ -19,13 +22,16 @@ class RankFragment : Fragment() {
     lateinit var binding : FragmentRankBinding
     var blogname : String?=""
     var titleKeyword : String?=""
+    val userBlgoViewModel by activityViewModels<UserBlogViewmodel>()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding=FragmentRankBinding.inflate(layoutInflater)
-
+        userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
+            binding.name.text="${userdata} 님의 블로그"
+        })
         binding.search.setOnClickListener {
             Log.d("HHH", "RankFragment - onCreateView() - called${binding.blogName.text}")
-            if(binding.blogName.text.isEmpty()||binding.postingKeyword.text.isEmpty()){
+            if(binding.blogName.text.isEmpty()||binding.postingKeyword.text!!.isEmpty()){
                 Log.d("HHH", "RankFragment - onCreateView() - called!!!!!")
                 Toast.makeText(getActivity(),"Toast Message",Toast.LENGTH_SHORT).show();
             }else {
