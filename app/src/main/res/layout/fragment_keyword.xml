@@ -58,8 +58,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="13dp"
                         android:textColor="@color/white"
                         android:text="월 PC 검색량"
                         app:cardUseCompatPadding="true"/>
@@ -67,7 +67,7 @@
                         android:id="@+id/pc_click"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
+                        android:textSize="25dp"
                         android:textColor="@color/white"
                         android:padding="12dp"
                         android:layout_gravity="center_horizontal"
@@ -89,8 +89,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="13dp"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
                         android:text="월 모바일 검색량 "/>
@@ -98,7 +98,7 @@
                         android:id="@+id/mo_click"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
+                        android:textSize="25dp"
                         android:padding="12dp"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
@@ -128,8 +128,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="13dp"
                         android:textColor="@color/white"
                         android:text="블로그 수"
                         app:cardUseCompatPadding="true"/>
@@ -138,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
+                        android:textSize="25dp"
                         android:padding="12dp"
                         android:layout_gravity="center_horizontal"
                         android:text="0"/>
@@ -159,8 +159,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="13dp"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
                         android:text="월간 포스팅 수 "/>
@@ -169,7 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
+                        android:textSize="25dp"
                         android:padding="12dp"
                         android:layout_gravity="center_horizontal"
                         android:text="0"/>

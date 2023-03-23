@@ -1,13 +1,16 @@
 package com.example.keyword_miner
 
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import com.example.keyword_miner.KeywordSearch.*
 import com.example.keyword_miner.MainFragments.RankFragment
@@ -45,6 +48,8 @@ class MainActivity : AppCompatActivity(){
                 if (userSearchInput != null) {
                     intent.putExtra("searchterm", userSearchInput)
                 }
+                binding.searchViewMain.setQuery("",false)
+                binding.searchViewMain.clearFocus()
                 startActivity(intent)
                 return false
             }
@@ -82,10 +87,26 @@ class MainActivity : AppCompatActivity(){
 //        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
         binding.userBtn.setOnClickListener{
-            App.prefs.setboolean("isLoggedIn",false)
-            intent = Intent(this@MainActivity, BlogIdActivity::class.java)
-            startActivity(intent)
-            finish()
+            val builder = AlertDialog.Builder(this)
+
+            builder.setTitle("로그아웃")
+                .setMessage("로그아웃 하시겠습니까??")
+                .setPositiveButton("확인",DialogInterface.OnClickListener{dialog, id ->
+                    App.prefs.setboolean("isLoggedIn",false)
+                    intent = Intent(this@MainActivity, BlogIdActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                })
+                .setNegativeButton("취소",DialogInterface.OnClickListener{dialog, id ->
+                    Toast.makeText(this@MainActivity, "취소", Toast.LENGTH_SHORT).show()
+
+                })
+            builder.show()
+//            App.prefs.setboolean("isLoggedIn",false)
+//            intent = Intent(this@MainActivity, BlogIdActivity::class.java)
+//            startActivity(intent)
+//            finish()
         }
     }
 

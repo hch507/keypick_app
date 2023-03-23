@@ -120,7 +120,8 @@ class UserFragment : Fragment() {
         val barDataSet = BarDataSet(entries, title)
         val data = BarData(barDataSet)
         barDataSet.setColor(ContextCompat.getColor(getContext()!!,R.color.teal_200))
-        barDataSet
+
+
         barChart.data = data
         barChart.invalidate()
     }

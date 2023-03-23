@@ -47,7 +47,6 @@
                     android:id="@+id/repository"
                     android:layout_width="50dp"
                     android:layout_height="45dp"
-
                     android:backgroundTint="@color/appbar"
                     android:scaleType="fitXY"
                     android:src="@drawable/baseline_shopping_cart_24"

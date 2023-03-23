@@ -70,12 +70,12 @@ class KeywordFragment : Fragment() {
             this.keyword = KeywordInfoList.get(0).relKeyword
             this.monthPc = KeywordInfoList.get(0).monthlyPcQcCnt
             this.monthMo = KeywordInfoList.get(0).monthlyMobileQcCnt
-            if(monthPc=="<10"){
+            if(monthPc=="< 10"&& monthMo!="< 10"){
                 this.monthCnt = monthMo
-            }else if(monthMo=="<10"){
+            }else if(monthMo=="< 10"&&monthPc!="< 10"){
                 this.monthCnt = monthPc
-            }else if(monthPc=="<10"&&monthMo=="<10"){
-                this.monthCnt="<10"
+            }else if(monthPc=="< 10"&&monthMo=="< 10"){
+                this.monthCnt="< 10"
             }else{
                 this.monthCnt= (monthPc.toInt()+monthMo.toInt()).toString()
             }

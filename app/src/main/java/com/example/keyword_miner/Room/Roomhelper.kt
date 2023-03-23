@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.keyword_miner.Repository.RepositoryItem
 
-@Database(entities = arrayOf(RepositoryItem::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(RepositoryItem::class), version = 2, exportSchema = false)
 abstract class Roomhelper : RoomDatabase() {
     abstract fun roomDao(): RoomRepositoryDao
 

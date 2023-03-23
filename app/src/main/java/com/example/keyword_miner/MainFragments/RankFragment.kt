@@ -27,15 +27,16 @@ class RankFragment : Fragment() {
     ): View? {
         binding=FragmentRankBinding.inflate(layoutInflater)
         userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
+            this.blogname = userdata
             binding.name.text="${userdata} 님의 블로그"
         })
         binding.search.setOnClickListener {
-            Log.d("HHH", "RankFragment - onCreateView() - called${binding.blogName.text}")
-            if(binding.blogName.text.isEmpty()||binding.postingKeyword.text!!.isEmpty()){
-                Log.d("HHH", "RankFragment - onCreateView() - called!!!!!")
+            Log.d("HHH", "RankFragment - onCreateView() - called${binding.name.text}")
+            if(binding.postingKeyword.text!!.isEmpty()){
+                binding.inputKeyword.error ="키워드를 입력해주세요."
                 Toast.makeText(getActivity(),"Toast Message",Toast.LENGTH_SHORT).show();
             }else {
-                blogname = binding.blogName.text.toString()
+
                 titleKeyword = binding.postingKeyword.text.toString()
 
                 RetrofitManager.instance.searchBlogCnt(searchTerm = titleKeyword, sort = Blog_API.SORT2) { responseState, responseData ->

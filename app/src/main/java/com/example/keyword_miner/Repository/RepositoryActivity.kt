@@ -3,6 +3,7 @@ package com.example.keyword_miner.Repository
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.keyword_miner.RecyclerView.RepositoryRecyclerViewAdapter
@@ -20,6 +21,7 @@ class RepositoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRepositoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         helper= Roomhelper.getInstance(this)!!
 
@@ -50,5 +52,15 @@ class RepositoryActivity : AppCompatActivity() {
 //                binding.repositoryRecyclerview.adapter = keywordAdapter
 //            }
 //        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+            else -> {}
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
