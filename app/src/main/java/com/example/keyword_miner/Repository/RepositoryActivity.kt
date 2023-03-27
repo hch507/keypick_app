@@ -21,6 +21,7 @@ class RepositoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRepositoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         helper= Roomhelper.getInstance(this)!!

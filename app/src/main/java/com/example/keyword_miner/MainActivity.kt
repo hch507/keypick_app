@@ -15,19 +15,11 @@ import androidx.appcompat.widget.SearchView
 import com.example.keyword_miner.KeywordSearch.*
 import com.example.keyword_miner.MainFragments.RankFragment
 import com.example.keyword_miner.MainFragments.UserFragment
-import com.example.keyword_miner.Model.UserBlog
-import com.example.keyword_miner.Model.blogData
-import com.example.keyword_miner.Repository.RepositoryActivity
-import com.example.keyword_miner.Retrofit.RetrofitManager
-import com.example.keyword_miner.User.LoginActivity
 import com.example.keyword_miner.User.UserBlogViewmodel
 import com.example.keyword_miner.databinding.ActivityMainBinding
 import com.example.keyword_miner.sharePref.App
-import com.example.keyword_miner.utils.RESPONSE_STATE
-import com.example.keyword_miner.utils.constant
 
 import com.google.android.material.tabs.TabLayoutMediator
-import com.navercorp.nid.NaverIdLoginSDK
 
 class MainActivity : AppCompatActivity(){
     lateinit var binding: ActivityMainBinding

@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.SearchView
 import com.example.keyword_miner.KeywordSearch.KeywordActivity
-import com.example.keyword_miner.Repository.RepositoryActivity
-import com.example.keyword_miner.User.LoginActivity
 import com.example.keyword_miner.databinding.ActivityNonLoginactivityBinding
-import com.example.keyword_miner.sharePref.App
 
 class NonLoginactivity : AppCompatActivity() {
     lateinit var binding : ActivityNonLoginactivityBinding

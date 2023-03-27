@@ -19,11 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textSize="25dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:textColor="@color/black"
                 android:text="검색어 :"/>
 
@@ -33,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:textSize="20dp"
                 android:text="Null"/>
         </LinearLayout>
@@ -54,22 +57,43 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/pc_cnt"
                     android:orientation="vertical">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:textSize="13dp"
-                        android:textColor="@color/white"
-                        android:text="월 PC 검색량"
-                        app:cardUseCompatPadding="true"/>
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="23dp"
+                            android:fontFamily="@font/nanumsquareneo_deb"
+                            android:textColor="@color/white"
+                            android:text="PC"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="13dp"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/nanumsquareneo_brg"
+                            android:textColor="@color/white"
+
+                            android:text="월 검색량 "/>
+
+
+
+                    </LinearLayout>
+
+
                     <TextView
                         android:id="@+id/pc_click"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:textColor="@color/white"
-                        android:padding="12dp"
+                        android:fontFamily="@font/nanumsquareneo_brg"
+                        android:padding="10dp"
                         android:layout_gravity="center_horizontal"
                         android:text="0"/>
                 </LinearLayout>
@@ -86,22 +110,40 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/mobile_cnt"
                     android:orientation="vertical">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="13dp"
-                        android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
-                        android:text="월 모바일 검색량 "/>
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="23dp"
+                            android:fontFamily="@font/nanumsquareneo_deb"
+                            android:textColor="@color/white"
+                            android:text="모바일"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="13dp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/nanumsquareneo_brg"
+                            android:text="월 검색량 "/>
+
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/mo_click"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:padding="12dp"
                         android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/nanumsquareneo_brg"
                         android:text="0"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -124,23 +166,40 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/blog_cnt"
                     android:orientation="vertical">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:textSize="13dp"
-                        android:textColor="@color/white"
-                        android:text="블로그 수"
-                        app:cardUseCompatPadding="true"/>
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="23dp"
+                            android:fontFamily="@font/nanumsquareneo_deb"
+                            android:textColor="@color/white"
+                            android:text="블로그"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="13dp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/nanumsquareneo_brg"
+                            android:text="수 "/>
+
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/total_blog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:padding="12dp"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/nanumsquareneo_brg"
                         android:text="0"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -156,22 +215,41 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/month_cnt"
                     android:orientation="vertical">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:textSize="13dp"
-                        android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
-                        android:text="월간 포스팅 수 "/>
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="23dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/nanumsquareneo_deb"
+                            android:text="30일"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="13dp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/nanumsquareneo_brg"
+                            android:text="간 포스팅수"/>
+
+                    </LinearLayout>
+
+
                     <TextView
                         android:id="@+id/month_blog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:padding="12dp"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/nanumsquareneo_brg"
                         android:text="0"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -183,12 +261,14 @@
             android:layout_gravity="center_horizontal"
             android:text="키워드 분석"
             android:textColor="@color/black"
+            android:fontFamily="@font/nanumsquareneo_brg"
             android:textSize="25dp"/>
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/nanumsquareneo_brg"
             android:text="날짜"
             android:textColor="#F41616"
             android:textSize="13dp"/>
@@ -213,6 +293,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/appbar"
+            android:fontFamily="@font/nanumsquareneo_brg"
             android:text="키워드 저장"/>
     </LinearLayout>
 </ScrollView>

@@ -27,13 +27,15 @@
                 android:layout_height="wrap_content"
                 android:text="name"
                 android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_deb"
                 android:textFontWeight="30"
-                android:textSize="30dp" />
+                android:textSize="27dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="좋은 하루 되세요^^"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:textSize="13dp" />
         </LinearLayout>
 
@@ -53,6 +55,7 @@
                 android:text="최근 블로그 방문자 수"
                 android:textColor="@color/black"
                 android:layout_marginLeft="4dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:layout_marginBottom="15dp"
                 android:textSize="18dp" />
 
@@ -77,6 +80,7 @@
                     android:layout_marginEnd="16dp"
                     android:textColor="@color/black"
                     android:text="TODAY"
+                    android:fontFamily="@font/nanumsquareneo_brg"
                     android:textSize="13dp"
                     />
 
@@ -86,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/nanumsquareneo_brg"
                     android:text="0"
                     android:textSize="13dp" />
             </LinearLayout>
@@ -99,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/nanumsquareneo_brg"
                     android:text="전날대비"
                     android:textSize="13dp"
                     />
@@ -109,6 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/nanumsquareneo_brg"
                     android:text="0"
                     android:textSize="13dp" />
             </LinearLayout>
@@ -140,8 +147,9 @@
             android:id="@+id/recommend_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이번주 추천 키워드 GO!"
+            android:text="오늘의 추천 키워드 GO!"
             android:backgroundTint="@color/appbar"
+            android:fontFamily="@font/nanumsquareneo_brg"
          />
     </LinearLayout>
 </ScrollView>

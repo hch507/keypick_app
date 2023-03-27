@@ -36,7 +36,8 @@ class RankFragment : Fragment() {
                 binding.inputKeyword.error ="키워드를 입력해주세요."
                 Toast.makeText(getActivity(),"Toast Message",Toast.LENGTH_SHORT).show();
             }else {
-
+                binding.inputKeyword.error = null
+                binding.inputKeyword.isErrorEnabled = false
                 titleKeyword = binding.postingKeyword.text.toString()
 
                 RetrofitManager.instance.searchBlogCnt(searchTerm = titleKeyword, sort = Blog_API.SORT2) { responseState, responseData ->

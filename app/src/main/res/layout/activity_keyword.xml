@@ -29,7 +29,7 @@
                 android:gravity="center_horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:paddingBottom="10dp">
 
                 <androidx.appcompat.widget.SearchView
@@ -40,17 +40,18 @@
                     android:focusableInTouchMode="false"
                     app:closeIcon="@drawable/ic_baseline_clear_24"
                     app:iconifiedByDefault="false"
+                    android:fontFamily="@font/nanumsquareneo_brg"
                     app:queryBackground="@drawable/searchview_backgroud"
                     app:queryHint="          검색어를 입력하시오" />
 
                 <ImageButton
                     android:id="@+id/repository"
                     android:layout_width="50dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/appbar"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/baseline_shopping_cart_24"
-                    />
+
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/repository" />
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
 

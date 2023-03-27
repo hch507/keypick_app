@@ -61,12 +61,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="블로그 아이디를 등록하시면 더 많은 서비스를 이용하실 수 있습니다."
+            android:fontFamily="@font/nanumsquareneo_deb"
+            android:layout_marginBottom="20dp"
             android:textColor="@color/black"
             android:textSize="20dp" />
         <Button
             android:id="@+id/return_btn"
             android:backgroundTint="@color/appbar"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/nanumsquareneo_brg"
             android:layout_height="wrap_content"
             android:text="블로그 ID 등록하기"/>
     </LinearLayout>

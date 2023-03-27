@@ -11,12 +11,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="120dp">
+        android:layout_height="110dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"
             >
 
@@ -26,6 +27,7 @@
                 android:textSize="20dp"
                 android:padding="3dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="#" />
 
             <TextView
@@ -34,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="TextView" />
 
         </LinearLayout>
@@ -42,6 +45,7 @@
             android:id="@+id/mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="horizontal"
             android:paddingLeft="10dp"
            >
@@ -51,6 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:textColor="@color/black"
                 android:padding="3dp"
                 android:text="월간 모바일 검색량 :" />
 
@@ -58,6 +64,8 @@
                 android:id="@+id/mobile_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="TextView" />
 
         </LinearLayout>
@@ -73,12 +81,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="월간 pc 검색량 :" />
 
             <TextView
                 android:id="@+id/pc_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="TextView" />
         </LinearLayout>
 
@@ -95,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:padding="3dp"
                 android:textColor="@color/appbar"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="Click!!" />
 
 

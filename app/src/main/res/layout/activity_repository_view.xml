@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
+
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,34 +19,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
             >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="키워드 :"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/keyword"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.071" />
 
 
             <TextView
                 android:id="@+id/keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="180dp"
                 android:padding="3dp"
                 android:text="TextView"
-                android:textSize="15dp"
                 android:textColor="@color/black"
+                android:textSize="20dp"
+                android:fontFamily="@font/nanumsquareneo_deb"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.071" />
@@ -71,17 +60,20 @@
             >
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:padding="3dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="월간 검색량 :" />
 
             <TextView
                 android:id="@+id/month_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:textColor="@color/black"
                 android:text="TextView" />
 
         </LinearLayout>
@@ -97,12 +89,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:textColor="@color/black"
                 android:text="총 블로그 수 :" />
 
             <TextView
                 android:id="@+id/blog_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:textColor="@color/black"
                 android:text="TextView" />
 
 
@@ -115,14 +111,20 @@
             android:layout_marginRight="10dp"
             android:gravity="right"
             >
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
 
+                android:src="@drawable/pin"/>
             <TextView
                 android:id="@+id/datetime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+
+                android:layout_marginLeft="3dp"
                 android:layout_gravity="left"
                 android:text="yyyy/mm/dd" />
+
 
 
         </LinearLayout>

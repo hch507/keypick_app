@@ -18,10 +18,12 @@
             android:layout_height="wrap_content"
             android:text="안녕하세요."
             android:textColor="@color/black"
+            android:fontFamily="@font/nanumsquareneo_deb"
             android:textSize="50dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareneo_brg"
             android:text="네이버 블로그ID를 입력 하여 \n다양한 서비스를 이용하세요.  "/>
     </LinearLayout>
 
@@ -36,9 +38,10 @@
         app:counterMaxLength="12"
         app:boxStrokeColor="@color/appbar"
         app:endIconMode="clear_text"
-        android:outlineAmbientShadowColor="@color/appbar"
+
+        android:fontFamily="@font/nanumsquareneo_brg"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:helperText="https://blog.naver.com/xxxxx/ x부분 입력"
+        app:helperText="blog.naver.com/xxxxx/ x부분 입력"
         android:hint="BlogID를 입력히세요">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -47,6 +50,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/nanumsquareneo_brg"
 
             />
 
@@ -57,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar"
+        android:fontFamily="@font/nanumsquareneo_brg"
         android:textColor="@color/white"
         android:text="등록"/>
     <Button
@@ -65,5 +70,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar"
         android:textColor="@color/white"
+        android:fontFamily="@font/nanumsquareneo_brg"
         android:text="ID등록 없이 시작하기"/>
 </LinearLayout>

@@ -32,13 +32,13 @@
                 android:layout_height="wrap_content"
                 android:text="name"
                 android:textColor="@color/black"
-                android:textFontWeight="30"
-                android:textSize="30dp" />
+                android:fontFamily="@font/nanumsquareneo_deb"
+                android:textSize="27dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="포스팅된 글의 랭킹이 궁금하신가요??"
                 android:textSize="13dp" />
         </LinearLayout>
@@ -50,6 +50,8 @@
             android:layout_height="wrap_content"
             android:text="Posting Blog Keyword"
             android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquareneo_brg"
 
             android:textSize="20dp" />
 
@@ -72,10 +74,8 @@
                 android:id="@+id/postingKeyword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="왕곡가든"
                 android:inputType="text"
-
-
+                android:fontFamily="@font/nanumsquareneo_brg"
                 />
 
 
@@ -87,32 +87,51 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@color/appbar"
+            android:fontFamily="@font/nanumsquareneo_brg"
+
             android:text="검색"
              />
-
-        <TextView
-
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="검색 결과"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-             />
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="검색 결과"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:textSize="20dp"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ranking"/>
+        </LinearLayout>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_margin="20dp"
             app:cardCornerRadius="20dp"
             app:strokeWidth="2dp"
             app:strokeColor="@color/Line"
+
             android:layout_height="100dp">
 
             <TextView
                 android:id="@+id/ranking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:layout_margin="10dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

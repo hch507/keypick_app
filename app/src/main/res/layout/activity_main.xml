@@ -31,7 +31,7 @@
                 android:gravity="center_horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingTop="10dp"
+                android:paddingTop="5dp"
                 android:paddingBottom="10dp">
 
                 <androidx.appcompat.widget.SearchView
@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
+                    android:fontFamily="@font/nanumsquareneo_brg"
                     app:closeIcon="@drawable/ic_baseline_clear_24"
                     app:iconifiedByDefault="false"
                     app:queryBackground="@drawable/searchview_backgroud"
@@ -49,9 +50,11 @@
                 <ImageButton
                     android:id="@+id/user_btn"
                     android:layout_width="50dp"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
                     android:backgroundTint="@color/appbar"
-                    android:src="@drawable/ic_baseline_person_24"
+                    android:src="@drawable/logout"
                      />
 
 
