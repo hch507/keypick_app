@@ -31,7 +31,6 @@ class RepositoryViewModel:ViewModel() {
         }
     }
     fun deleteItem(item: RepositoryItem){
-
         CoroutineScope(Dispatchers.IO).launch {
             helper.roomDao().delate(item)
             val storeItems = helper.roomDao().getAll()

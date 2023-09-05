@@ -37,10 +37,7 @@ interface IRetrofit {
         @Query("sort") sort: String
     ):Call<JsonElement>
 
-//    @GET("nid/me")
-//    fun getUserBlog(
-//        @Header("Authorization") authorization: String,
-//    ):Call<JsonElement>
+
 
     @GET("NVisitorgp4Ajax.nhn")
     fun getBlogData(

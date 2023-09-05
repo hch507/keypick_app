@@ -29,11 +29,9 @@ class RepositoryActivity : AppCompatActivity() {
 
         Log.d("HCH", "RepositoryFragment-onCreateView() called")
         keywordAdapter= RepositoryRecyclerViewAdapter(repositoryViewModel)
-//        keywordAdapter.submit(storeItemList)
 
- //       storeItemList = mutableListOf()
         repositoryViewModel.loadRepository()
-
+        //리사이클러뷰에 저장된 값을 뿌려줌
         repositoryViewModel.currentRepository.observe(this) { repositoryItem ->
             this.storeItemList = repositoryItem
             keywordAdapter.submit(storeItemList)

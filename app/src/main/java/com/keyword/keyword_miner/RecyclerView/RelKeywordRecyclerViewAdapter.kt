@@ -1,8 +1,10 @@
 package com.keyword.keyword_miner.RecyclerView
 
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.keyword.keyword_miner.KeywordInfo
 import com.keyword.keyword_miner.KeywordSearch.KeywordViewModel
@@ -17,6 +19,7 @@ class RelKeywordRecyclerViewAdapter(var viewModel: KeywordViewModel) : RecyclerV
         return itemhodler
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RelKeywordViewHolder, position: Int) {
         Log.d(TAG, "Adapter-onBindViewHolder() called")
         holder.bind(this.keywordList[position])

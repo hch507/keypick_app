@@ -26,6 +26,8 @@ class BlogIdActivity : AppCompatActivity() {
             finish() // LoginActivity를 종료한다
             return // 이후의 코드는 실행하지 않는다
         }
+
+        ///
         binding.registerBtn.setOnClickListener {
             userEmail=binding.blogID.text.toString()
 

@@ -32,7 +32,7 @@ object Search_API {
     const val Client_id : String ="oKQNT8007_pUD1FBJv0a"
     const val Client_pw : String ="Cp7YEq41hc"
     const val start_date : String ="2020-01-01"
-    const val end_date : String ="2023-01-01"
+    const val end_date : String ="2023-06-01"
     const val timeunit : String ="month"
 
 }

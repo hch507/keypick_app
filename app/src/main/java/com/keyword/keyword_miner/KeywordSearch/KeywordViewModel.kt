@@ -32,11 +32,7 @@ class KeywordViewModel: ViewModel() {
         get() = _currentMonthCnt
 
 
-//    init{
-//        _currentRelData.value= ArrayList<KeywordInfo>()
-//        _currentBlogDate.value=ArrayList<ItemPeriod>()
-//        _currentMonthCnt.value=ArrayList<blogData>()
-//    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateKeywordData(searchTerm : String){
@@ -47,7 +43,8 @@ class KeywordViewModel: ViewModel() {
 //                    Log.d("HHHH", "api 호출에 성공하였습니다 ${responseArrayList?.get(0)}")
 
                     if(responseArrayList!!.isEmpty()){
-                        Log.d("BBBB", "KeywordViewModel - updateKeywordData() - called")
+
+                        Log.d("bbbb", "KeywordViewModel - updateKeywordData() - called ${responseArrayList}")
                         Toast.makeText( context,"잠시후 다시 검색해주세요", Toast.LENGTH_SHORT).show()
 //                        System.exit(0);
                     }else {

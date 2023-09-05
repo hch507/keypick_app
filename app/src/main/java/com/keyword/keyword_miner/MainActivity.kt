@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        //검색
         binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity(){
             }
 
         })
+
+
         val list = listOf(UserFragment(), RankFragment())
         //어답터 생성
         val pageAdapter = FragmentPageAdapter(list, this)
@@ -64,7 +66,7 @@ class MainActivity : AppCompatActivity(){
         }.attach()
 
 
-//        val userEmail = App.prefs.getEmail("userEmail","").substring(0, App.prefs.getEmail("userEmail","").indexOf('@'))
+
         val userEmail = App.prefs.getEmail("userEmail","")
 
         Log.d("AAA", "MainActivity - onCreate() - called ${userEmail}")
@@ -72,13 +74,8 @@ class MainActivity : AppCompatActivity(){
         userBlogViewModel.UserSet(userEmail!!)
         userBlogViewModel.BlogCntUpdate(userEmail)
 
-//        val username =App.prefs.getName("userName","")
-//        Log.d("HHH", "MainActivity - onCreate() - called ${username}")
-
-//        intent = Intent(this, KeywordActivity::class.java)
-//        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
         binding.userBtn.setOnClickListener{
+
             val builder = AlertDialog.Builder(this)
 
             builder.setTitle("로그아웃")
@@ -95,10 +92,7 @@ class MainActivity : AppCompatActivity(){
 
                 })
             builder.show()
-//            App.prefs.setboolean("isLoggedIn",false)
-//            intent = Intent(this@MainActivity, BlogIdActivity::class.java)
-//            startActivity(intent)
-//            finish()
+
         }
     }
 

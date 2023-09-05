@@ -6,4 +6,4 @@ data class ItemPeriod(
     var title : String,
     var period: ArrayList<String>,
     var rate : ArrayList<Double>
-):Serializable
+)

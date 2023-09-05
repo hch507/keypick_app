@@ -3,7 +3,7 @@ package com.keyword.keyword_miner.RecyclerView
 import androidx.recyclerview.widget.RecyclerView
 import com.keyword.keyword_miner.Repository.RepositoryItem
 import com.keyword.keyword_miner.databinding.ActivityRepositoryViewBinding
-import java.util.*
+
 
 class RepositoryViewHolder(val binding : ActivityRepositoryViewBinding):RecyclerView.ViewHolder(binding.root) {
     fun bind(item: RepositoryItem){

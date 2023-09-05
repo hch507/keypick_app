@@ -56,7 +56,7 @@ class KeywordFragment : Fragment() {
     ): View? {
         binding = FragmentKeywordBinding.inflate(layoutInflater)
         helper= Roomhelper.getInstance(requireContext())!!
-        //keywordViewModel = ViewModelProvider(requireActivity()).get(KeywordViewModel::class.java)
+
         Log.d("HCH", "KeywordFragment - onCreateView() - called")
         keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
             Log.d(TAG, "KeywordFragment - onCreateView() - called${KeywordInfoList}")
@@ -185,6 +185,7 @@ class KeywordFragment : Fragment() {
         val leftAxis: YAxis = lineChart.getAxisLeft()
         leftAxis.setDrawAxisLine(false)
         leftAxis.textColor = Color.BLACK
+        xAxis.setLabelCount(4, true);
 
         //바차트의 타이틀
         val legend: Legend = lineChart.getLegend()

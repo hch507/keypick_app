@@ -49,7 +49,7 @@
 
                 <ImageButton
                     android:id="@+id/user_btn"
-                    android:layout_width="50dp"
+                    android:layout_width="45dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:scaleType="centerCrop"

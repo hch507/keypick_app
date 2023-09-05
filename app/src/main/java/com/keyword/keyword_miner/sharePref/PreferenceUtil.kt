@@ -23,13 +23,5 @@ class PreferenceUtil(context:Context) {
     {
         prefs.edit().putString(key, str).apply()
     }
-    fun getName(key: String, defValue: String): String
-    {
-        return prefs.getString(key, defValue).toString()
-    }
 
-    fun setName(key: String, str: String)
-    {
-        prefs.edit().putString(key, str).apply()
-    }
 }

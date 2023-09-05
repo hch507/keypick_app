@@ -7,5 +7,5 @@ data class KeywordInfo(
     @SerializedName("relKeyword") val relKeyword: String,
     @SerializedName("monthlyPcQcCnt") val monthlyPcQcCnt: String,
     @SerializedName("monthlyMobileQcCnt") val monthlyMobileQcCnt: String,
-):Serializable
+)
 

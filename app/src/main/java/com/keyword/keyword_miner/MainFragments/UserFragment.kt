@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -65,14 +66,21 @@ class UserFragment : Fragment() {
             collectionRef.whereEqualTo("date", today)
                 .get()
                 .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        keyword = document.getString("keyword").toString()
-                        Log.d("HHH", "Today's keyword: $keyword")
-                    }
-                    val intent = Intent(requireActivity(), KeywordActivity::class.java)
-                    intent.putExtra("searchterm", keyword)
+                    if (documents.size() > 0) {
 
-                    startActivity(intent)
+                            for (document in documents) {
+                            keyword = document.getString("keyword").toString()
+                            Log.d("HHH", "Today's keyword: $keyword")
+                        }
+                        val intent = Intent(requireActivity(), KeywordActivity::class.java)
+                        intent.putExtra("searchterm", keyword)
+
+                        startActivity(intent)
+                    }
+                    else{
+                        Toast.makeText(requireContext(), "오늘은 추천코드룰 찾지 못했습니다. 죄송합니다ㅠ.", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
                 .addOnFailureListener { exception ->
                     Log.w("HHH", "Error getting documents: ", exception)

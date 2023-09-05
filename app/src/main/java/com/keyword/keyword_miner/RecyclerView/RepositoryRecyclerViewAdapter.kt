@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keyword.keyword_miner.Repository.RepositoryItem
 import com.keyword.keyword_miner.Repository.RepositoryViewModel
 import com.keyword.keyword_miner.databinding.ActivityRepositoryViewBinding
-import com.keyword.keyword_miner.sharePref.App
+
 import com.keyword.keyword_miner.utils.constant
 
 class RepositoryRecyclerViewAdapter(var viewModel: RepositoryViewModel) : RecyclerView.Adapter<RepositoryViewHolder>() {
     private var RepositoryList = listOf<RepositoryItem>()
-    val Context  = App.instance.getAppContext()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         Log.d(constant.TAG, "Adapter-onCreateViewHolder() called")
         val itemhodler= RepositoryViewHolder(ActivityRepositoryViewBinding.inflate(LayoutInflater.from(parent.context),parent,false))

@@ -33,7 +33,7 @@ class RankFragment : Fragment() {
             Log.d("HHH", "RankFragment - onCreateView() - called${binding.name.text}")
             if(binding.postingKeyword.text!!.isEmpty()){
                 binding.inputKeyword.error ="키워드를 입력해주세요."
-                Toast.makeText(getActivity(),"Toast Message",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"키워드를 입력해주세요.",Toast.LENGTH_SHORT).show();
             }else {
                 binding.inputKeyword.error = null
                 binding.inputKeyword.isErrorEnabled = false

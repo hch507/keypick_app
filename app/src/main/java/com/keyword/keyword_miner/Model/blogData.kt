@@ -6,4 +6,4 @@ data class blogData(
     var total: String,
     var data: ArrayList<String>,
     var blogname : ArrayList<String>
-):Serializable
+)

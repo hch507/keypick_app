@@ -18,7 +18,7 @@ class RetrofitManager {
     private var iRetrofit : IRetrofit? = RetrofitClient.getRetrifitClient(API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_search : IRetrofit? = RetrofitClient.getRetrifitClient(Search_API.BASE_URL)?.create(IRetrofit::class.java)
     private var iRetrofit_blog : IRetrofit? = RetrofitClient.getRetrifitClient(Blog_API.BASE_URL)?.create(IRetrofit::class.java)
- //   private var iRetrofit_user : IRetrofit? = RetrofitClient.getRetrifitClient(MY_BLOG.BASE_URL)?.create(IRetrofit::class.java)
+
     private var iRetrofit_blog_data : IRetrofit? = RetrofitClient.getGsonRetrifitClient(MY_BLOG.MY_BASE_URL)?.create(IRetrofit::class.java)
 
     // 연관 검색어 및 월 피씨 모바일 컴생량
@@ -34,9 +34,8 @@ class RetrofitManager {
             x_signature = Signature.generate(API.X_Timestamp,
                                              Signature.method,
                                              Signature.uri,
-                                             API.X_secret
-
-            ), hintKeywords = searchTerm).let{
+                                             API.X_secret),
+            hintKeywords = searchTerm).let{
             it
         }?: return
         //실제 요청 후 callback을 받
