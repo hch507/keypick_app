@@ -3,6 +3,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.keyword.keyword_miner.utils.constant.TAG
+import java.time.LocalDate
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import java.util.*
@@ -32,7 +33,8 @@ object Search_API {
     const val Client_id : String ="oKQNT8007_pUD1FBJv0a"
     const val Client_pw : String ="Cp7YEq41hc"
     const val start_date : String ="2020-01-01"
-    const val end_date : String ="2023-06-01"
+    @RequiresApi(Build.VERSION_CODES.O)
+    var end_date  = LocalDate.now().toString()
     const val timeunit : String ="month"
 
 }
