@@ -4,8 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.keyword.keyword_miner.Repository.RepositoryItem
-import com.keyword.keyword_miner.Repository.RepositoryViewModel
+import com.keyword.keyword_miner.data.Repository.RepositoryItem
+import com.keyword.keyword_miner.ui.viewmodels.RepositoryViewModel
 import com.keyword.keyword_miner.databinding.ActivityRepositoryViewBinding
 
 import com.keyword.keyword_miner.utils.constant

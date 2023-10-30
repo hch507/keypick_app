@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'com.google.dagger.hilt.android'
+
 }
 
 android {
@@ -12,7 +14,7 @@ android {
         applicationId "com.keyword.keyword_miner"
         minSdk 21
         targetSdk 33
-        versionCode 5
+        versionCode 6
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -91,4 +93,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    runtimeOnly "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.0"
+
+    implementation 'com.google.dagger:hilt-android:2.44'
+    kapt 'com.google.dagger:hilt-android-compiler:2.44'
 }

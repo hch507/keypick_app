@@ -7,7 +7,7 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
-        android:name="com.keyword.keyword_miner.sharePref.App"
+        android:name="com.keyword.keyword_miner.ui.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,14 +18,14 @@
         android:theme="@style/Theme.Keyword_miner"
         tools:targetApi="31">
         <activity
-            android:name="com.keyword.keyword_miner.NonLoginactivity"
+            android:name="com.keyword.keyword_miner.ui.activity.NonLoginactivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.keyword.keyword_miner.BlogIdActivity"
+            android:name="com.keyword.keyword_miner.ui.activity.BlogIdActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,18 +38,18 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.keyword.keyword_miner.Repository.RepositoryActivity"
+            android:name="com.keyword.keyword_miner.ui.activity.RepositoryActivity"
             android:exported="false" />
 
         <activity
-            android:name="com.keyword.keyword_miner.KeywordSearch.KeywordActivity"
+            android:name="com.keyword.keyword_miner.ui.activity.KeywordActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.keyword.keyword_miner.MainActivity"
+            android:name="com.keyword.keyword_miner.ui.activity.MainActivity"
             android:exported="true">
 
 

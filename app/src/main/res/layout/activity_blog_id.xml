@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".BlogIdActivity">
+    tools:context=".ui.activity.BlogIdActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,60 +17,62 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안녕하세요."
             android:layout_marginBottom="3dp"
-            android:textColor="@color/black"
             android:fontFamily="@font/nanumsquareneo_deb"
-            android:textSize="50dp"/>
+            android:text="안녕하세요."
+            android:textColor="@color/black"
+            android:textSize="50dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquareneo_brg"
-            android:text="네이버 블로그ID를 입력 하여 \n다양한 서비스를 이용하세요.  "/>
+            android:text="네이버 블로그ID를 입력 하여 \n다양한 서비스를 이용하세요.  " />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:padding="40dp"
         android:id="@+id/input_blog"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent"
         android:layout_gravity="right"
+        android:fontFamily="@font/nanumsquareneo_brg"
 
+        android:hint="BlogID를 입력하세요"
+        android:padding="40dp"
         app:boxStrokeColor="@color/appbar"
         app:endIconMode="clear_text"
-
-        android:fontFamily="@font/nanumsquareneo_brg"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:helperText="blog.naver.com/xxxxx/ x부분 입력"
-        android:hint="BlogID를 입력하세요">
+        app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/blogID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/nanumsquareneo_brg"
+            android:inputType="text"
 
             />
 
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar"
         android:fontFamily="@font/nanumsquareneo_brg"
-        android:textColor="@color/white"
-        android:text="등록"/>
+        android:text="등록"
+        android:textColor="@color/white" />
+
     <Button
         android:id="@+id/non_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/appbar"
-        android:textColor="@color/white"
         android:fontFamily="@font/nanumsquareneo_brg"
-        android:text="ID등록 없이 시작하기"/>
+        android:text="ID등록 없이 시작하기"
+        android:textColor="@color/white" />
 </LinearLayout>

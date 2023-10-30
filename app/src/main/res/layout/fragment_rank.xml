@@ -8,7 +8,7 @@
     android:orientation="vertical"
 
 
-    tools:context=".MainFragments.RankFragment">
+    tools:context=".ui.fragments.RankFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

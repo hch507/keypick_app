@@ -2,42 +2,40 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="30dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    >
+    app:cardCornerRadius="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="110dp">
+        android:layout_height="110dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:padding="3dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="#" />
+                android:padding="3dp"
+                android:text="#"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/relkeyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
 
         </LinearLayout>
 
@@ -47,8 +45,7 @@
             android:layout_height="wrap_content"
 
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-           >
+            android:paddingLeft="10dp">
 
             <TextView
 
@@ -56,17 +53,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:textColor="@color/black"
                 android:padding="3dp"
-                android:text="월간 모바일 검색량 :" />
+                android:text="월간 모바일 검색량 :"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/mobile_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -74,24 +71,23 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-           >
+            android:paddingLeft="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="월간 pc 검색량 :" />
+                android:padding="3dp"
+                android:text="월간 pc 검색량 :"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/pc_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,16 +95,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            >
+            android:paddingLeft="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:textColor="@color/appbar"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="Click!!" />
+                android:padding="3dp"
+                android:text="Click!!"
+                android:textColor="@color/appbar" />
 
 
         </LinearLayout>

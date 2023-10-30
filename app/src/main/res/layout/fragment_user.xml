@@ -2,40 +2,40 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragments.UserFragment">
+    android:background="@color/background"
+    tools:context=".ui.fragments.UserFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        android:gravity="center">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/nanumsquareneo_deb"
                 android:text="name"
                 android:textColor="@color/black"
-                android:fontFamily="@font/nanumsquareneo_deb"
-                android:layout_marginBottom="3dp"
                 android:textSize="27dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="좋은 하루 되세요^^"
                 android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="좋은 하루 되세요^^"
                 android:textSize="13dp" />
         </LinearLayout>
 
@@ -47,16 +47,16 @@
             <ImageView
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/statistics"/>
+                android:src="@drawable/statistics" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
                 android:text="최근 블로그 방문자 수"
                 android:textColor="@color/black"
-                android:layout_marginLeft="4dp"
-                android:fontFamily="@font/nanumsquareneo_brg"
-                android:layout_marginBottom="15dp"
                 android:textSize="18dp" />
 
 
@@ -66,32 +66,32 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_marginRight="20dp"
+            android:gravity="right"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
 
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:textColor="@color/black"
-                    android:text="TODAY"
                     android:fontFamily="@font/nanumsquareneo_brg"
-                    android:textSize="13dp"
-                    />
+                    android:text="TODAY"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
 
                 <TextView
                     android:id="@+id/today_text"
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/nanumsquareneo_brg"
                     android:text="0"
+                    android:textColor="@color/black"
                     android:textSize="13dp" />
             </LinearLayout>
 
@@ -99,24 +99,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/nanumsquareneo_brg"
                     android:text="전날대비"
-                    android:textSize="13dp"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
 
                 <TextView
-                    android:textColor="@color/black"
                     android:id="@+id/gap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/nanumsquareneo_brg"
                     android:text="0"
+                    android:textColor="@color/black"
                     android:textSize="13dp" />
             </LinearLayout>
 
@@ -127,29 +127,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            app:strokeWidth="2dp"
+            app:cardCornerRadius="20dp"
             app:strokeColor="@color/appbar"
-            app:cardCornerRadius="20dp">
+            app:strokeWidth="2dp">
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/blog_chart_week"
                 android:layout_width="match_parent"
-
-                android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                />
+                android:layout_marginEnd="16dp" />
         </com.google.android.material.card.MaterialCardView>
+
         <Button
 
             android:id="@+id/recommend_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘의 추천 키워드 GO!"
             android:backgroundTint="@color/appbar"
             android:fontFamily="@font/nanumsquareneo_brg"
-         />
+            android:text="오늘의 추천 키워드 GO!" />
     </LinearLayout>
 </ScrollView>

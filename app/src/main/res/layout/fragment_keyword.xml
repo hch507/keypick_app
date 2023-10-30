@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
-    tools:context=".KeywordSearch.KeywordFragment">
-    <LinearLayout
+    tools:context=".ui.fragments.KeywordFragment">
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -23,33 +22,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:textSize="25dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
+                android:padding="5dp"
+                android:text="검색어 :"
                 android:textColor="@color/black"
-                android:text="검색어 :"/>
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:textSize="20dp"
-                android:text="Null"/>
+                android:padding="5dp"
+                android:text="Null"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                app:cardElevation="5dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="30dp"
+                app:cardElevation="5dp"
                 app:strokeColor="#DFC3A0">
 
                 <LinearLayout
@@ -57,30 +57,31 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/pc_cnt"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:fontFamily="@font/nanumsquareneo_deb"
+                            android:text="PC"
                             android:textColor="@color/white"
-                            android:text="PC"/>
+                            android:textSize="20dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13dp"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nanumsquareneo_brg"
+                            android:text="월 검색량 "
                             android:textColor="@color/white"
 
-                            android:text="월 검색량 "/>
-
+                            android:textSize="13dp" />
 
 
                     </LinearLayout>
@@ -90,48 +91,52 @@
                         android:id="@+id/pc_click"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
-                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/nanumsquareneo_brg"
                         android:padding="10dp"
-                        android:layout_gravity="center_horizontal"
-                        android:text="0"/>
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="30dp"
                 android:layout_margin="10dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="5dp"
                 app:strokeColor="#DFC3A0">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/mobile_cnt"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:fontFamily="@font/nanumsquareneo_deb"
+                            android:text="모바일"
                             android:textColor="@color/white"
-                            android:text="모바일"/>
+                            android:textSize="20dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13dp"
                             android:layout_marginLeft="5dp"
-                            android:textColor="@color/white"
                             android:fontFamily="@font/nanumsquareneo_brg"
-                            android:text="월 검색량 "/>
+                            android:text="월 검색량 "
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
 
                     </LinearLayout>
 
@@ -139,12 +144,12 @@
                         android:id="@+id/mo_click"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
-                        android:padding="12dp"
-                        android:textColor="@color/white"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="0"/>
+                        android:padding="12dp"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
@@ -153,12 +158,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                app:cardElevation="5dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="30dp"
+                app:cardElevation="5dp"
                 app:strokeColor="#DFC3A0">
 
                 <LinearLayout
@@ -166,28 +172,30 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/blog_cnt"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
                             android:fontFamily="@font/nanumsquareneo_deb"
+                            android:text="블로그"
                             android:textColor="@color/white"
-                            android:text="블로그"/>
+                            android:textSize="20dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13dp"
                             android:layout_marginLeft="5dp"
-                            android:textColor="@color/white"
                             android:fontFamily="@font/nanumsquareneo_brg"
-                            android:text="수 "/>
+                            android:text="수 "
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
 
                     </LinearLayout>
 
@@ -195,48 +203,52 @@
                         android:id="@+id/total_blog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:padding="12dp"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="0"/>
+                        android:padding="12dp"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                app:cardElevation="5dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="30dp"
+                app:cardElevation="5dp"
                 app:strokeColor="#DFC3A0">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/month_cnt"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20dp"
-                            android:textColor="@color/white"
                             android:fontFamily="@font/nanumsquareneo_deb"
-                            android:text="30일"/>
+                            android:text="30일"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13dp"
                             android:layout_marginLeft="5dp"
-                            android:textColor="@color/white"
                             android:fontFamily="@font/nanumsquareneo_brg"
-                            android:text="간 포스팅수"/>
+                            android:text="간 포스팅수"
+                            android:textColor="@color/white"
+                            android:textSize="13dp" />
 
                     </LinearLayout>
 
@@ -245,12 +257,12 @@
                         android:id="@+id/month_blog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:padding="12dp"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="0"/>
+                        android:padding="12dp"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
@@ -259,11 +271,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/nanumsquareneo_brg"
             android:text="키워드 분석"
             android:textColor="@color/black"
-            android:fontFamily="@font/nanumsquareneo_brg"
-            android:layout_marginBottom="3dp"
-            android:textSize="22dp"/>
+            android:textSize="22dp" />
+
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
@@ -272,29 +285,32 @@
             android:fontFamily="@font/nanumsquareneo_brg"
             android:text="날짜"
             android:textColor="#F41616"
-            android:textSize="13dp"/>
+            android:textSize="13dp" />
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             app:cardCornerRadius="20dp"
-            app:cardElevation="5dp"
-            android:layout_height="wrap_content">
+            app:cardElevation="5dp">
+
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart_week"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp" />
         </com.google.android.material.card.MaterialCardView>
+
         <Button
             android:id="@+id/store_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/appbar"
             android:fontFamily="@font/nanumsquareneo_brg"
-            android:text="키워드 저장"/>
+            android:text="키워드 저장" />
     </LinearLayout>
 </ScrollView>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.keyword.keyword_miner.KeywordInfo
-import com.keyword.keyword_miner.KeywordSearch.KeywordViewModel
+import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.databinding.ActivityItemViewBinding
 import com.keyword.keyword_miner.utils.constant.TAG
 
