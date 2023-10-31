@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity(){
         setContentView(binding.root)
         //검색
 
+        //search해서 넘기기
         binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {

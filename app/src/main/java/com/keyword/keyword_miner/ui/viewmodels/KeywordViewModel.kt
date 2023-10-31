@@ -40,7 +40,7 @@ class KeywordViewModel: ViewModel() {
         RetrofitManager.instance.searchKeywordRel(searchTerm = searchTerm) { responseState, responseArrayList ->
             when (responseState) {
                 RESPONSE_STATE.OKAY -> {
-//                    Log.d("HHHH", "api 호출에 성공하였습니다 ${responseArrayList?.get(0)}")
+//
 
                     if(responseArrayList!!.isEmpty()){
 

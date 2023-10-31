@@ -1,11 +1,11 @@
-package com.keyword.keyword_miner.data.Repository
+package com.keyword.keyword_miner.data.dto
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "room_repository")
-data class RepositoryItem (
+data class KeywordSaveModel (
     @PrimaryKey
     var keyword: String ="",
     @ColumnInfo

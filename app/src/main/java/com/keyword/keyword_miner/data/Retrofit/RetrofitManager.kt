@@ -31,7 +31,6 @@ class RetrofitManager {
     // 연관 검색어 및 월 피씨 모바일 컴생량
     @RequiresApi(Build.VERSION_CODES.O)
     fun searchKeywordRel(searchTerm: String?, completion: (RESPONSE_STATE, ArrayList<KeywordInfo>?) -> Unit){
-        Log.d("HHHH", "RetrofitManager - searchKeywordRel() - called${searchTerm}")
         API.updateTimestamp()
         val call = iRetrofit?.getRelKwdStat(
             content_type = API.Content_Type,
@@ -50,7 +49,7 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-                Log.d("HHHH", "RetrofitManager-onResponse() called-rel/ response :${response.body()} ")
+                Log.d("hch", "RetrofitManager-onResponse() called-rel/ response :${response.body()} ")
                 var parseRelArray = ArrayList<KeywordInfo>()
                 response.body()?.let{
                     val body = it.asJsonObject
@@ -88,7 +87,6 @@ class RetrofitManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun searcKData(searchTerm: String?, completion: (RESPONSE_STATE, Any?) -> Unit){
         var item : String? = searchTerm
-
         val keywordGroups = listOf(
             mapOf("groupName" to item, "keywords" to listOf(item))
         )
@@ -104,7 +102,7 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-                Log.d(TAG, "RetrofitManager-onResponse-graph() called")
+                Log.d("hch", "RetrofitManager-onResponse() called-searchDate :${response.body()} ")
                 var parseDataArray = ArrayList<ItemPeriod>()
                 var parsePeriod = ArrayList<String>()
                 var parseRate = ArrayList<Double>()
@@ -161,7 +159,7 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-                Log.d(TAG, "RetrofitManager-onResponse() called ")
+                Log.d("hch", "RetrofitManager-onResponse() called-totalCnt :${response.body()} ")
 
                 response.body()?.let{
                     val body = it.asJsonObject
@@ -179,7 +177,6 @@ class RetrofitManager {
                         parsetitle.add(title)
                     }
                     val ItemData= blogData(total = total, data = parseDate , blogname = parsetitle )
-                    Log.d(TAG, "RetrofitManager - onResponse() - called${ItemData}")
                     parseBlogDataArray.add(ItemData)
                 }
                 completion(RESPONSE_STATE.OKAY,parseBlogDataArray)
@@ -187,7 +184,6 @@ class RetrofitManager {
             //응답실패시
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
 
-                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
                 completion(RESPONSE_STATE.FAIL,null)
             }
         })
@@ -209,7 +205,7 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
-                Log.d("HHH", "RetrofitManager-onResponse() called${response.body()}")
+                Log.d("hch", "RetrofitManager-onResponse() called${response.body()}")
 
                 completion(RESPONSE_STATE.OKAY,response.body())
             }

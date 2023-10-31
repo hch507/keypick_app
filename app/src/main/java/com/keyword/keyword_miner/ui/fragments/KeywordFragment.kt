@@ -15,7 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.keyword.keyword_miner.domain.Model.ItemPeriod
 import com.keyword.keyword_miner.R
-import com.keyword.keyword_miner.data.Repository.RepositoryItem
+import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.data.Room.Roomhelper
 import com.keyword.keyword_miner.databinding.FragmentKeywordBinding
 import com.keyword.keyword_miner.utils.constant.TAG
@@ -58,9 +58,7 @@ class KeywordFragment : Fragment() {
         binding = FragmentKeywordBinding.inflate(layoutInflater)
         helper= Roomhelper.getInstance(requireContext())!!
 
-        Log.d("HCH", "KeywordFragment - onCreateView() - called")
         keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
-            Log.d(TAG, "KeywordFragment - onCreateView() - called${KeywordInfoList}")
             binding.apply {
             binding.keyword.text = KeywordInfoList.get(0).relKeyword
             binding.pcClick.text = KeywordInfoList.get(0).monthlyPcQcCnt
@@ -94,8 +92,7 @@ class KeywordFragment : Fragment() {
         })
         binding.storeBtn.setOnClickListener {
             val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
-            Log.d("HHH", "KeywordFragment-onCreateView() called${date}")
-            val StoreList = RepositoryItem(keyword,monthCnt,total,date)
+            val StoreList = KeywordSaveModel(keyword,monthCnt,total,date)
             insert(StoreList)
             Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
         }
@@ -210,7 +207,7 @@ class KeywordFragment : Fragment() {
         }
 
     }
-    fun insert(item : RepositoryItem){
+    fun insert(item : KeywordSaveModel){
         Log.d("HCH", "KeywordFragment-insert() called")
         CoroutineScope(Dispatchers.IO).launch {
             helper.roomDao().insert(item)

@@ -4,14 +4,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.keyword.keyword_miner.data.Repository.RepositoryItem
+import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.ui.viewmodels.RepositoryViewModel
 import com.keyword.keyword_miner.databinding.ActivityRepositoryViewBinding
 
 import com.keyword.keyword_miner.utils.constant
 
 class RepositoryRecyclerViewAdapter(var viewModel: RepositoryViewModel) : RecyclerView.Adapter<RepositoryViewHolder>() {
-    private var RepositoryList = listOf<RepositoryItem>()
+    private var RepositoryList = listOf<KeywordSaveModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         Log.d(constant.TAG, "Adapter-onCreateViewHolder() called")
@@ -31,8 +31,8 @@ class RepositoryRecyclerViewAdapter(var viewModel: RepositoryViewModel) : Recycl
             viewModel.deleteItem(this.RepositoryList[position])
         }
     }
-    fun submit(repositoryItem : List<RepositoryItem>){
-        Log.d("HCH", "RepositoryRecyclerViewAdapter-submit() called${repositoryItem}")
-        this.RepositoryList= repositoryItem
+    fun submit(keywordSaveModel : List<KeywordSaveModel>){
+
+        this.RepositoryList= keywordSaveModel
     }
 }

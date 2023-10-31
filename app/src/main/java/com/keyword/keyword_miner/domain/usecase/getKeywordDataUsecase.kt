@@ -1,7 +1,8 @@
 package com.keyword.keyword_miner.domain.usecase
 
-//class RequestLoginUsecase {
+//class getKeywordDataUsecase {
 //    operator suspend fun invoke(){
 //
 //    }
+//
 //}

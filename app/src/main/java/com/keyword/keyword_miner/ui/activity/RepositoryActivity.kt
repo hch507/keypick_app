@@ -2,13 +2,12 @@ package com.keyword.keyword_miner.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keyword.keyword_miner.databinding.ActivityRepositoryBinding
 import com.keyword.keyword_miner.RecyclerView.RepositoryRecyclerViewAdapter
-import com.keyword.keyword_miner.data.Repository.RepositoryItem
+import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.data.Room.Roomhelper
 import com.keyword.keyword_miner.ui.viewmodels.RepositoryViewModel
 
@@ -17,7 +16,7 @@ class RepositoryActivity : AppCompatActivity() {
     lateinit var binding : ActivityRepositoryBinding
     lateinit var helper: Roomhelper
     lateinit var keywordAdapter: RepositoryRecyclerViewAdapter
-    var storeItemList =listOf<RepositoryItem>()
+    var storeItemList =listOf<KeywordSaveModel>()
 
     val repositoryViewModel: RepositoryViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +27,6 @@ class RepositoryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         helper= Roomhelper.getInstance(this)!!
-
-        Log.d("HCH", "RepositoryFragment-onCreateView() called")
         keywordAdapter= RepositoryRecyclerViewAdapter(repositoryViewModel)
 
         repositoryViewModel.loadRepository()

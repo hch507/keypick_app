@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.keyword.keyword_miner.data.Repository.RepositoryItem
+import com.keyword.keyword_miner.data.dao.RoomRepositoryDao
+import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 
-@Database(entities = arrayOf(RepositoryItem::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(KeywordSaveModel::class), version = 1, exportSchema = false)
 abstract class Roomhelper : RoomDatabase() {
     abstract fun roomDao(): RoomRepositoryDao
 
