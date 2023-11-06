@@ -1,6 +1,7 @@
 package com.keyword.keyword_miner.di
 
 import com.keyword.keyword_miner.data.Retrofit.IRetrofit
+import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.utils.API
 import com.keyword.keyword_miner.utils.MY_BLOG.MY_BASE_URL
 import dagger.Module
@@ -52,7 +53,7 @@ class NetworkModules {
 
     @Provides
     @Singleton
-    fun provideRelApiService(@RelKeywordRetrofit retrofit: Retrofit):IRetrofit= retrofit.create(IRetrofit::class.java)
+    fun provideRelApiService(@RelKeywordRetrofit retrofit: Retrofit): RelSearchRetrofit = retrofit.create(RelSearchRetrofit::class.java)
 
 
 

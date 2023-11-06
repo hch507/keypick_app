@@ -3,7 +3,9 @@ package com.keyword.keyword_miner.data.Retrofit
 
 import com.keyword.keyword_miner.domain.Model.BlogKeywordParam
 import com.google.gson.JsonElement
+import com.keyword.keyword_miner.data.dto.relKeyword.RelKeyword
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface IRetrofit {

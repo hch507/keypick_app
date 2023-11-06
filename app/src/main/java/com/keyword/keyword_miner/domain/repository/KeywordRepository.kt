@@ -1,6 +1,6 @@
 package com.keyword.keyword_miner.domain.repository
 
-interface keywordRepository {
+interface KeywordRepository {
 
     suspend fun getKeywordRel(searchTerm : String)
 
