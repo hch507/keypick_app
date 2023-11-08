@@ -8,6 +8,7 @@ import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
 import com.keyword.keyword_miner.utils.API
 import com.keyword.keyword_miner.utils.Signature
+import retrofit2.Call
 import javax.inject.Inject
 
 class KeywordRepositoryImpl @Inject constructor(
@@ -27,7 +28,8 @@ class KeywordRepositoryImpl @Inject constructor(
                 API.X_secret),
             hintKeywords = searchTerm)
 
-        val responseRelKeyword = response.body()?.keywordList
+        val responseRelKeyword = response.body()
+
         Log.d("hch", "getKeywordRel: ${responseRelKeyword} ")
     }
 
@@ -36,3 +38,4 @@ class KeywordRepositoryImpl @Inject constructor(
     }
 
 }
+
