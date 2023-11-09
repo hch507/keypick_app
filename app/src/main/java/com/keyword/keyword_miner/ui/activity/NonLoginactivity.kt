@@ -20,6 +20,7 @@ class NonLoginactivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewmodel.getRelData("아이패드")
+        viewmodel.getMonthRatioData("아이패드")
         binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {

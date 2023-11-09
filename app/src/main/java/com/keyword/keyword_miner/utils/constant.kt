@@ -39,7 +39,6 @@ object Search_API {
 }
 object Blog_API{
     const val BASE_URL : String = "https://openapi.naver.com/v1/"
-
     const val CLIENT_ID ="tZR4mxv0e3Le0j2F3mQP"
     const val CLIENT_PW ="ZJoce5jaT6"
     const val SORT ="date"
@@ -52,7 +51,6 @@ enum class RESPONSE_STATE{
     FAIL
 }
 object MY_BLOG{
-    const val BASE_URL : String = "https://openapi.naver.com/v1/"
     const val MY_BASE_URL : String ="https://blog.naver.com/"
 }
 

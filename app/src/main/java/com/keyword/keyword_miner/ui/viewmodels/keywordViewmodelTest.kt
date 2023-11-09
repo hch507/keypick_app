@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keyword.keyword_miner.domain.Model.RelKeywordInfo
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
+import com.keyword.keyword_miner.domain.usecase.getMonthRatioUsecase
 import com.keyword.keyword_miner.domain.usecase.getRelKeywordUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class keywordViewmodelTest @Inject constructor(
     private val relKeywordUsecase: getRelKeywordUsecase,
-    private val keywordRepository: KeywordRepository
+    private val monthRatioUsecase: getMonthRatioUsecase,
+
 ): ViewModel() {
     private val _currentRelData = MutableLiveData <List<RelKeywordInfo>>()
 //    val currentRelData : LiveData<List<RelKeywordInfo>>
@@ -26,9 +28,9 @@ class keywordViewmodelTest @Inject constructor(
             relKeywordUsecase.invoke(searchTerm)
         }
     }
-    fun getMonthRatioData(){
+    fun getMonthRatioData(searchTerm: String) {
         viewModelScope.launch {
-            keywordRepository.getMonthRatio()
+            monthRatioUsecase.invoke(searchTerm)
         }
     }
 }

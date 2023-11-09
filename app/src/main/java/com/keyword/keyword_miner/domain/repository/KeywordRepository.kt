@@ -4,5 +4,5 @@ interface KeywordRepository {
 
     suspend fun getKeywordRel(searchTerm : String)
 
-    suspend fun getMonthRatio()
+    suspend fun getMonthRatio(searchTerm: String)
 }
