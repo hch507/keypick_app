@@ -8,6 +8,7 @@ import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.domain.Model.BlogKeywordParam
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
 import com.keyword.keyword_miner.utils.API
+import com.keyword.keyword_miner.utils.Blog_API
 import com.keyword.keyword_miner.utils.Search_API
 import com.keyword.keyword_miner.utils.Signature
 import javax.inject.Inject
@@ -53,9 +54,21 @@ class KeywordRepositoryImpl @Inject constructor(
         )
 
         val responseMonthRatio = response.body()
-        Log.d("hch", "getKeywordRel: ${responseMonthRatio} ")
+        Log.d("hch", "getMonthRatio: ${responseMonthRatio} ")
     }
 
+    override suspend fun getBlogTotal(searchTerm: String) {
+        val response = naverApiService.getBlogTotal(
+            client_id = Blog_API.CLIENT_ID,
+            client_secret = Blog_API.CLIENT_PW ,
+            display = 100 ,searhTerm =searchTerm,
+            sort=Blog_API.SORT2
+        )
+
+        val responseBlogTotal = response.body()
+
+        Log.d("hch", "getBlogTotal: ${responseBlogTotal} ")
+    }
 
 
 }

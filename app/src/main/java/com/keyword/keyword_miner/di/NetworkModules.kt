@@ -12,13 +12,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModules {
+
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class RelKeywordRetrofit
@@ -29,7 +29,9 @@ class NetworkModules {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class MonthRatioRetrofit
+    annotation class NaverApiRetrofit
+
+
 
     @Provides
     @Singleton
@@ -42,16 +44,19 @@ class NetworkModules {
         return retrofitClient
     }
 
+
     @Provides
     @Singleton
-    fun provideLoginApiService(@BlogCntRetrofit retrofit: Retrofit): IRetrofit = retrofit.create(IRetrofit::class.java)
+    fun provideLoginApiService(@BlogCntRetrofit retrofit: Retrofit): IRetrofit =
+        retrofit.create(IRetrofit::class.java)
 
 
     @Provides
     @Singleton
     @RelKeywordRetrofit
-    fun provideRelRetrofit():Retrofit{
-        val  retrofitClient = Retrofit.Builder()
+    fun provideRelRetrofit(): Retrofit {
+
+        val retrofitClient = Retrofit.Builder()
             .baseUrl(API.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -60,13 +65,14 @@ class NetworkModules {
 
     @Provides
     @Singleton
-    fun provideRelApiService(@RelKeywordRetrofit retrofit: Retrofit): RelSearchRetrofit = retrofit.create(RelSearchRetrofit::class.java)
+    fun provideRelApiService(@RelKeywordRetrofit retrofit: Retrofit): RelSearchRetrofit =
+        retrofit.create(RelSearchRetrofit::class.java)
 
 
     @Provides
     @Singleton
-    @MonthRatioRetrofit
-    fun provideMonthRatioRetrofit():Retrofit{
+    @NaverApiRetrofit
+    fun provideMonthRatioRetrofit(): Retrofit {
         val retrofitClient = Retrofit.Builder()
             .baseUrl(Search_API.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -76,7 +82,7 @@ class NetworkModules {
 
     @Provides
     @Singleton
-    fun provideMonthRatioApiService(@MonthRatioRetrofit retrofit: Retrofit):NaverRetrofit = retrofit.create(NaverRetrofit::class.java)
-
+    fun provideMonthRatioApiService(@NaverApiRetrofit retrofit: Retrofit): NaverRetrofit =
+        retrofit.create(NaverRetrofit::class.java)
 
 }

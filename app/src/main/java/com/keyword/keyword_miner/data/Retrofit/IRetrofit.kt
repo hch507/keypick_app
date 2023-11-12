@@ -22,7 +22,7 @@ interface IRetrofit {
 
     ): Call<JsonElement>
 
-    @POST("search")
+    @POST("datalab/search")
     fun getKeywordData(
         @Header("Content-Type") content_type: String,
         @Header("X-Naver-Client-Id") clientId: String,

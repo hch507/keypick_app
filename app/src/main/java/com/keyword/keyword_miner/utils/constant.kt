@@ -28,7 +28,7 @@ object API {
 
 object Search_API {
 
-    const val BASE_URL : String = "https://openapi.naver.com/v1/datalab/"
+    const val BASE_URL : String = "https://openapi.naver.com/v1/"
     const val Client_id : String ="oKQNT8007_pUD1FBJv0a"
     const val Client_pw : String ="Cp7YEq41hc"
     const val start_date : String ="2020-01-01"
