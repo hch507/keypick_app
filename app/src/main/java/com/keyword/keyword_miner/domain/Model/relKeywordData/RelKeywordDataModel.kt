@@ -1,4 +1,4 @@
-package com.keyword.keyword_miner.domain.Model
+package com.keyword.keyword_miner.domain.Model.relKeywordData
 
 data class RelKeywordDataModel(
     val relKeyword: String,

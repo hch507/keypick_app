@@ -1,10 +1,13 @@
 package com.keyword.keyword_miner.data.mapper
 
 import com.keyword.keyword_miner.data.dto.blogTotal.BlogTotal
+import com.keyword.keyword_miner.data.dto.monthRatio.Result
 import com.keyword.keyword_miner.data.dto.relKeyword.Keyword
-import com.keyword.keyword_miner.data.dto.relKeyword.RelKeyword
-import com.keyword.keyword_miner.domain.Model.BlogTotalDataModel
-import com.keyword.keyword_miner.domain.Model.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogData
+import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
+import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.Model.monthRadioData.RatioData
 
 class MainMapper {
 
@@ -18,7 +21,31 @@ class MainMapper {
         }
     }
 
-    fun mapperToBlogTotal(blogTotal: BlogTotal):List<BlogTotalDataModel>{
-        return 
+    fun mapperToBlogTotal(blogTotal: BlogTotal):BlogTotalDataModel{
+        var blogTotalData = BlogTotalDataModel(
+            total = blogTotal.total,
+            blogData = blogTotal.items.map {item ->
+                BlogData(
+                    date = item.postdate,
+                    blogname = item.bloggername
+                )
+
+            }
+        )
+        return blogTotalData
+    }
+
+    fun mapperToMonthRatio(monthRatio : Result):MonthRatioDataModel {
+        var monthRatioData = MonthRatioDataModel(
+            title = monthRatio.title,
+            ratioData = monthRatio.data.map { data ->
+                RatioData(
+                    period = data.period,
+                    rate = data.ratio
+                )
+
+            }
+        )
+        return monthRatioData
     }
 }
