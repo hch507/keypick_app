@@ -12,7 +12,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.domain.Model.ItemPeriod
 import com.keyword.keyword_miner.R
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
@@ -58,6 +61,11 @@ class KeywordFragment : Fragment() {
         binding = FragmentKeywordBinding.inflate(layoutInflater)
         helper= Roomhelper.getInstance(requireContext())!!
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+            }
+        }
         keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
             binding.apply {
             binding.keyword.text = KeywordInfoList.get(0).relKeyword

@@ -35,17 +35,19 @@ class MainMapper {
         return blogTotalData
     }
 
-    fun mapperToMonthRatio(monthRatio : Result):MonthRatioDataModel {
-        var monthRatioData = MonthRatioDataModel(
-            title = monthRatio.title,
-            ratioData = monthRatio.data.map { data ->
-                RatioData(
-                    period = data.period,
-                    rate = data.ratio
-                )
+    fun mapperToMonthRatio(monthRatio : List<Result>):List<MonthRatioDataModel>{
+        var monthRatioData = monthRatio.map {
+            MonthRatioDataModel(
+                title = it.title,
+                ratioData = it.data.map { data ->
+                    RatioData(
+                        period = data.period,
+                        rate = data.ratio
+                    )
 
-            }
-        )
+                }
+            )
+        }
         return monthRatioData
     }
 }
