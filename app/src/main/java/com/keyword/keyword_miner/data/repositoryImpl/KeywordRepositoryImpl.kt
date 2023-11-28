@@ -69,7 +69,7 @@ class KeywordRepositoryImpl @Inject constructor(
             client_id = Blog_API.CLIENT_ID,
             client_secret = Blog_API.CLIENT_PW ,
             display = 100 ,searhTerm =searchTerm,
-            sort=Blog_API.SORT2
+            sort=Blog_API.SORT
         )
 
         val responseBlogTotal = response.body()

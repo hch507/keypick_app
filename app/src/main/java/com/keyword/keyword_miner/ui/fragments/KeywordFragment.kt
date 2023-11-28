@@ -32,8 +32,11 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
+import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
+import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -55,6 +58,7 @@ class KeywordFragment : Fragment() {
     lateinit var helper: Roomhelper
 
     val keywordViewModel by activityViewModels<KeywordViewModel>()
+    val keywordViewmodelTest by activityViewModels<keywordViewmodelTest>()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -63,41 +67,91 @@ class KeywordFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
+                keywordViewmodelTest.currentBlogTotal.collectLatest {
+                    when(it){
+                        is MainUiState.success ->{
+                            var monthCnt = MonthCnt(it.data.blogData.map { it.date })
+                            Log.d("hchh", "KeywordFragment - onCreateView() - called${it.data.blogData.map { it.date }}")
+                            binding.apply {
+                                monthBlog.text=monthCnt
+                                totalBlog.text=it.data.total.toString()
+                            }
+                        }
+                        else ->{
 
+                        }
+                    }
+                }
             }
         }
-        keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
-            binding.apply {
-            binding.keyword.text = KeywordInfoList.get(0).relKeyword
-            binding.pcClick.text = KeywordInfoList.get(0).monthlyPcQcCnt
-            binding.moClick.text = KeywordInfoList.get(0).monthlyMobileQcCnt}
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                keywordViewmodelTest.currentMonthRatio.collectLatest {
+                    when(it){
+                        is MainUiState.success ->{
+                            binding.apply {
 
-            this.keyword = KeywordInfoList.get(0).relKeyword
-            this.monthPc = KeywordInfoList.get(0).monthlyPcQcCnt
-            this.monthMo = KeywordInfoList.get(0).monthlyMobileQcCnt
-            if(monthPc=="< 10"&& monthMo!="< 10"){
-                this.monthCnt = monthMo
-            }else if(monthMo=="< 10"&&monthPc!="< 10"){
-                this.monthCnt = monthPc
-            }else if(monthPc=="< 10"&&monthMo=="< 10"){
-                this.monthCnt="< 10"
-            }else{
-                this.monthCnt= (monthPc.toInt()+monthMo.toInt()).toString()
+                            }
+                        }
+                        else ->{
+
+                        }
+                    }
+                }
             }
-        })
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                keywordViewmodelTest.currentRelData.collectLatest {
+                    when(it){
+                        is MainUiState.success ->{
+                            binding.apply {
+                                Log.d("hhh", "KeywordFragment - onCreateView() - called ${it.data}")
+                                keyword.text = it.data.get(0).relKeyword
+                                pcClick.text = it.data.get(0).monthlyPcQcCnt
+                                moClick.text = it.data.get(0).monthlyMobileQcCnt
+                            }
+                        }
+                        else ->{
 
-        keywordViewModel.currentBlogDate.observe(viewLifecycleOwner, Observer{
-            PeriodList=it
-            setChartView(binding)
-        })
-
-        keywordViewModel.currentMonthCnt.observe(viewLifecycleOwner, Observer{
-            var monthCnt = MonthCnt(it.get(0).data)
-            binding.monthBlog.text=monthCnt
-            binding.totalBlog.text=it.get(0).total
-
-            this.total=it.get(0).total
-        })
+                        }
+                    }
+                }
+            }
+        }
+//        keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
+//            binding.apply {
+//            binding.keyword.text = KeywordInfoList.get(0).relKeyword
+//            binding.pcClick.text = KeywordInfoList.get(0).monthlyPcQcCnt
+//            binding.moClick.text = KeywordInfoList.get(0).monthlyMobileQcCnt}
+//
+//            this.keyword = KeywordInfoList.get(0).relKeyword
+//            this.monthPc = KeywordInfoList.get(0).monthlyPcQcCnt
+//            this.monthMo = KeywordInfoList.get(0).monthlyMobileQcCnt
+//            if(monthPc=="< 10"&& monthMo!="< 10"){
+//                this.monthCnt = monthMo
+//            }else if(monthMo=="< 10"&&monthPc!="< 10"){
+//                this.monthCnt = monthPc
+//            }else if(monthPc=="< 10"&&monthMo=="< 10"){
+//                this.monthCnt="< 10"
+//            }else{
+//                this.monthCnt= (monthPc.toInt()+monthMo.toInt()).toString()
+//            }
+//        })
+//
+//        keywordViewModel.currentBlogDate.observe(viewLifecycleOwner, Observer{
+//            PeriodList=it
+//            setChartView(binding)
+//        })
+//
+//        keywordViewModel.currentMonthCnt.observe(viewLifecycleOwner, Observer{
+//            var monthCnt = MonthCnt(it.get(0).data)
+//            Log.d("hchh", "KeywordFragment - onCreateView() - called${it.get(0).data}")
+//            binding.monthBlog.text=monthCnt
+//            binding.totalBlog.text=it.get(0).total
+//
+//            this.total=it.get(0).total
+//        })
         binding.storeBtn.setOnClickListener {
             val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
             val StoreList = KeywordSaveModel(keyword,monthCnt,total,date)
@@ -203,8 +257,7 @@ class KeywordFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun MonthCnt(list: ArrayList<String>):String{
-        val list: List<String> = list.toList()
+    fun MonthCnt(list: List<String>):String{
         val thirtyDaysAgo = LocalDate.now().minusDays(30)
         val count = list.filter { LocalDate.parse("$it", DateTimeFormatter.ofPattern("yyyyMMdd")) >= thirtyDaysAgo }.count()
         Log.d(TAG, "KeywordActivity - MonthCnt() - called $count")

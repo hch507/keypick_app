@@ -13,15 +13,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NonLoginactivity : AppCompatActivity() {
     lateinit var binding : ActivityNonLoginactivityBinding
-    private val viewmodel : keywordViewmodelTest by viewModels()
+//    private val viewmodel : keywordViewmodelTest by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding =ActivityNonLoginactivityBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewmodel.getRelData("아이패드")
-        viewmodel.getMonthRatioData("아이패드")
-        viewmodel.getBlogTotal("아이패드")
+//        viewmodel.getRelData("아이패드")
+//        viewmodel.getMonthRatioData("아이패드")
+//        viewmodel.getBlogTotal("아이패드")
         binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {

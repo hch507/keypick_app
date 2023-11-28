@@ -14,12 +14,15 @@ import com.keyword.keyword_miner.KeywordSearch.FragmentPageAdapter
 import com.keyword.keyword_miner.ui.fragments.KeywordFragment
 import com.keyword.keyword_miner.ui.fragments.RelFragment
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
+import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class KeywordActivity : AppCompatActivity() {
 
 
     val keywordViewModel: KeywordViewModel by viewModels()
-
+    val keywordViewmodelTest : keywordViewmodelTest by viewModels()
     lateinit var kbinding: ActivityKeywordBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -41,12 +44,13 @@ class KeywordActivity : AppCompatActivity() {
         }.attach()
 
         var searchTerm = intent.getStringExtra("searchterm")
-        Log.d("AAAA2", "KeywordActivity - onCreate() - called${searchTerm}")
         searchTerm= searchTerm?.let { convertToUpperCase(it) }
-        Log.d("AAAA3", "KeywordActivity - onCreate() - called")
+
         if (searchTerm != null) {
-            Log.d("HHHH1", "KeywordActivity - onCreate() - called${searchTerm}")
+            Log.d("hch", "KeywordActivity - onCreate() - called")
             keywordViewModel.updateKeywordData(searchTerm)
+            updateKeywordData(searchTerm)
+
         }
 
 
@@ -55,7 +59,6 @@ class KeywordActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 var userSearchInput = query?.replace(" ", "")
-                Log.d("HHHH2", "KeywordActivity - onCreate() - called${userSearchInput}")
                 userSearchInput= userSearchInput?.let { convertToUpperCase(it) }
                 if (userSearchInput != null) {
                     keywordViewModel.updateKeywordData(userSearchInput)
@@ -89,6 +92,13 @@ class KeywordActivity : AppCompatActivity() {
             input.toUpperCase()
         } else {
             input
+        }
+    }
+    fun updateKeywordData(searchTerm : String){
+        keywordViewmodelTest.apply {
+            getBlogTotal(searchTerm)
+            getRelData(searchTerm)
+            getMonthRatioData(searchTerm)
         }
     }
 
