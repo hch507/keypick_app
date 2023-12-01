@@ -31,6 +31,8 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.Model.monthRadioData.RatioData
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import com.keyword.keyword_miner.utils.MainUiState
@@ -47,8 +49,8 @@ import kotlin.collections.ArrayList
 
 class KeywordFragment : Fragment() {
 
-    var PeriodList = ArrayList<ItemPeriod>()
-
+    var periodList = ArrayList<ItemPeriod>()
+    lateinit var periodRadioData : List<MonthRatioDataModel>
     var keyword: String=""
     var monthPc: String=""
     var monthMo: String=""
@@ -78,7 +80,7 @@ class KeywordFragment : Fragment() {
                             }
                         }
                         else ->{
-
+                            Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -89,12 +91,11 @@ class KeywordFragment : Fragment() {
                 keywordViewmodelTest.currentMonthRatio.collectLatest {
                     when(it){
                         is MainUiState.success ->{
-                            binding.apply {
-
-                            }
+                            periodRadioData= it.data
+                            setChartView(binding)
                         }
                         else ->{
-
+                            Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -113,7 +114,7 @@ class KeywordFragment : Fragment() {
                             }
                         }
                         else ->{
-
+                            Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -140,7 +141,8 @@ class KeywordFragment : Fragment() {
 //        })
 //
 //        keywordViewModel.currentBlogDate.observe(viewLifecycleOwner, Observer{
-//            PeriodList=it
+//            Log.d("hhh", "KeywordFragment - onCreateView() - called${it}")
+//            periodList=it
 //            setChartView(binding)
 //        })
 //
@@ -183,10 +185,12 @@ class KeywordFragment : Fragment() {
 
         lineChart.setScaleEnabled(false) //Zoom In/Out
 
-        val valueList : ArrayList<Double> = PeriodList[0].rate
+//        val valueList : ArrayList<Double> = periodList[0].rate
+        val valueList : List<Double> =
+            periodRadioData.get(0).ratioData?.map { it.rate?.toDouble() ?: return } ?: return
         //val entries: ArrayList<String> = PeriodList[0].period
         val entries: ArrayList<Entry> = ArrayList()
-        val title = PeriodList[0].title
+        val title = periodRadioData.get(0).title
 
         //input data
 
@@ -198,11 +202,11 @@ class KeywordFragment : Fragment() {
 
         val lineDataSet = LineDataSet(entries, title)
         lineDataSet.setDrawFilled(true)
-        lineDataSet.fillDrawable= ContextCompat.getDrawable(context!!, R.drawable.linechart)
+        lineDataSet.fillDrawable= ContextCompat.getDrawable(requireContext(), R.drawable.linechart)
         lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        lineDataSet.setColor(ContextCompat.getColor(context!!, R.color.white)); //LineChart에서 Line Color 설정
-        lineDataSet.setCircleColor(ContextCompat.getColor(context!!, R.color.purple_line)); // LineChart에서 Line Circle Color 설정
-        lineDataSet.setCircleHoleColor(ContextCompat.getColor(context!!, R.color.white))
+        lineDataSet.setColor(ContextCompat.getColor(requireContext(), R.color.white)); //LineChart에서 Line Color 설정
+        lineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.purple_line)); // LineChart에서 Line Circle Color 설정
+        lineDataSet.setCircleHoleColor(ContextCompat.getColor(requireContext(), R.color.white))
         val data = LineData(lineDataSet)
         lineChart.data = data
 //        lineChart.data.isHighlightEnabled = false
@@ -211,9 +215,11 @@ class KeywordFragment : Fragment() {
     }
 
     private fun initBarChart(lineChart: LineChart) {
-        val dateList: ArrayList<String> = PeriodList[0].period
+//        val dateList: ArrayList<String> = periodList[0].period
+        val dateList: List<String> =
+            periodRadioData.get(0).ratioData?.map { it.period.toString()} ?:return
         //hiding the grey background of the chart, default false if not set
-        lineChart.setDrawGridBackground(false)
+        lineChart.setDrawGridBackground(false )
         //remove the bar shadow, default false if not set
 
         //remove border of the chart, default false if not set
