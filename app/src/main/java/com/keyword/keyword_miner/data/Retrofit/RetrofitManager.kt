@@ -194,8 +194,6 @@ class RetrofitManager {
 
 //    내 블로그 방문자 수
     fun blogData(email : String, completion :(RESPONSE_STATE, String?) -> Unit){
-        var parseBlogDataArray = ArrayList<MyBlogData>()
-
 
         val call = iRetrofit_blog_data?.getBlogData(blogId = email).let{
             it
@@ -205,7 +203,7 @@ class RetrofitManager {
             //응답 성공시
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
-                Log.d("hch", "RetrofitManager-onResponse() called${response.body()}")
+                Log.d("hhh", "RetrofitManager-onResponse() called${response.body()}")
 
                 completion(RESPONSE_STATE.OKAY,response.body())
             }

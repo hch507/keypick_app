@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.keyword.keyword_miner.data.Retrofit.RetrofitManager
 import com.keyword.keyword_miner.databinding.ActivityBlogIdBinding
 import com.keyword.keyword_miner.ui.App
+import com.keyword.keyword_miner.ui.viewmodels.LoginViewModel
 import com.keyword.keyword_miner.utils.RESPONSE_STATE
 import com.keyword.keyword_miner.utils.constant
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,12 +18,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BlogIdActivity : AppCompatActivity() {
     lateinit var binding : ActivityBlogIdBinding
+
+    val loginViewModel: LoginViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding=ActivityBlogIdBinding.inflate(layoutInflater)
         var userEmail :String =""
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        loginViewModel.requestLogin("ddoaak")
         if (App.prefs.getboolean("isLoggedIn",false)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

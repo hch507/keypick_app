@@ -1,10 +1,12 @@
 package com.keyword.keyword_miner.di
 
-import com.keyword.keyword_miner.data.Retrofit.IRetrofit
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.keyword.keyword_miner.data.Retrofit.BlogRetrofit
 import com.keyword.keyword_miner.data.Retrofit.NaverRetrofit
 import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.utils.API
-import com.keyword.keyword_miner.utils.MY_BLOG.MY_BASE_URL
+import com.keyword.keyword_miner.utils.MY_BLOG
 import com.keyword.keyword_miner.utils.Search_API
 import dagger.Module
 import dagger.Provides
@@ -19,6 +21,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModules {
 
+    val gson : Gson = GsonBuilder()
+        .setLenient()
+        .create()
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class RelKeywordRetrofit
@@ -31,15 +36,16 @@ class NetworkModules {
     @Retention(AnnotationRetention.BINARY)
     annotation class NaverApiRetrofit
 
-
-
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class NaverBlogRetrofit
     @Provides
     @Singleton
-    @BlogCntRetrofit
+    @NaverBlogRetrofit
     fun provideLoginRetrofit(): Retrofit {
         val retrofitClient = Retrofit.Builder()
-            .baseUrl(MY_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(MY_BLOG.MY_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
         return retrofitClient
     }
@@ -47,8 +53,8 @@ class NetworkModules {
 
     @Provides
     @Singleton
-    fun provideLoginApiService(@BlogCntRetrofit retrofit: Retrofit): IRetrofit =
-        retrofit.create(IRetrofit::class.java)
+    fun provideLoginApiService(@NaverBlogRetrofit retrofit: Retrofit): BlogRetrofit =
+        retrofit.create(BlogRetrofit::class.java)
 
 
     @Provides

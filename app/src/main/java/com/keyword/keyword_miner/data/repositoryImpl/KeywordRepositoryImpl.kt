@@ -23,6 +23,7 @@ class KeywordRepositoryImpl @Inject constructor(
 ) : KeywordRepository{
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun getKeywordRel(searchTerm : String) : List<RelKeywordDataModel>? {
+        API.updateTimestamp()
         val response = relApiService.getRelKwdStatTest(
             content_type = API.Content_Type,
             x_timestamp = API.X_Timestamp,

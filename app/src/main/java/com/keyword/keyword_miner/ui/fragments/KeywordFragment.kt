@@ -1,5 +1,6 @@
 package com.keyword.keyword_miner.ui.fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -32,8 +33,9 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
-import com.keyword.keyword_miner.domain.Model.monthRadioData.RatioData
+
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
+import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.CoroutineScope
@@ -68,7 +70,7 @@ class KeywordFragment : Fragment() {
         helper= Roomhelper.getInstance(requireContext())!!
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 keywordViewmodelTest.currentBlogTotal.collectLatest {
                     when(it){
                         is MainUiState.success ->{
@@ -78,31 +80,39 @@ class KeywordFragment : Fragment() {
                                 monthBlog.text=monthCnt
                                 totalBlog.text=it.data.total.toString()
                             }
+
                         }
-                        else ->{
+                        is MainUiState.Error ->{
                             Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
+                        }
+                        is MainUiState.Loading ->{
+
                         }
                     }
                 }
             }
         }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 keywordViewmodelTest.currentMonthRatio.collectLatest {
                     when(it){
                         is MainUiState.success ->{
                             periodRadioData= it.data
                             setChartView(binding)
+
                         }
-                        else ->{
+                        is MainUiState.Error ->{
                             Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
+                        }
+                        is MainUiState.Loading ->{
+
                         }
                     }
                 }
             }
         }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 keywordViewmodelTest.currentRelData.collectLatest {
                     when(it){
                         is MainUiState.success ->{
@@ -112,48 +122,19 @@ class KeywordFragment : Fragment() {
                                 pcClick.text = it.data.get(0).monthlyPcQcCnt
                                 moClick.text = it.data.get(0).monthlyMobileQcCnt
                             }
+
                         }
-                        else ->{
+                        is MainUiState.Error ->{
                             Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
+                        }
+                        is MainUiState.Loading ->{
+
                         }
                     }
                 }
             }
         }
-//        keywordViewModel.currentRelData.observe(viewLifecycleOwner, Observer{KeywordInfoList->
-//            binding.apply {
-//            binding.keyword.text = KeywordInfoList.get(0).relKeyword
-//            binding.pcClick.text = KeywordInfoList.get(0).monthlyPcQcCnt
-//            binding.moClick.text = KeywordInfoList.get(0).monthlyMobileQcCnt}
-//
-//            this.keyword = KeywordInfoList.get(0).relKeyword
-//            this.monthPc = KeywordInfoList.get(0).monthlyPcQcCnt
-//            this.monthMo = KeywordInfoList.get(0).monthlyMobileQcCnt
-//            if(monthPc=="< 10"&& monthMo!="< 10"){
-//                this.monthCnt = monthMo
-//            }else if(monthMo=="< 10"&&monthPc!="< 10"){
-//                this.monthCnt = monthPc
-//            }else if(monthPc=="< 10"&&monthMo=="< 10"){
-//                this.monthCnt="< 10"
-//            }else{
-//                this.monthCnt= (monthPc.toInt()+monthMo.toInt()).toString()
-//            }
-//        })
-//
-//        keywordViewModel.currentBlogDate.observe(viewLifecycleOwner, Observer{
-//            Log.d("hhh", "KeywordFragment - onCreateView() - called${it}")
-//            periodList=it
-//            setChartView(binding)
-//        })
-//
-//        keywordViewModel.currentMonthCnt.observe(viewLifecycleOwner, Observer{
-//            var monthCnt = MonthCnt(it.get(0).data)
-//            Log.d("hchh", "KeywordFragment - onCreateView() - called${it.get(0).data}")
-//            binding.monthBlog.text=monthCnt
-//            binding.totalBlog.text=it.get(0).total
-//
-//            this.total=it.get(0).total
-//        })
+
         binding.storeBtn.setOnClickListener {
             val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
             val StoreList = KeywordSaveModel(keyword,monthCnt,total,date)

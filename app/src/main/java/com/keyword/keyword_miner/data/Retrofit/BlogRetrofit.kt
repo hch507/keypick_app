@@ -1,0 +1,14 @@
+package com.keyword.keyword_miner.data.Retrofit
+
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface BlogRetrofit {
+
+    @GET("NVisitorgp4Ajax.nhn")
+    suspend fun getBlogData(
+        @Query("blogId") blogId : String
+    ): Response<String>
+}
