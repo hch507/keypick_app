@@ -1,5 +1,6 @@
 package com.keyword.keyword_miner.di
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.keyword.keyword_miner.data.Retrofit.BlogRetrofit
@@ -8,10 +9,14 @@ import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.utils.API
 import com.keyword.keyword_miner.utils.MY_BLOG
 import com.keyword.keyword_miner.utils.Search_API
+import com.tickaroo.tikxml.TikXml
+import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
@@ -28,9 +33,6 @@ class NetworkModules {
     @Retention(AnnotationRetention.BINARY)
     annotation class RelKeywordRetrofit
 
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class BlogCntRetrofit
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
@@ -43,9 +45,21 @@ class NetworkModules {
     @Singleton
     @NaverBlogRetrofit
     fun provideLoginRetrofit(): Retrofit {
+
+        val client = OkHttpClient.Builder()
+
+        val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
+            override fun log(message: String) {
+                Log.d("HTTP", "RetrofitClient - log() called / message: $message")
+            }
+        })
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        client.addInterceptor(loggingInterceptor)
+
         val retrofitClient = Retrofit.Builder()
             .baseUrl(MY_BLOG.MY_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client.build())
+            .addConverterFactory(TikXmlConverterFactory.create(TikXml.Builder().exceptionOnUnreadXml(false).build()))
             .build()
         return retrofitClient
     }

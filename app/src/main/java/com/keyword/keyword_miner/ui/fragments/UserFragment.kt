@@ -48,6 +48,7 @@ class UserFragment : Fragment() {
         })
 
         userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt ->
+            Log.d("doa", "onCreateView: ${blogcnt} ")
             CntList = blogcnt
             var gapCnt = calculate(CntList[0].cnt)
             binding.todayText.text = "${CntList[0].cnt[4].toInt().toString()}명"
