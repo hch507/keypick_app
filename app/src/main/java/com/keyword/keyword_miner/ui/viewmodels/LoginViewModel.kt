@@ -20,7 +20,7 @@ class LoginViewModel @Inject constructor(
 
     fun requestLogin(userId : String){
         viewModelScope.launch {
-            _currentBlogCnt.value = MainUiState.success(requestLoginUseCase.invoke(userId)!!)
+            _currentBlogCnt.value =requestLoginUseCase.invoke(userId)?.let { MainUiState.success(it) }?:MainUiState.Error
         }
     }
 }
