@@ -7,8 +7,10 @@ import com.keyword.keyword_miner.data.Retrofit.NaverRetrofit
 import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.data.mapper.MainMapper
 import com.keyword.keyword_miner.domain.Model.BlogKeywordParam
+import com.keyword.keyword_miner.domain.Model.blogData
 import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
 import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
 import com.keyword.keyword_miner.utils.API
@@ -77,6 +79,17 @@ class KeywordRepositoryImpl @Inject constructor(
 
         Log.d("hch", "getBlogTotal: ${responseBlogTotal} ")
         return responseBlogTotal?.let { MainMapper().mapperToBlogTotal(it) }
+    }
+
+    override suspend fun getBlogRank(searchTerm: String) : RankDataModel {
+        val response = naverApiService.getBlogTotal(
+            client_id = Blog_API.CLIENT_ID,
+            client_secret = Blog_API.CLIENT_PW ,
+            display = 100 ,searhTerm =searchTerm,
+            sort=Blog_API.SORT2
+        )
+
+        return
     }
 
 

@@ -1,6 +1,6 @@
 package com.keyword.keyword_miner.ui.activity
 
-import android.content.Context
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,15 +10,14 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.keyword.keyword_miner.data.Retrofit.RetrofitManager
 import com.keyword.keyword_miner.databinding.ActivityBlogIdBinding
 import com.keyword.keyword_miner.ui.App
-import com.keyword.keyword_miner.ui.viewmodels.LoginViewModel
+import com.keyword.keyword_miner.ui.viewmodels.UserBlogIdViewmodel
 import com.keyword.keyword_miner.utils.MainUiState
-import com.keyword.keyword_miner.utils.RESPONSE_STATE
-import com.keyword.keyword_miner.utils.constant
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 
@@ -26,7 +25,7 @@ import kotlinx.coroutines.launch
 class BlogIdActivity : AppCompatActivity() {
     lateinit var binding: ActivityBlogIdBinding
     lateinit var userEmail: String
-    val loginViewModel: LoginViewModel by viewModels()
+    val userBlogIdViewModel: UserBlogIdViewmodel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityBlogIdBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -45,8 +44,10 @@ class BlogIdActivity : AppCompatActivity() {
             if (userEmail != null) {
                 lifecycleScope.launch {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        loginViewModel.requestLogin(userEmail)
-                        loginViewModel.currentBlogCnt.collectLatest {
+                        userBlogIdViewModel.getUserBlogData(userEmail)
+                        userBlogIdViewModel.currentBlogCnt
+                            .debounce(300)
+                            .collectLatest {
                             when (it) {
                                 is MainUiState.success -> {
                                     Log.d("LoginState", "onCreate: success ")

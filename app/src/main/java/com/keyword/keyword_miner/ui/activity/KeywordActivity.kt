@@ -32,13 +32,9 @@ class KeywordActivity : AppCompatActivity() {
         setContentView(kbinding.root)
 
         val list = listOf(KeywordFragment(), RelFragment())
-        //어답터 생성
         val pageAdapter = FragmentPageAdapter(list,this)
-        //어답터와 뷰페이저 연결
         kbinding.ViewPage.adapter=pageAdapter
-        //탭 레이아웃 타이틀 설정
         val titles = listOf("검색어","연관검색어")
-        //탭 레이아웃과 뷰페이저 연걸
         TabLayoutMediator(kbinding.tabLayout, kbinding.ViewPage){tab, position ->
             tab.text= titles.get(position)
         }.attach()

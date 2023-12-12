@@ -43,7 +43,7 @@ class RankFragment : Fragment() {
                     when (responseState) {
                         RESPONSE_STATE.OKAY -> {
                             if (responseData != null) {
-                                Log.d("HCH", "api 호출에 성공하였습니다 ${responseData.get(0).blogname}")
+                                Log.d("HCH", "api 호출에 성공하였습니다 ${responseData}")
                             }
                             val index = responseData?.get(0)
                                 ?.let { it1 -> getIndexWithKeyword(it1.blogname, blogname!!) }
@@ -70,6 +70,7 @@ class RankFragment : Fragment() {
         return binding.root
     }
     fun getIndexWithKeyword(list: List<String>, keyword: String): Int? {
+        Log.d("hch", "getIndexWithKeyword:${list} ")
         return list.indexOfFirst { it.contains(keyword) }.takeIf { it != -1 }
     }
 

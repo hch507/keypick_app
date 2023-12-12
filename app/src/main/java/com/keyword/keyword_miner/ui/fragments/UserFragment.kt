@@ -3,6 +3,7 @@ package com.keyword.keyword_miner.ui.fragments
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.ui.activity.KeywordActivity
 import com.keyword.keyword_miner.domain.Model.MyBlogData
 import com.keyword.keyword_miner.R
@@ -27,48 +32,83 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.keyword.keyword_miner.ui.activity.MainActivity
+import com.keyword.keyword_miner.ui.viewmodels.UserBlogIdViewmodel
+import com.keyword.keyword_miner.utils.MainUiState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+@AndroidEntryPoint
 class UserFragment : Fragment() {
-    var CntList = listOf<MyBlogData>()
+    lateinit var userEmail: String
+    lateinit var keyword : String
     lateinit var binding : FragmentUserBinding
-    val userBlgoViewModel by activityViewModels<UserBlogViewmodel>()
+    val userBlogViewModel: UserBlogIdViewmodel by viewModels()
+//    val userBlogViewmodel by activityViewModels<UserBlogIdViewmodel> ()
+    lateinit var visitCnt : List<Int>
+    lateinit var visitPeriod : List<String>
+
+
+
+
     val today = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
     val db = FirebaseFirestore.getInstance()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserBinding.inflate(layoutInflater)
-        var keyword=""
+//        var keyword=""
         val collectionRef = db.collection("keywordDB")
-        userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
-            binding.name.text="${userdata} 님의 블로그"
-        })
+//        userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
+//            binding.name.text="${userdata} 님의 블로그"
+//        })
+        userEmail= userBlogViewModel.getUserEmail()
+        userBlogViewModel.getUserBlogData(userEmail)
+        binding.name.text=userEmail
 
-        userBlgoViewModel.currentUserBLogCnt.observe(viewLifecycleOwner, Observer { blogcnt ->
-            Log.d("doa", "onCreateView: ${blogcnt} ")
-            CntList = blogcnt
-            var gapCnt = calculate(CntList[0].cnt)
-            binding.todayText.text = "${CntList[0].cnt[4].toInt().toString()}명"
-            binding.gap.text =  "${gapCnt.toInt().toString()}명"
-            if (gapCnt.toInt() < 0) {
-                binding.gap.setTextColor(Color.BLUE)
-            } else if (gapCnt.toInt() > 0) {
-                binding.gap.setTextColor(Color.RED)
-                binding.gap.text =  "+${gapCnt.toInt().toString()}명"
-            }else{
-                binding.gap.setTextColor(Color.BLACK)
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                userBlogViewModel.currentBlogCnt.collectLatest {
+                    when(it){
+                        is MainUiState.success ->{
+                            visitCnt =it.data.visitorcntList.map { it.cnt.toInt() }
+                            visitPeriod= it.data.visitorcntList.map { it.id }
+                            Log.d("hhh", "onCreateView: ${visitCnt}")
+                            var gapCnt = calculate(visitCnt)
+                            binding.apply {
+                                todayText.text = "${visitCnt[4]}명"
+                                gap.apply {
+                                    if (gapCnt<0){
+                                        text ="${gapCnt} 명"
+                                        setTextColor(Color.BLUE)
+                                    }else if (gapCnt>0){
+                                        setTextColor(Color.RED)
+                                        text ="+${gapCnt} 명"
+                                    }else{
+                                        setTextColor(Color.BLACK)
+                                    }
+                                }
+                            }
+                            setChartView(binding)
+                        }
+                        is MainUiState.Error -> {
+
+                        }
+                        is MainUiState.Loading -> {
+
+                        }
+                    }
+                }
             }
-            setChartView(binding)
-        })
+        }
         binding.recommendBtn.setOnClickListener {
             collectionRef.whereEqualTo("date", today)
                 .get()
                 .addOnSuccessListener { documents ->
                     if (documents.size() > 0) {
-
                             for (document in documents) {
                             keyword = document.getString("keyword").toString()
                             Log.d("HHH", "Today's keyword: $keyword")
@@ -90,7 +130,7 @@ class UserFragment : Fragment() {
 
         return binding.root
     }
-    private fun calculate(Cnt : List<Double>) : Double{
+    private fun calculate(Cnt : List<Int>) : Int{
         val gap = Cnt[4] - Cnt[3]
         return gap
     }
@@ -105,10 +145,10 @@ class UserFragment : Fragment() {
 
         barChart.setScaleEnabled(false) //Zoom In/Out
 
-        val valueList : List<Double> = CntList[0].cnt
+        val valueList : List<Int> = visitCnt
         //val entries: ArrayList<String> = PeriodList[0].period
         val entries: ArrayList<BarEntry> = ArrayList()
-        val title = CntList[0].title
+        val title = "ddoaak"
 
         //input data
 
@@ -120,7 +160,7 @@ class UserFragment : Fragment() {
 
         val barDataSet = BarDataSet(entries, title)
         val data = BarData(barDataSet)
-        barDataSet.setColor(ContextCompat.getColor(getContext()!!,R.color.teal_200))
+        barDataSet.setColor(ContextCompat.getColor(requireContext(),R.color.teal_200))
 
 
         barChart.data = data
@@ -128,7 +168,7 @@ class UserFragment : Fragment() {
     }
 
     private fun initBarChart(barChart: BarChart) {
-        val dateList: List<String> = CntList[0].period
+        val dateList: List<String> = visitPeriod
         //hiding the grey background of the chart, default false if not set
         barChart.setDrawGridBackground(false)
         barChart.setBackgroundColor(Color.TRANSPARENT)

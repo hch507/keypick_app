@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +19,6 @@ import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import com.keyword.keyword_miner.utils.MainUiState
-import com.keyword.keyword_miner.utils.constant
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

@@ -1,23 +1,21 @@
 package com.keyword.keyword_miner.data.repositoryImpl
 
-
 import android.util.Log
 import com.keyword.keyword_miner.data.Retrofit.BlogRetrofit
 import com.keyword.keyword_miner.data.dto.userBlog.UserBlog
-import com.keyword.keyword_miner.domain.repository.LoginRepository
+import com.keyword.keyword_miner.domain.repository.UserBLogRepository
 import javax.inject.Inject
 
-class LoginRepositoryImpl @Inject constructor(
+class UserBlogRepositoryImpl @Inject constructor(
     private val blogApiRetrofit: BlogRetrofit
-) : LoginRepository {
-    override suspend fun getIsLogin(userId: String) : UserBlog? {
+) : UserBLogRepository{
+    override suspend fun getUserBlogData(userId: String): UserBlog? {
         val response = blogApiRetrofit.getBlogData(
             blogId = userId
         )
         val responseBlogCnt  = response.body()
-        Log.d("hhh", "getIsLogin: ${responseBlogCnt} ")
+        Log.d("hhh", "userBlogData: ${responseBlogCnt} ")
         return responseBlogCnt
     }
-
 
 }

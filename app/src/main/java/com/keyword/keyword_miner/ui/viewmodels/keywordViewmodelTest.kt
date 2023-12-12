@@ -1,10 +1,8 @@
 package com.keyword.keyword_miner.ui.viewmodels
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keyword.keyword_miner.domain.Model.RelKeywordInfo
+
 import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel

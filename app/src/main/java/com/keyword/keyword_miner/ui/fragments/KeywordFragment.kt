@@ -1,6 +1,6 @@
 package com.keyword.keyword_miner.ui.fragments
 
-import android.annotation.SuppressLint
+
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +14,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.domain.Model.ItemPeriod
@@ -33,9 +32,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
-
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
-import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.CoroutineScope

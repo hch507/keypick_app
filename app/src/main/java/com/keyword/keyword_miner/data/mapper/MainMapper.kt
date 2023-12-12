@@ -8,6 +8,7 @@ import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
 import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.domain.Model.monthRadioData.RatioData
+import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
 
 class MainMapper {
 
@@ -49,5 +50,14 @@ class MainMapper {
             )
         }
         return monthRatioData
+    }
+
+    fun mapperToBlogRank(blogTotal: BlogTotal):RankDataModel{
+        var rankData = blogTotal.items.map {
+                it.bloggerlink
+        }
+        
+
+        }
     }
 }
