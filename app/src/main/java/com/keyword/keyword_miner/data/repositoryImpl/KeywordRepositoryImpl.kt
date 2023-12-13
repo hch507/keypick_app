@@ -81,7 +81,7 @@ class KeywordRepositoryImpl @Inject constructor(
         return responseBlogTotal?.let { MainMapper().mapperToBlogTotal(it) }
     }
 
-    override suspend fun getBlogRank(searchTerm: String) : RankDataModel {
+    override suspend fun getBlogRank(searchTerm: String) : RankDataModel? {
         val response = naverApiService.getBlogTotal(
             client_id = Blog_API.CLIENT_ID,
             client_secret = Blog_API.CLIENT_PW ,
@@ -89,7 +89,9 @@ class KeywordRepositoryImpl @Inject constructor(
             sort=Blog_API.SORT2
         )
 
-        return
+        val responseBlogTotal = response.body()
+        Log.d("hhh", "KeywordRepositoryImpl - getBlogRank() - called ${responseBlogTotal?.let { MainMapper().mapperToBlogRank(it) } }")
+        return responseBlogTotal?.let { MainMapper().mapperToBlogRank(it) }
     }
 
 

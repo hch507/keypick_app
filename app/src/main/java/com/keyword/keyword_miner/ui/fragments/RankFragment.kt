@@ -8,62 +8,75 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.data.Retrofit.RetrofitManager
 import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewmodel
 import com.keyword.keyword_miner.databinding.FragmentRankBinding
+import com.keyword.keyword_miner.ui.viewmodels.RankViewmodel
 import com.keyword.keyword_miner.utils.Blog_API
+import com.keyword.keyword_miner.utils.MainUiState
 import com.keyword.keyword_miner.utils.RESPONSE_STATE
 import com.keyword.keyword_miner.utils.constant
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class RankFragment : Fragment() {
     lateinit var binding : FragmentRankBinding
-    var blogname : String?=""
-    var titleKeyword : String?=""
-    val userBlgoViewModel by activityViewModels<UserBlogViewmodel>()
+    lateinit var userEmail : String
+    lateinit var searchTerm : String
+
+
+    val rankViewmodel : RankViewmodel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding=FragmentRankBinding.inflate(layoutInflater)
-        userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
-            this.blogname = userdata
-            binding.name.text="${userdata} 님의 블로그"
-        })
+        userEmail=rankViewmodel.getUserEmail()
+        binding.name.text="${userEmail} 님의 블로그"
+
         binding.search.setOnClickListener {
             Log.d("HHH", "RankFragment - onCreateView() - called${binding.name.text}")
             if(binding.postingKeyword.text!!.isEmpty()){
                 binding.inputKeyword.error ="키워드를 입력해주세요."
                 Toast.makeText(getActivity(),"키워드를 입력해주세요.",Toast.LENGTH_SHORT).show();
             }else {
-                binding.inputKeyword.error = null
-                binding.inputKeyword.isErrorEnabled = false
-                titleKeyword = binding.postingKeyword.text.toString()
+                binding.inputKeyword.apply {
+                    error =null
+                    isErrorEnabled=false
+                }
+                searchTerm = binding.postingKeyword.text.toString()
+                rankViewmodel.getBlogRank(searchTerm)
+                lifecycleScope.launch{
+                    viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                        rankViewmodel.currentRank.collectLatest {
 
-                RetrofitManager.instance.searchBlogCnt(searchTerm = titleKeyword, sort = Blog_API.SORT2) { responseState, responseData ->
-                    when (responseState) {
-                        RESPONSE_STATE.OKAY -> {
-                            if (responseData != null) {
-                                Log.d("HCH", "api 호출에 성공하였습니다 ${responseData}")
+                            when(it){
+                                is MainUiState.success ->{
+                                    Log.d("hhh", "onCreateView: ${it.data} ")
+                                    var index = getIndexWithKeyword(it.data.blogLink, userEmail!!)
+                                    if (index != null) {
+                                        binding.ranking.text="${userEmail}님의 ${searchTerm} 키워드 관련 포스팅 글은 상위 랭크 ${index+1}번째에 위치해있습니다."
+                                    } else {
+                                        binding.ranking.text="아쉽게 100위안에 들지 못했습니다ㅠㅠ"
+                                    }
+                                }
+                                is MainUiState.Error -> {
+
+                                }
+                                is MainUiState.Loading -> {
+
+                                }
                             }
-                            val index = responseData?.get(0)
-                                ?.let { it1 -> getIndexWithKeyword(it1.blogname, blogname!!) }
-                            if (index != null) {
-                                binding.ranking.text="${blogname}님의 ${titleKeyword} 키워드 관련 포스팅 글은 상위 랭크 ${index+1}번째에 위치해있습니다."
-                            } else {
-                                binding.ranking.text="아쉽게 100위안에 들지 못했습니다ㅠㅠ"
-                            }
-
-                        }
-                        RESPONSE_STATE.FAIL -> {
-
-                            Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-
 
                         }
 
                     }
-
                 }
+
             }
 
         }

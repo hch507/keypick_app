@@ -56,8 +56,10 @@ class MainMapper {
         var rankData = blogTotal.items.map {
                 it.bloggerlink
         }
-        
 
-        }
+        return RankDataModel(
+            blogLink = rankData
+        )
+
     }
 }

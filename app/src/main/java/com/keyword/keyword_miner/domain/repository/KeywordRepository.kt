@@ -3,6 +3,7 @@ package com.keyword.keyword_miner.domain.repository
 
 import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
 import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
 
 interface KeywordRepository {
@@ -12,5 +13,5 @@ interface KeywordRepository {
 
     suspend fun getBlogTotal(searchTerm: String) : BlogTotalDataModel?
 
-    suspend fun getBlogRank(searchterm : String)
+    suspend fun getBlogRank(searchterm : String) : RankDataModel?
 }
