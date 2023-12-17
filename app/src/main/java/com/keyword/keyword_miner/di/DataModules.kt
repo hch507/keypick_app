@@ -2,8 +2,10 @@ package com.keyword.keyword_miner.di
 
 import com.keyword.keyword_miner.data.repositoryImpl.KeywordRepositoryImpl
 import com.keyword.keyword_miner.data.repositoryImpl.UserBlogRepositoryImpl
+//import com.keyword.keyword_miner.data.repositoryImpl.UserEmailRepositoryImpl
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
 import com.keyword.keyword_miner.domain.repository.UserBLogRepository
+//import com.keyword.keyword_miner.domain.repository.UserEmailRepository
 
 import dagger.Binds
 import dagger.Module
@@ -19,4 +21,7 @@ abstract class DataModules {
     abstract fun UserBLogRepository(repositoryImpl: UserBlogRepositoryImpl): UserBLogRepository
     @Binds
     abstract fun keywordRepository(repositoryImpl: KeywordRepositoryImpl):KeywordRepository
+
+//    @Binds
+//    abstract fun userEmailRepository(repositoryImpl: UserEmailRepositoryImpl): UserEmailRepository
 }

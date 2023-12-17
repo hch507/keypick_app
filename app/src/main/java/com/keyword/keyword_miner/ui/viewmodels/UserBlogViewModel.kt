@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class UserBlogIdViewmodel @Inject constructor(
+class UserBlogViewModel @Inject constructor(
     val getUserBlogUsecase: GetUserBlogUsecase
 ) : ViewModel() {
     private val _currentBlogCnt = MutableStateFlow<MainUiState<UserBlog>>(MainUiState.Loading)
@@ -25,5 +25,8 @@ class UserBlogIdViewmodel @Inject constructor(
     }
     fun getUserEmail(): String{
         return  App.prefs.getEmail("userEmail", "")
+    }
+    fun saveUserEmail(){
+
     }
 }

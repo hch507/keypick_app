@@ -1,94 +1,60 @@
 package com.keyword.keyword_miner.ui.viewmodels
 
-import android.content.Context
-import android.os.Build
-import android.util.Log
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.keyword.keyword_miner.KeywordInfo
-import com.keyword.keyword_miner.domain.Model.ItemPeriod
-import com.keyword.keyword_miner.domain.Model.blogData
-import com.keyword.keyword_miner.data.Retrofit.RetrofitManager
-import com.keyword.keyword_miner.ui.App
-import com.keyword.keyword_miner.utils.Blog_API
-import com.keyword.keyword_miner.utils.RESPONSE_STATE
-import com.keyword.keyword_miner.utils.constant
+import androidx.lifecycle.viewModelScope
+import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 
-class KeywordViewModel : ViewModel() {
-    val context: Context = App.instance.getAppContext()
-    private val _currentRelData = MutableLiveData<ArrayList<KeywordInfo>>()
-    val currentRelData: LiveData<ArrayList<KeywordInfo>>
-        get() = _currentRelData
+import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
+import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.usecase.GetBlogTotalUsecase
+import com.keyword.keyword_miner.domain.usecase.GetMonthRatioUsecase
+import com.keyword.keyword_miner.domain.usecase.GetRelKeywordUsecase
+import com.keyword.keyword_miner.utils.MainUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-    private val _currentBlogDate = MutableLiveData<ArrayList<ItemPeriod>>()
-    val currentBlogDate: LiveData<ArrayList<ItemPeriod>>
-        get() = _currentBlogDate
+@HiltViewModel
+class KeywordViewModel @Inject constructor(
+    private val relKeywordUsecase: GetRelKeywordUsecase,
+    private val monthRatioUsecase: GetMonthRatioUsecase,
+    private val blogTotalUsecase: GetBlogTotalUsecase
 
-    private val _currentMonthCnt = MutableLiveData<ArrayList<blogData>>()
-    val currentMonthCnt: LiveData<ArrayList<blogData>>
-        get() = _currentMonthCnt
+) : ViewModel() {
 
+    private val _currentRelData = MutableStateFlow<MainUiState<List<RelKeywordDataModel>>>(MainUiState.Loading)
+    val currentRelData = _currentRelData.asStateFlow()
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun updateKeywordData(searchTerm: String) {
-        Log.d("aaaa4", "KeywordViewModel - updateKeywordData() - called${searchTerm}")
-        RetrofitManager.instance.searchKeywordRel(searchTerm = searchTerm) { responseState, responseArrayList ->
-            when (responseState) {
-                RESPONSE_STATE.OKAY -> {
-//
-                    if (responseArrayList!!.isEmpty()) {
+    private val _currentMonthRatio = MutableStateFlow<MainUiState<List<MonthRatioDataModel>>>(MainUiState.Loading)
+    val currentMonthRatio = _currentMonthRatio.asStateFlow()
 
-                        Log.d(
-                            "bbbb",
-                            "KeywordViewModel - updateKeywordData() - called ${responseArrayList}"
-                        )
-                        Toast.makeText(context, "잠시후 다시 검색해주세요", Toast.LENGTH_SHORT).show()
-//                        System.exit(0);
-                    } else {
-                        _currentRelData.value = responseArrayList
-                    }
-                }
+    private val _currentBlogTotal = MutableStateFlow<MainUiState<BlogTotalDataModel>>(MainUiState.Loading)
+    val currentBlogTotal =_currentBlogTotal.asStateFlow()
 
-                RESPONSE_STATE.FAIL -> {
-                    Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-                }
-            }
-        }
-
-        RetrofitManager.instance.searcKData(searchTerm = searchTerm) { responseState, responseData ->
-            when (responseState) {
-                RESPONSE_STATE.OKAY -> {
-                    Log.d("aaaa5", "api 호출에 성공하였습니다 ${responseData}")
-                    _currentBlogDate.value = responseData as ArrayList<ItemPeriod>?
-                }
-
-                RESPONSE_STATE.FAIL -> {
-                    Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-                }
-            }
-        }
-
-        RetrofitManager.instance.searchBlogCnt(
-            searchTerm = searchTerm,
-            sort = Blog_API.SORT
-        ) { responseState, responseData ->
-            when (responseState) {
-                RESPONSE_STATE.OKAY -> {
-                    Log.d("aaaa6", "api 호출에 성공하였습니다 ${responseData}")
-                    _currentMonthCnt.value = responseData
-                }
-
-                RESPONSE_STATE.FAIL -> {
-                    Log.d(constant.TAG, "api 호충에 실패 하였습니다")
-                    Log.d("LHH", "api 호충에 실패 하였습니다")
-                }
-
-            }
-
+    fun getRelData(searchTerm: String) {
+        viewModelScope.launch {
+            _currentRelData.value = MainUiState.success(relKeywordUsecase.invoke(searchTerm)!!)
         }
     }
 
+    fun getMonthRatioData(searchTerm: String) {
+        viewModelScope.launch {
+            _currentMonthRatio.value = MainUiState.success(monthRatioUsecase.invoke(searchTerm)!!)
+        }
+    }
+
+    fun getBlogTotal(searchTerm: String) {
+        viewModelScope.launch {
+            _currentBlogTotal.value = MainUiState.success(blogTotalUsecase.invoke(searchTerm)!!)
+        }
+    }
+
+    fun insertKeyword(keywordData : KeywordSaveModel){
+        viewModelScope.launch {
+
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.keyword.keyword_miner.data.sharePref
+package com.keyword.keyword_miner.data.local.sharePref
 
 import android.content.Context
 import android.content.SharedPreferences

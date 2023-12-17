@@ -2,7 +2,7 @@ package com.keyword.keyword_miner.ui
 
 import android.app.Application
 import android.content.Context
-import com.keyword.keyword_miner.data.sharePref.PreferenceUtil
+import com.keyword.keyword_miner.data.local.sharePref.PreferenceUtil
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

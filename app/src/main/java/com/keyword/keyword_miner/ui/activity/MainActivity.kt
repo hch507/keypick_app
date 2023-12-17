@@ -7,7 +7,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
@@ -17,9 +16,7 @@ import com.keyword.keyword_miner.ui.fragments.UserFragment
 import com.keyword.keyword_miner.databinding.ActivityMainBinding
 import com.keyword.keyword_miner.ui.App
 import com.google.android.material.tabs.TabLayoutMediator
-import com.keyword.keyword_miner.ui.viewmodels.UserBlogIdViewmodel
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding

@@ -1,4 +1,4 @@
-package com.keyword.keyword_miner.data.Room
+package com.keyword.keyword_miner.data.local.Room
 
 import android.content.Context
 import androidx.room.Database

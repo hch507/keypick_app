@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.keyword.keyword_miner.databinding.ActivityRepositoryBinding
 import com.keyword.keyword_miner.RecyclerView.RepositoryRecyclerViewAdapter
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
-import com.keyword.keyword_miner.data.Room.Roomhelper
+import com.keyword.keyword_miner.data.local.Room.Roomhelper
 import com.keyword.keyword_miner.ui.viewmodels.RepositoryViewModel
 
 

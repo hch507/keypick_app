@@ -17,18 +17,15 @@ import com.keyword.keyword_miner.RecyclerView.RelKeywordRecyclerViewAdapter
 import com.keyword.keyword_miner.databinding.FragmentRelBinding
 import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
-import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class RelFragment : Fragment() {
 
-    var keywordList = ArrayList<KeywordInfo>()
     lateinit var binding: FragmentRelBinding
     lateinit var keywordTestList: List<RelKeywordDataModel>
-    val keywordViewModel by activityViewModels<KeywordViewModel>()
-    val keywordViewmodelTest by activityViewModels<keywordViewmodelTest>()
+    val KeywordViewModel by activityViewModels<KeywordViewModel>()
     lateinit var keywordAdapter: RelKeywordRecyclerViewAdapter
 
     override fun onCreateView(
@@ -39,13 +36,12 @@ class RelFragment : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                keywordViewmodelTest.currentRelData.collectLatest {
-
+                KeywordViewModel.currentRelData.collectLatest {
                     when (it) {
                         is MainUiState.success -> {
                             Log.d("hhhh", "RelFragment - onCreateView() - called ${it.data}")
                             keywordTestList = it.data
-                            keywordAdapter = RelKeywordRecyclerViewAdapter(keywordViewmodelTest)
+                            keywordAdapter = RelKeywordRecyclerViewAdapter(KeywordViewModel)
                             keywordAdapter.submit(keywordTestList)
 
                             binding.recyclerview.apply {

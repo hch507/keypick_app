@@ -9,7 +9,6 @@ import com.keyword.keyword_miner.utils.constant.TAG
 import com.google.gson.JsonElement
 import com.keyword.keyword_miner.domain.Model.BlogKeywordParam
 import com.keyword.keyword_miner.domain.Model.ItemPeriod
-import com.keyword.keyword_miner.domain.Model.MyBlogData
 import com.keyword.keyword_miner.domain.Model.blogData
 import retrofit2.Call
 import retrofit2.Response

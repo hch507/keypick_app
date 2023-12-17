@@ -13,16 +13,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.keyword.keyword_miner.KeywordSearch.FragmentPageAdapter
 import com.keyword.keyword_miner.ui.fragments.KeywordFragment
 import com.keyword.keyword_miner.ui.fragments.RelFragment
+
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
-import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class KeywordActivity : AppCompatActivity() {
 
-
-    val keywordViewModel: KeywordViewModel by viewModels()
-    val keywordViewmodelTest : keywordViewmodelTest by viewModels()
+    val KeywordViewModel : KeywordViewModel by viewModels()
     lateinit var kbinding: ActivityKeywordBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -44,7 +42,7 @@ class KeywordActivity : AppCompatActivity() {
 
         if (searchTerm != null) {
             Log.d("hch", "KeywordActivity - onCreate() - called")
-            keywordViewModel.updateKeywordData(searchTerm)
+//            keywordViewModel.updateKeywordData(searchTerm)
             updateKeywordData(searchTerm)
 
         }
@@ -57,7 +55,8 @@ class KeywordActivity : AppCompatActivity() {
                 var userSearchInput = query?.replace(" ", "")
                 userSearchInput= userSearchInput?.let { convertToUpperCase(it) }
                 if (userSearchInput != null) {
-                    keywordViewModel.updateKeywordData(userSearchInput)
+//                    keywordViewModel.updateKeywordData(userSearchInput)
+                    updateKeywordData(userSearchInput)
                 }
                 kbinding.searchView.setQuery("",false)
                 kbinding.searchView.clearFocus()
@@ -65,12 +64,10 @@ class KeywordActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                // 검색창에서 글자가 변경이 일어날 때마다 호출
-
                 return false
             }
         })
+
         kbinding.repository.setOnClickListener {
             intent = Intent(this@KeywordActivity, RepositoryActivity::class.java)
             startActivity(intent)
@@ -91,7 +88,7 @@ class KeywordActivity : AppCompatActivity() {
         }
     }
     fun updateKeywordData(searchTerm : String){
-        keywordViewmodelTest.apply {
+        KeywordViewModel.apply {
             getBlogTotal(searchTerm)
             getRelData(searchTerm)
             getMonthRatioData(searchTerm)

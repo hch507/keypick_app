@@ -7,13 +7,13 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import com.keyword.keyword_miner.databinding.ActivityNonLoginactivityBinding
-import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
+import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NonLoginactivity : AppCompatActivity() {
     lateinit var binding : ActivityNonLoginactivityBinding
-    private val viewmodel : keywordViewmodelTest by viewModels()
+    private val viewmodel : KeywordViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding =ActivityNonLoginactivityBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)

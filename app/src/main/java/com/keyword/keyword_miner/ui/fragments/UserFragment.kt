@@ -3,7 +3,6 @@ package com.keyword.keyword_miner.ui.fragments
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,16 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.ui.activity.KeywordActivity
-import com.keyword.keyword_miner.domain.Model.MyBlogData
 import com.keyword.keyword_miner.R
-import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewmodel
 import com.keyword.keyword_miner.databinding.FragmentUserBinding
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
@@ -32,8 +27,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.firebase.firestore.FirebaseFirestore
-import com.keyword.keyword_miner.ui.activity.MainActivity
-import com.keyword.keyword_miner.ui.viewmodels.UserBlogIdViewmodel
+import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -47,8 +41,7 @@ class UserFragment : Fragment() {
     lateinit var userEmail: String
     lateinit var keyword : String
     lateinit var binding : FragmentUserBinding
-    val userBlogViewModel: UserBlogIdViewmodel by viewModels()
-//    val userBlogViewmodel by activityViewModels<UserBlogIdViewmodel> ()
+    val userBlogViewModel: UserBlogViewModel by viewModels()
     lateinit var visitCnt : List<Int>
     lateinit var visitPeriod : List<String>
 
@@ -60,11 +53,8 @@ class UserFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserBinding.inflate(layoutInflater)
-//        var keyword=""
         val collectionRef = db.collection("keywordDB")
-//        userBlgoViewModel.currentBlogData.observe(viewLifecycleOwner, Observer { userdata->
-//            binding.name.text="${userdata} 님의 블로그"
-//        })
+
         userEmail= userBlogViewModel.getUserEmail()
         userBlogViewModel.getUserBlogData(userEmail)
         binding.name.text=userEmail

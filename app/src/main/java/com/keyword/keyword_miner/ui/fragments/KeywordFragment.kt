@@ -19,7 +19,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.domain.Model.ItemPeriod
 import com.keyword.keyword_miner.R
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
-import com.keyword.keyword_miner.data.Room.Roomhelper
+import com.keyword.keyword_miner.data.local.Room.Roomhelper
 import com.keyword.keyword_miner.databinding.FragmentKeywordBinding
 import com.keyword.keyword_miner.utils.constant.TAG
 import com.github.mikephil.charting.charts.LineChart
@@ -33,7 +33,6 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
-import com.keyword.keyword_miner.ui.viewmodels.keywordViewmodelTest
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +58,6 @@ class KeywordFragment : Fragment() {
     lateinit var helper: Roomhelper
 
     val keywordViewModel by activityViewModels<KeywordViewModel>()
-    val keywordViewmodelTest by activityViewModels<keywordViewmodelTest>()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -68,7 +66,7 @@ class KeywordFragment : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                keywordViewmodelTest.currentBlogTotal.collectLatest {
+                keywordViewModel.currentBlogTotal.collectLatest {
                     when(it){
                         is MainUiState.success ->{
                             var monthCnt = MonthCnt(it.data.blogData.map { it.date })
@@ -91,7 +89,7 @@ class KeywordFragment : Fragment() {
         }
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                keywordViewmodelTest.currentMonthRatio.collectLatest {
+                keywordViewModel.currentMonthRatio.collectLatest {
                     when(it){
                         is MainUiState.success ->{
                             periodRadioData= it.data
@@ -110,7 +108,7 @@ class KeywordFragment : Fragment() {
         }
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                keywordViewmodelTest.currentRelData.collectLatest {
+                keywordViewModel.currentRelData.collectLatest {
                     when(it){
                         is MainUiState.success ->{
                             binding.apply {

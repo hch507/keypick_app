@@ -12,9 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.databinding.ActivityBlogIdBinding
 import com.keyword.keyword_miner.ui.App
-import com.keyword.keyword_miner.ui.viewmodels.UserBlogIdViewmodel
+import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
 import com.keyword.keyword_miner.utils.MainUiState
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -25,13 +24,12 @@ import kotlinx.coroutines.launch
 class BlogIdActivity : AppCompatActivity() {
     lateinit var binding: ActivityBlogIdBinding
     lateinit var userEmail: String
-    val userBlogIdViewModel: UserBlogIdViewmodel by viewModels()
+    val userBlogIdViewModel: UserBlogViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityBlogIdBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        loginViewModel.requestLogin("dafdasgfzcvd")
         if (App.prefs.getboolean("isLoggedIn", false)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -59,7 +57,6 @@ class BlogIdActivity : AppCompatActivity() {
                                     App.prefs.setEmail("userEmail", userEmail)
                                     startActivity(intent)
                                     finish() // LoginActivity를 종료한다
-
                                 }
 
                                 is MainUiState.Error -> {

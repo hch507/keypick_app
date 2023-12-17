@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
-import com.keyword.keyword_miner.data.Room.Roomhelper
+import com.keyword.keyword_miner.data.local.Room.Roomhelper
 import com.keyword.keyword_miner.ui.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
