@@ -4,13 +4,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.auth.api.signin.internal.Storage
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.ui.viewmodels.RepositoryViewModel
 import com.keyword.keyword_miner.databinding.ActivityRepositoryViewBinding
+import com.keyword.keyword_miner.ui.viewmodels.StorageViewModel
 
 import com.keyword.keyword_miner.utils.constant
 
-class RepositoryRecyclerViewAdapter(var viewModel: RepositoryViewModel) : RecyclerView.Adapter<RepositoryViewHolder>() {
+class RepositoryRecyclerViewAdapter(var viewModel: StorageViewModel) : RecyclerView.Adapter<RepositoryViewHolder>() {
     private var RepositoryList = listOf<KeywordSaveModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
@@ -28,7 +30,7 @@ class RepositoryRecyclerViewAdapter(var viewModel: RepositoryViewModel) : Recycl
         holder.bind(this.RepositoryList[position])
         holder.btn.setOnClickListener {
 
-            viewModel.deleteItem(this.RepositoryList[position])
+//            viewModel.deleteItem(this.RepositoryList[position])
         }
     }
     fun submit(keywordSaveModel : List<KeywordSaveModel>){

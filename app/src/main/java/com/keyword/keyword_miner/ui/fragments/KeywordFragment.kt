@@ -34,8 +34,6 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.utils.MainUiState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -132,8 +130,9 @@ class KeywordFragment : Fragment() {
 
         binding.storeBtn.setOnClickListener {
             val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
-            val StoreList = KeywordSaveModel(keyword,monthCnt,total,date)
-            insert(StoreList)
+            val storeList = KeywordSaveModel(keyword,monthCnt,total,date)
+//            insert(StoreList)
+            keywordViewModel.insertKeyword(storeList)
             Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
         }
 
@@ -250,10 +249,10 @@ class KeywordFragment : Fragment() {
         }
 
     }
-    fun insert(item : KeywordSaveModel){
-        Log.d("HCH", "KeywordFragment-insert() called")
-        CoroutineScope(Dispatchers.IO).launch {
-            helper.roomDao().insert(item)
-        }
-    }
+//    fun insert(item : KeywordSaveModel){
+//        Log.d("HCH", "KeywordFragment-insert() called")
+//        CoroutineScope(Dispatchers.IO).launch {
+//            helper.roomDao().insert(item)
+//        }
+//    }
 }

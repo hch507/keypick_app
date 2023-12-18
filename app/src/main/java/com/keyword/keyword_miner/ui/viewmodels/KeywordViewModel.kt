@@ -10,6 +10,7 @@ import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
 import com.keyword.keyword_miner.domain.usecase.GetBlogTotalUsecase
 import com.keyword.keyword_miner.domain.usecase.GetMonthRatioUsecase
 import com.keyword.keyword_miner.domain.usecase.GetRelKeywordUsecase
+import com.keyword.keyword_miner.domain.usecase.InsertKeywordUsecase
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class KeywordViewModel @Inject constructor(
     private val relKeywordUsecase: GetRelKeywordUsecase,
     private val monthRatioUsecase: GetMonthRatioUsecase,
-    private val blogTotalUsecase: GetBlogTotalUsecase
+    private val blogTotalUsecase: GetBlogTotalUsecase,
+    private val insertKeywordUsecase: InsertKeywordUsecase
 
 ) : ViewModel() {
 
@@ -54,7 +56,7 @@ class KeywordViewModel @Inject constructor(
 
     fun insertKeyword(keywordData : KeywordSaveModel){
         viewModelScope.launch {
-
+            insertKeywordUsecase.invoke(keywordData)
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.keyword.keyword_miner.di
 
 import com.keyword.keyword_miner.data.repositoryImpl.KeywordRepositoryImpl
+import com.keyword.keyword_miner.data.repositoryImpl.RoomRepositoryImpl
 import com.keyword.keyword_miner.data.repositoryImpl.UserBlogRepositoryImpl
 //import com.keyword.keyword_miner.data.repositoryImpl.UserEmailRepositoryImpl
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
+import com.keyword.keyword_miner.domain.repository.RoomRepository
 import com.keyword.keyword_miner.domain.repository.UserBLogRepository
 //import com.keyword.keyword_miner.domain.repository.UserEmailRepository
 
@@ -24,4 +26,6 @@ abstract class DataModules {
 
 //    @Binds
 //    abstract fun userEmailRepository(repositoryImpl: UserEmailRepositoryImpl): UserEmailRepository
+    @Binds
+    abstract fun roomRepository(repositoryImpl: RoomRepositoryImpl) :RoomRepository
 }

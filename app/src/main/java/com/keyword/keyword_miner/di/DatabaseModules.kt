@@ -2,6 +2,7 @@ package com.keyword.keyword_miner.di
 
 import android.content.Context
 import androidx.room.Room
+import com.keyword.keyword_miner.data.dao.RoomDao
 import com.keyword.keyword_miner.data.local.Room.Roomhelper
 import com.keyword.keyword_miner.data.local.Room.RoomhelperHilt
 import dagger.Module
@@ -17,16 +18,16 @@ class DatabaseModules {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context : Context) =
+    fun provideAppDatabase(@ApplicationContext context : Context) :RoomhelperHilt =
         Room.databaseBuilder(
-            context.applicationContext,
-            Roomhelper::class.java,
+            context,
+            RoomhelperHilt::class.java,
             "room_db"
         ).fallbackToDestructiveMigration()
             .build()
 
     @Provides
-    fun provideUserDao(appDatabase : RoomhelperHilt) = appDatabase.roomDao()
+    fun provideUserDao(appDatabase : RoomhelperHilt) : RoomDao  = appDatabase.roomDao()
 
 
 
