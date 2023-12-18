@@ -1,5 +1,6 @@
 package com.keyword.keyword_miner.data.repositoryImpl
 
+import android.util.Log
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.data.local.Room.RoomhelperHilt
 import com.keyword.keyword_miner.domain.repository.RoomRepository
@@ -13,6 +14,7 @@ class RoomRepositoryImpl @Inject constructor(
     }
 
     override suspend fun InsertData(saveData: KeywordSaveModel) {
+        Log.d("Insert" ,"repositoryImpl InsertData: ")
         roomhelper.roomDao().insert(saveData)
     }
 

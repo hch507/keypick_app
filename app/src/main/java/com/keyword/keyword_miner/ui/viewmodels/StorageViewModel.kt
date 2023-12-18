@@ -1,5 +1,6 @@
 package com.keyword.keyword_miner.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
@@ -24,6 +25,7 @@ class StorageViewModel @Inject constructor(
     fun getSavedData(){
         viewModelScope.launch {
             _savedData.value=MainUiState.success(getSavedKeywordUsecase.invoke())
+            Log.d("storage", "viewmodel getSavedData: ${_savedData} ")
         }
     }
 }

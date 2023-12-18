@@ -1,5 +1,6 @@
 package com.keyword.keyword_miner.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
@@ -56,6 +57,7 @@ class KeywordViewModel @Inject constructor(
 
     fun insertKeyword(keywordData : KeywordSaveModel){
         viewModelScope.launch {
+            Log.d("Insert", " Viewmodel insertKeyword: ")
             insertKeywordUsecase.invoke(keywordData)
         }
     }

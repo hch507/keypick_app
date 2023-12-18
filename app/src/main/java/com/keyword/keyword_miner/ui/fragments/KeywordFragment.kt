@@ -45,13 +45,10 @@ import kotlin.collections.ArrayList
 
 class KeywordFragment : Fragment() {
 
-    var periodList = ArrayList<ItemPeriod>()
     lateinit var periodRadioData : List<MonthRatioDataModel>
-    var keyword: String=""
-    var monthPc: String=""
-    var monthMo: String=""
-    var monthCnt: String=""
-    var total : String=""
+    lateinit var keywordName: String
+    lateinit var currentMonthCnt: String
+    lateinit var total : String
     lateinit var binding: FragmentKeywordBinding
     lateinit var helper: Roomhelper
 
@@ -71,7 +68,8 @@ class KeywordFragment : Fragment() {
                             Log.d("hchh", "KeywordFragment - onCreateView() - called${it.data.blogData.map { it.date }}")
                             binding.apply {
                                 monthBlog.text=monthCnt
-                                totalBlog.text=it.data.total.toString()
+                                total = it.data.total.toString()
+                                totalBlog.text=total
                             }
 
                         }
@@ -111,9 +109,11 @@ class KeywordFragment : Fragment() {
                         is MainUiState.success ->{
                             binding.apply {
                                 Log.d("hhh", "KeywordFragment - onCreateView() - called ${it.data}")
-                                keyword.text = it.data.get(0).relKeyword
+                                keywordName = it.data.get(0).relKeyword.toString()
+                                keyword.text = keywordName
                                 pcClick.text = it.data.get(0).monthlyPcQcCnt
                                 moClick.text = it.data.get(0).monthlyMobileQcCnt
+                                currentMonthCnt = (it.data.get(0).monthlyPcQcCnt!!.toInt() +it.data.get(0).monthlyMobileQcCnt!!.toInt()).toString()
                             }
 
                         }
@@ -128,11 +128,13 @@ class KeywordFragment : Fragment() {
             }
         }
 
+
         binding.storeBtn.setOnClickListener {
             val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
-            val storeList = KeywordSaveModel(keyword,monthCnt,total,date)
+            val storeList = KeywordSaveModel(keywordName,currentMonthCnt,total,date)
 //            insert(StoreList)
             keywordViewModel.insertKeyword(storeList)
+            Log.d("insert", "KeywordFragment-onCreateView() called ${storeList}")
             Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
         }
 
@@ -249,10 +251,5 @@ class KeywordFragment : Fragment() {
         }
 
     }
-//    fun insert(item : KeywordSaveModel){
-//        Log.d("HCH", "KeywordFragment-insert() called")
-//        CoroutineScope(Dispatchers.IO).launch {
-//            helper.roomDao().insert(item)
-//        }
-//    }
+
 }

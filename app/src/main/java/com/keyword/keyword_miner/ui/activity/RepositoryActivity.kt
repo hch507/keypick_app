@@ -36,17 +36,7 @@ class RepositoryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         keywordAdapter= RepositoryRecyclerViewAdapter(storageViewModel)
 
-//        repositoryViewModel.loadRepository()
-//        //리사이클러뷰에 저장된 값을 뿌려줌
-//        repositoryViewModel.currentRepository.observe(this) { repositoryItem ->
-//            this.storeItemList = repositoryItem
-//            keywordAdapter.submit(storeItemList)
-//            binding.repositoryRecyclerview.layoutManager = LinearLayoutManager(
-//                this@RepositoryActivity,
-//                LinearLayoutManager.VERTICAL, false
-//            )
-//            binding.repositoryRecyclerview.adapter = keywordAdapter
-//        }
+
         storageViewModel.getSavedData()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
