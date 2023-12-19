@@ -2,9 +2,9 @@ package com.keyword.keyword_miner.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keyword.keyword_miner.data.local.sharePref.PreferenceUtil
 import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
 import com.keyword.keyword_miner.domain.usecase.GetRankUsecase
-import com.keyword.keyword_miner.ui.App
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RankViewmodel @Inject constructor(
-    private val getRankUsecase: GetRankUsecase
+    private val getRankUsecase: GetRankUsecase,
+    val prefs : PreferenceUtil
+
 ) : ViewModel(){
     private var _currentRank = MutableStateFlow<MainUiState<RankDataModel>>(MainUiState.Loading)
     var currentRank = _currentRank.asStateFlow()
@@ -26,6 +28,6 @@ class RankViewmodel @Inject constructor(
     }
 
     fun getUserEmail(): String{
-        return  App.prefs.getEmail("userEmail", "")
+        return prefs.getEmail("userEmail", "")
     }
 }

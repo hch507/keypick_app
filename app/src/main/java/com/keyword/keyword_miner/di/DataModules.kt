@@ -24,8 +24,6 @@ abstract class DataModules {
     @Binds
     abstract fun keywordRepository(repositoryImpl: KeywordRepositoryImpl):KeywordRepository
 
-//    @Binds
-//    abstract fun userEmailRepository(repositoryImpl: UserEmailRepositoryImpl): UserEmailRepository
     @Binds
     abstract fun roomRepository(repositoryImpl: RoomRepositoryImpl) :RoomRepository
 }

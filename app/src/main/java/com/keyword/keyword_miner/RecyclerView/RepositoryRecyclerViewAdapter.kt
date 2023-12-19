@@ -4,20 +4,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.auth.api.signin.internal.Storage
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
-import com.keyword.keyword_miner.ui.viewmodels.RepositoryViewModel
 import com.keyword.keyword_miner.databinding.ActivityRepositoryViewBinding
 import com.keyword.keyword_miner.ui.viewmodels.StorageViewModel
-
 import com.keyword.keyword_miner.utils.constant
 
-class RepositoryRecyclerViewAdapter(var viewModel: StorageViewModel) : RecyclerView.Adapter<RepositoryViewHolder>() {
+class RepositoryRecyclerViewAdapter(var viewModel: StorageViewModel) :
+    RecyclerView.Adapter<RepositoryViewHolder>() {
     private var RepositoryList = listOf<KeywordSaveModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         Log.d(constant.TAG, "Adapter-onCreateViewHolder() called")
-        val itemhodler= RepositoryViewHolder(ActivityRepositoryViewBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        val itemhodler = RepositoryViewHolder(
+            ActivityRepositoryViewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
         return itemhodler
     }
 
@@ -30,11 +34,12 @@ class RepositoryRecyclerViewAdapter(var viewModel: StorageViewModel) : RecyclerV
         holder.bind(this.RepositoryList[position])
         holder.btn.setOnClickListener {
 
-//            viewModel.deleteItem(this.RepositoryList[position])
+            viewModel.requestDeleteData(this.RepositoryList[position])
         }
     }
-    fun submit(keywordSaveModel : List<KeywordSaveModel>){
 
-        this.RepositoryList= keywordSaveModel
+    fun submit(keywordSaveModel: List<KeywordSaveModel>) {
+
+        this.RepositoryList = keywordSaveModel
     }
 }

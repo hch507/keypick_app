@@ -1,11 +1,11 @@
 package com.keyword.keyword_miner.data.local.sharePref
 
-import android.content.Context
 import android.content.SharedPreferences
+import javax.inject.Inject
 
-class PreferenceUtil(context:Context) {
-    private val prefs: SharedPreferences = context.getSharedPreferences("Login", 0)
-
+class PreferenceUtil @Inject constructor(
+    private var prefs: SharedPreferences)
+{
     fun getboolean(key: String, defValue: Boolean): Boolean
     {
         return prefs.getBoolean(key, defValue)

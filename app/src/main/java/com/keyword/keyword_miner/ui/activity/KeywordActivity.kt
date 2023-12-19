@@ -13,7 +13,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.keyword.keyword_miner.KeywordSearch.FragmentPageAdapter
 import com.keyword.keyword_miner.ui.fragments.KeywordFragment
 import com.keyword.keyword_miner.ui.fragments.RelFragment
-
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -9,14 +9,13 @@ import dagger.hilt.android.HiltAndroidApp
 class App:Application() {
     companion object
     {
-        lateinit var prefs: PreferenceUtil
+ //       lateinit var prefs: PreferenceUtil
         lateinit var instance: App
             private set
     }
 
     override fun onCreate()
     {
-        prefs = PreferenceUtil(applicationContext)
         super.onCreate()
         instance = this
     }

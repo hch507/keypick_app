@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
@@ -16,10 +17,13 @@ import com.keyword.keyword_miner.ui.fragments.UserFragment
 import com.keyword.keyword_miner.databinding.ActivityMainBinding
 import com.keyword.keyword_miner.ui.App
 import com.google.android.material.tabs.TabLayoutMediator
+import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    val userBlogViewModel: UserBlogViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 return false
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
@@ -59,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             builder.setTitle("로그아웃")
                 .setMessage("로그아웃 하시겠습니까??")
                 .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, id ->
-                    App.prefs.setboolean("isLoggedIn", false)
+                    userBlogViewModel.saveUserEmail("")
                     intent = Intent(this@MainActivity, BlogIdActivity::class.java)
                     startActivity(intent)
                     finish()

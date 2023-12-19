@@ -19,8 +19,8 @@ class RoomRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun DeleteData() {
-        TODO("Not yet implemented")
+    override suspend fun DeleteData(item : KeywordSaveModel) {
+        roomhelper.roomDao().delate(item)
     }
 
 }

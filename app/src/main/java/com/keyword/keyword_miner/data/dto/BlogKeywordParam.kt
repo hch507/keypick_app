@@ -1,4 +1,4 @@
-package com.keyword.keyword_miner.domain.Model
+package com.keyword.keyword_miner.data.dto
 
 import com.google.gson.annotations.SerializedName
 

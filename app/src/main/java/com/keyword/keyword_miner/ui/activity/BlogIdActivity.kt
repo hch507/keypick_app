@@ -11,7 +11,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.databinding.ActivityBlogIdBinding
-import com.keyword.keyword_miner.ui.App
 import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,13 +23,13 @@ import kotlinx.coroutines.launch
 class BlogIdActivity : AppCompatActivity() {
     lateinit var binding: ActivityBlogIdBinding
     lateinit var userEmail: String
-    val userBlogIdViewModel: UserBlogViewModel by viewModels()
+    val userBlogViewModel: UserBlogViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityBlogIdBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if (App.prefs.getboolean("isLoggedIn", false)) {
+        if (userBlogViewModel.getUserEmail() != "") {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish() // LoginActivity를 종료한다
@@ -42,36 +41,38 @@ class BlogIdActivity : AppCompatActivity() {
             if (userEmail != null) {
                 lifecycleScope.launch {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        userBlogIdViewModel.getUserBlogData(userEmail)
-                        userBlogIdViewModel.currentBlogCnt
+                        userBlogViewModel.getUserBlogData(userEmail)
+                        userBlogViewModel.currentBlogCnt
                             .debounce(300)
                             .collectLatest {
-                            when (it) {
-                                is MainUiState.success -> {
-                                    Log.d("LoginState", "onCreate: success ")
-                                    binding.blogID.error = null
-                                    val intent =
-                                        Intent(this@BlogIdActivity, MainActivity::class.java)
-                                    App.prefs.setboolean("isLoggedIn", true)
-                                    Log.d("HHH", "LoginActivity - onSuccess() - called${userEmail}")
-                                    App.prefs.setEmail("userEmail", userEmail)
-                                    startActivity(intent)
-                                    finish() // LoginActivity를 종료한다
-                                }
+                                when (it) {
+                                    is MainUiState.success -> {
+                                        Log.d("LoginState", "onCreate: success ")
+                                        binding.blogID.error = null
+                                        val intent =
+                                            Intent(this@BlogIdActivity, MainActivity::class.java)
+                                        Log.d(
+                                            "HHH",
+                                            "LoginActivity - onSuccess() - called${userEmail}"
+                                        )
+                                        userBlogViewModel.saveUserEmail(userEmail)
+                                        startActivity(intent)
+                                        finish() // LoginActivity를 종료한다
+                                    }
 
-                                is MainUiState.Error -> {
-                                    Log.d("LoginState", "onCreate: fail ")
-                                    binding.inputBlog.error = "블로그아이디가 존재하지않습니다"
-                                    Toast.makeText(
-                                        this@BlogIdActivity,
-                                        "블로그 아이디를 다시 확인해주세요",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                                    is MainUiState.Error -> {
+                                        Log.d("LoginState", "onCreate: fail ")
+                                        binding.inputBlog.error = "블로그아이디가 존재하지않습니다"
+                                        Toast.makeText(
+                                            this@BlogIdActivity,
+                                            "블로그 아이디를 다시 확인해주세요",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
 
-                                is MainUiState.Loading -> {}
+                                    is MainUiState.Loading -> {}
+                                }
                             }
-                        }
                     }
                 }
             } else {

@@ -16,7 +16,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.keyword.keyword_miner.domain.Model.ItemPeriod
 import com.keyword.keyword_miner.R
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.data.local.Room.Roomhelper

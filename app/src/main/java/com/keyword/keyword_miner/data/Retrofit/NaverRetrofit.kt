@@ -1,11 +1,8 @@
 package com.keyword.keyword_miner.data.Retrofit
 
-import com.google.gson.JsonElement
 import com.keyword.keyword_miner.data.dto.blogTotal.BlogTotal
 import com.keyword.keyword_miner.data.dto.monthRatio.BlogMonthRatio
-import com.keyword.keyword_miner.data.dto.monthRatio.Result
-import com.keyword.keyword_miner.domain.Model.BlogKeywordParam
-import retrofit2.Call
+import com.keyword.keyword_miner.data.dto.BlogKeywordParam
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -12,7 +12,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.keyword.keyword_miner.KeywordInfo
 import com.keyword.keyword_miner.RecyclerView.RelKeywordRecyclerViewAdapter
 import com.keyword.keyword_miner.databinding.FragmentRelBinding
 import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel

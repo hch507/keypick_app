@@ -9,7 +9,6 @@ import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 
 @Dao
 interface RoomRepositoryDao {
-
     @Query("SELECT * FROM room_repository")
     fun getAll():List<KeywordSaveModel>
 

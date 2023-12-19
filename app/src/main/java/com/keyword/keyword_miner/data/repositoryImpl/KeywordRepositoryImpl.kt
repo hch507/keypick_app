@@ -6,8 +6,7 @@ import androidx.annotation.RequiresApi
 import com.keyword.keyword_miner.data.Retrofit.NaverRetrofit
 import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.data.mapper.MainMapper
-import com.keyword.keyword_miner.domain.Model.BlogKeywordParam
-import com.keyword.keyword_miner.domain.Model.blogData
+import com.keyword.keyword_miner.data.dto.BlogKeywordParam
 import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
 import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel

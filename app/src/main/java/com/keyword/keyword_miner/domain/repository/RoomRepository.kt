@@ -8,5 +8,5 @@ interface RoomRepository {
 
     suspend fun InsertData(saveData: KeywordSaveModel)
 
-    suspend fun DeleteData()
+    suspend fun DeleteData(item : KeywordSaveModel)
 }
