@@ -80,4 +80,7 @@ class RepositoryActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+//    inner class Handler {
+//        fun delete(Data : )
+//    }
 }

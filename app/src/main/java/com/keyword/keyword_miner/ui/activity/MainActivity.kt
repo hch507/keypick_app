@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     val userBlogViewModel: UserBlogViewModel by viewModels()
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -72,7 +73,6 @@ class MainActivity : AppCompatActivity() {
                 })
                 .setNegativeButton("취소", DialogInterface.OnClickListener { dialog, id ->
                     Toast.makeText(this@MainActivity, "취소", Toast.LENGTH_SHORT).show()
-
                 })
             builder.show()
 

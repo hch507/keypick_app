@@ -1,6 +1,7 @@
 package com.keyword.keyword_miner.ui.activity
 
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.keyword.keyword_miner.databinding.ActivityBlogIdBinding
+
 import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +24,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class BlogIdActivity : AppCompatActivity() {
     lateinit var binding: ActivityBlogIdBinding
-    lateinit var userEmail: String
+    lateinit var userEmail : String
     val userBlogViewModel: UserBlogViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityBlogIdBinding.inflate(layoutInflater)
@@ -30,9 +32,7 @@ class BlogIdActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (userBlogViewModel.getUserEmail() != "") {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish() // LoginActivity를 종료한다
+            start(this@BlogIdActivity)// LoginActivity를 종료한다
             return // 이후의 코드는 실행하지 않는다
         }
 
@@ -49,14 +49,15 @@ class BlogIdActivity : AppCompatActivity() {
                                     is MainUiState.success -> {
                                         Log.d("LoginState", "onCreate: success ")
                                         binding.blogID.error = null
-                                        val intent =
-                                            Intent(this@BlogIdActivity, MainActivity::class.java)
+//                                        val intent =
+//                                            Intent(this@BlogIdActivity, MainActivity::class.java)
                                         Log.d(
                                             "HHH",
                                             "LoginActivity - onSuccess() - called${userEmail}"
                                         )
                                         userBlogViewModel.saveUserEmail(userEmail)
-                                        startActivity(intent)
+//                                        startActivity(intent)
+                                        start(this@BlogIdActivity)
                                         finish() // LoginActivity를 종료한다
                                     }
 
@@ -85,5 +86,9 @@ class BlogIdActivity : AppCompatActivity() {
             finish() // LoginActivity를 종료한다
         }
     }
-
+    fun start(context : Context){
+        Intent(context, MainActivity::class.java).run {
+            context.startActivity(this)
+        }
+    }
 }
