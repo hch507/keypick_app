@@ -30,7 +30,7 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.flow.collectLatest

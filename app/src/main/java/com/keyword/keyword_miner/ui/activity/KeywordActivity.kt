@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import com.keyword.keyword_miner.databinding.ActivityKeywordBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.keyword.keyword_miner.KeywordSearch.FragmentPageAdapter
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
 import com.keyword.keyword_miner.ui.fragments.KeywordFragment
 import com.keyword.keyword_miner.ui.fragments.RelFragment
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class KeywordActivity : AppCompatActivity() {
 
-    val KeywordViewModel : KeywordViewModel by viewModels()
+    val keywordViewModel : KeywordViewModel by viewModels()
     lateinit var kbinding: ActivityKeywordBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -87,10 +88,22 @@ class KeywordActivity : AppCompatActivity() {
         }
     }
     fun updateKeywordData(searchTerm : String){
-        KeywordViewModel.apply {
+        keywordViewModel.apply {
             getBlogTotal(searchTerm)
             getRelData(searchTerm)
             getMonthRatioData(searchTerm)
+        }
+    }
+    inner class RelKeywordHandler(){
+
+        fun onClick(relKeyword : RelKeywordDataModel){
+            keywordViewModel.apply {
+                relKeyword.relKeyword?.let { it1 ->
+                    getBlogTotal(it1)
+                    getRelData(it1)
+                    getMonthRatioData(it1)
+                }
+            }
         }
     }
 

@@ -3,7 +3,7 @@ package com.keyword.keyword_miner.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keyword.keyword_miner.data.local.sharePref.PreferenceUtil
-import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
+import com.keyword.keyword_miner.domain.model.rankData.RankDataModel
 import com.keyword.keyword_miner.domain.usecase.GetRankUsecase
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel

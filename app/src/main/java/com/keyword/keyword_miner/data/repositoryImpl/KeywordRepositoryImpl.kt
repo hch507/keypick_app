@@ -7,15 +7,18 @@ import com.keyword.keyword_miner.data.Retrofit.NaverRetrofit
 import com.keyword.keyword_miner.data.Retrofit.RelSearchRetrofit
 import com.keyword.keyword_miner.data.mapper.MainMapper
 import com.keyword.keyword_miner.data.dto.BlogKeywordParam
-import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
-import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
-import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
-import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.model.blogTotalData.BlogTotalDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.model.rankData.RankDataModel
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
 import com.keyword.keyword_miner.utils.API
 import com.keyword.keyword_miner.utils.Blog_API
 import com.keyword.keyword_miner.utils.Search_API
 import com.keyword.keyword_miner.utils.Signature
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import java.io.IOException
 import javax.inject.Inject
 
 class KeywordRepositoryImpl @Inject constructor(
@@ -23,24 +26,41 @@ class KeywordRepositoryImpl @Inject constructor(
     private val naverApiService : NaverRetrofit
 ) : KeywordRepository{
     @RequiresApi(Build.VERSION_CODES.O)
-    override suspend fun getKeywordRel(searchTerm : String) : List<RelKeywordDataModel>? {
+    override suspend fun getKeywordRel(searchTerm : String) : Flow<List<RelKeywordDataModel>>? {
         API.updateTimestamp()
-        val response = relApiService.getRelKwdStatTest(
-            content_type = API.Content_Type,
-            x_timestamp = API.X_Timestamp,
-            api_key = API.X_API_KEY,
-            x_customer = API.X_customer,
-            x_signature = Signature.generate(
-                API.X_Timestamp,
-                Signature.method,
-                Signature.uri,
-                API.X_secret),
-            hintKeywords = searchTerm)
-
-        val responseRelKeyword = response.body()?.keywordList
-
-        Log.d("hch", "getKeywordRel: ${responseRelKeyword} ")
-        return responseRelKeyword?.let { MainMapper().mapperToRelkeyword(it) }
+        return flow{
+            try {
+                relApiService.getRelKwdStatTest(
+                    content_type = API.Content_Type,
+                    x_timestamp = API.X_Timestamp,
+                    api_key = API.X_API_KEY,
+                    x_customer = API.X_customer,
+                    x_signature = Signature.generate(
+                        API.X_Timestamp,
+                        Signature.method,
+                        Signature.uri,
+                        API.X_secret),
+                    hintKeywords = searchTerm).body()?.keywordList?.let { MainMapper().mapperToRelkeyword(it)  }
+            }catch (e: IOException){
+                emptyList()
+            }
+        }
+//        val response = relApiService.getRelKwdStatTest(
+//            content_type = API.Content_Type,
+//            x_timestamp = API.X_Timestamp,
+//            api_key = API.X_API_KEY,
+//            x_customer = API.X_customer,
+//            x_signature = Signature.generate(
+//                API.X_Timestamp,
+//                Signature.method,
+//                Signature.uri,
+//                API.X_secret),
+//            hintKeywords = searchTerm)
+//
+//        val responseRelKeyword = response.body()?.keywordList
+//
+//        Log.d("hch", "getKeywordRel: ${responseRelKeyword} ")
+//        return responseRelKeyword?.let { MainMapper().mapperToRelkeyword(it) }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

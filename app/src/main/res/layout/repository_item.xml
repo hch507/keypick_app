@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
             type="com.keyword.keyword_miner.data.dto.KeywordSaveModel" />
+
+        <variable
+            name="handler"
+            type="com.keyword.keyword_miner.ui.activity.RepositoryActivity.RepositoryHandler" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -50,6 +53,7 @@
                     android:id="@+id/item_clear"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:onClick="@{() -> handler.delete(data)}"
                     android:backgroundTint="@color/white"
                     android:src="@drawable/ic_baseline_clear_24"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +133,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginLeft="3dp"
-                    android:text="yyyy/mm/dd" />
+                    tools:text="yyyy/mm/dd"
+                    android:text="@{data.datetime}" />
 
 
             </LinearLayout>

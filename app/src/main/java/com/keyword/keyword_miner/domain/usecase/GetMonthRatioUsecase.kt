@@ -1,7 +1,6 @@
 package com.keyword.keyword_miner.domain.usecase
 
-import android.util.Log
-import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
 import com.keyword.keyword_miner.domain.repository.KeywordRepository
 import javax.inject.Inject
 

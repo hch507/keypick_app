@@ -1,13 +1,14 @@
 package com.keyword.keyword_miner.domain.repository
 
 
-import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
-import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
-import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
-import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.model.blogTotalData.BlogTotalDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.model.rankData.RankDataModel
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
+import kotlinx.coroutines.flow.Flow
 
 interface KeywordRepository {
-    suspend fun getKeywordRel(searchTerm : String) : List<RelKeywordDataModel>?
+    suspend fun getKeywordRel(searchTerm : String) : Flow<List<RelKeywordDataModel>>?
 
     suspend fun getMonthRatio(searchTerm: String) :List<MonthRatioDataModel>?
 

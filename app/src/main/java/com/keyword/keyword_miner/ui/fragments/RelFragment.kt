@@ -14,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keyword.keyword_miner.RecyclerView.RelKeywordRecyclerViewAdapter
 import com.keyword.keyword_miner.databinding.FragmentRelBinding
-import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.flow.collectLatest
@@ -24,8 +24,9 @@ class RelFragment : Fragment() {
 
     lateinit var binding: FragmentRelBinding
     lateinit var keywordTestList: List<RelKeywordDataModel>
-    val KeywordViewModel by activityViewModels<KeywordViewModel>()
-    lateinit var keywordAdapter: RelKeywordRecyclerViewAdapter
+    val keywordViewModel by activityViewModels<KeywordViewModel>()
+    val keywordAdapter: RelKeywordRecyclerViewAdapter by lazy { RelKeywordRecyclerViewAdapter(RelKeywordHandler()) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +36,11 @@ class RelFragment : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                KeywordViewModel.currentRelData.collectLatest {
+                keywordViewModel.currentRelData.collectLatest {
                     when (it) {
                         is MainUiState.success -> {
                             Log.d("hhhh", "RelFragment - onCreateView() - called ${it.data}")
                             keywordTestList = it.data
-                            keywordAdapter = RelKeywordRecyclerViewAdapter(KeywordViewModel)
                             keywordAdapter.submit(keywordTestList)
 
                             binding.recyclerview.apply {
@@ -62,5 +62,16 @@ class RelFragment : Fragment() {
         }
         return binding.root
     }
+    inner class RelKeywordHandler(){
 
+        fun onClick(relKeyword : RelKeywordDataModel){
+            keywordViewModel.apply {
+                relKeyword.relKeyword?.let { it1 ->
+                    getBlogTotal(it1)
+                    getRelData(it1)
+                    getMonthRatioData(it1)
+                }
+            }
+        }
+    }
 }

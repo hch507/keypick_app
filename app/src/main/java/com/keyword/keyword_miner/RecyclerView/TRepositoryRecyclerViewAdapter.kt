@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.databinding.RepositoryItemBinding
+import com.keyword.keyword_miner.ui.activity.RepositoryActivity
 
-class TRepositoryRecyclerViewAdapter : ListAdapter<KeywordSaveModel, TRepositoryViewHolder>(
+class TRepositoryRecyclerViewAdapter(
+    private val handler: RepositoryActivity.RepositoryHandler
+) : ListAdapter<KeywordSaveModel, TRepositoryViewHolder>(
     diffCallback) {
 
     companion object {
@@ -31,7 +34,8 @@ class TRepositoryRecyclerViewAdapter : ListAdapter<KeywordSaveModel, TRepository
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TRepositoryViewHolder {
         return TRepositoryViewHolder(
-            RepositoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RepositoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            handler
         )
     }
 

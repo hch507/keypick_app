@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="reldata"
+            type="com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel" />
+        <variable
+            name="handler"
+            type="com.keyword.keyword_miner.ui.fragments.RelFragment.RelKeywordHandler" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -39,9 +44,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="TextView"
+                    android:text="@{reldata.relKeyword}"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    tools:text="RelKeyword" />
 
             </LinearLayout>
 
@@ -68,8 +74,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="TextView"
-                    android:textColor="@color/black" />
+                    android:text="@{reldata.monthlyMobileQcCnt}"
+                    android:textColor="@color/black"
+                    tools:text="0000" />
 
             </LinearLayout>
 
@@ -92,8 +99,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="TextView"
-                    android:textColor="@color/black" />
+                    android:text="@{reldata.monthlyPcQcCnt}"
+                    android:textColor="@color/black"
+                    tools:text="0000" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,7 +117,8 @@
                     android:fontFamily="@font/nanumsquareneo_brg"
                     android:padding="3dp"
                     android:text="Click!!"
-                    android:textColor="@color/appbar" />
+                    android:textColor="@color/appbar"
+                    android:onClick="@{() -> handler.onClick(reldata)}"/>
 
 
             </LinearLayout>

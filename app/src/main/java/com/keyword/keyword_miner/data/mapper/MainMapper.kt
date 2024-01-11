@@ -3,12 +3,12 @@ package com.keyword.keyword_miner.data.mapper
 import com.keyword.keyword_miner.data.dto.blogTotal.BlogTotal
 import com.keyword.keyword_miner.data.dto.monthRatio.Result
 import com.keyword.keyword_miner.data.dto.relKeyword.Keyword
-import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogData
-import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
-import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
-import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
-import com.keyword.keyword_miner.domain.Model.monthRadioData.RatioData
-import com.keyword.keyword_miner.domain.Model.rankData.RankDataModel
+import com.keyword.keyword_miner.domain.model.blogTotalData.BlogData
+import com.keyword.keyword_miner.domain.model.blogTotalData.BlogTotalDataModel
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.RatioData
+import com.keyword.keyword_miner.domain.model.rankData.RankDataModel
 
 class MainMapper {
 

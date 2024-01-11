@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keyword.keyword_miner.databinding.ActivityRepositoryBinding
-import com.keyword.keyword_miner.RecyclerView.RepositoryRecyclerViewAdapter
+import com.keyword.keyword_miner.RecyclerView.TRepositoryRecyclerViewAdapter
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
 import com.keyword.keyword_miner.ui.viewmodels.StorageViewModel
 import com.keyword.keyword_miner.utils.MainUiState
@@ -22,7 +22,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RepositoryActivity : AppCompatActivity() {
     lateinit var binding: ActivityRepositoryBinding
-    lateinit var keywordAdapter: RepositoryRecyclerViewAdapter
+    private val adapter by lazy { TRepositoryRecyclerViewAdapter(RepositoryHandler()) }
+
     var storeItemList = listOf<KeywordSaveModel>()
     val storageViewModel: StorageViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class RepositoryActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        keywordAdapter = RepositoryRecyclerViewAdapter(storageViewModel)
+        binding.repositoryRecyclerview.adapter = adapter
 
 
         storageViewModel.getSavedData()
@@ -40,17 +41,15 @@ class RepositoryActivity : AppCompatActivity() {
                 storageViewModel.savedData.collectLatest {
                     when (it) {
                         is MainUiState.success -> {
-                            Log.d("Storage", "onCreate: ${it.data}")
                             storeItemList = it.data
-                            keywordAdapter.submit(storeItemList)
                             binding.repositoryRecyclerview.apply {
                                 layoutManager = LinearLayoutManager(
                                     this@RepositoryActivity,
                                     LinearLayoutManager.VERTICAL,
                                     false
                                 )
-                                adapter = keywordAdapter
                             }
+                            adapter.submitList(storeItemList)
                         }
 
                         is MainUiState.Error -> {
@@ -80,7 +79,9 @@ class RepositoryActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-//    inner class Handler {
-//        fun delete(Data : )
-//    }
+    inner class RepositoryHandler {
+        fun delete(data : KeywordSaveModel){
+            storageViewModel.requestDeleteData(data)
+        }
+    }
 }

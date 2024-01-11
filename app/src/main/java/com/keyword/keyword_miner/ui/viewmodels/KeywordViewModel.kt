@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keyword.keyword_miner.data.dto.KeywordSaveModel
-import com.keyword.keyword_miner.domain.Model.blogTotalData.BlogTotalDataModel
-import com.keyword.keyword_miner.domain.Model.monthRadioData.MonthRatioDataModel
-import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
+import com.keyword.keyword_miner.domain.model.blogTotalData.BlogTotalDataModel
+import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
 import com.keyword.keyword_miner.domain.usecase.GetBlogTotalUsecase
 import com.keyword.keyword_miner.domain.usecase.GetMonthRatioUsecase
 import com.keyword.keyword_miner.domain.usecase.GetRelKeywordUsecase

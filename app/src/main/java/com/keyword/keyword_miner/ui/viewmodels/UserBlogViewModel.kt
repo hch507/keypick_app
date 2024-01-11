@@ -20,6 +20,7 @@ class UserBlogViewModel @Inject constructor(
     private val _currentBlogCnt = MutableStateFlow<MainUiState<UserBlog>>(MainUiState.Loading)
     val currentBlogCnt = _currentBlogCnt.asStateFlow()
 
+
     fun getUserBlogData(userId : String){
         viewModelScope.launch {
             _currentBlogCnt.value =getUserBlogUsecase.invoke(userId)?.let { MainUiState.success(it) }?: MainUiState.Error

@@ -47,22 +47,12 @@ class BlogIdActivity : AppCompatActivity() {
                             .collectLatest {
                                 when (it) {
                                     is MainUiState.success -> {
-                                        Log.d("LoginState", "onCreate: success ")
                                         binding.blogID.error = null
-//                                        val intent =
-//                                            Intent(this@BlogIdActivity, MainActivity::class.java)
-                                        Log.d(
-                                            "HHH",
-                                            "LoginActivity - onSuccess() - called${userEmail}"
-                                        )
                                         userBlogViewModel.saveUserEmail(userEmail)
-//                                        startActivity(intent)
                                         start(this@BlogIdActivity)
                                         finish() // LoginActivity를 종료한다
                                     }
-
                                     is MainUiState.Error -> {
-                                        Log.d("LoginState", "onCreate: fail ")
                                         binding.inputBlog.error = "블로그아이디가 존재하지않습니다"
                                         Toast.makeText(
                                             this@BlogIdActivity,

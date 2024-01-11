@@ -6,38 +6,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.keyword.keyword_miner.databinding.ActivityItemViewBinding
-import com.keyword.keyword_miner.domain.Model.relKeywordData.RelKeywordDataModel
-import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
+import com.keyword.keyword_miner.databinding.RelkeywordItemBinding
+import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
+import com.keyword.keyword_miner.ui.fragments.RelFragment
 import com.keyword.keyword_miner.utils.constant.TAG
 
 
-class RelKeywordRecyclerViewAdapter(var viewModel: KeywordViewModel) :
-    RecyclerView.Adapter<RelKeywordViewHolder>() {
+class RelKeywordRecyclerViewAdapter(
+    val handler: RelFragment.RelKeywordHandler
+) : RecyclerView.Adapter<RelKeywordViewHolder>() {
     lateinit var keywordList: List<RelKeywordDataModel>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RelKeywordViewHolder {
         Log.d(TAG, "Adapter-onCreateViewHolder() called")
-        val itemhodler = RelKeywordViewHolder(
-            ActivityItemViewBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-        return itemhodler
+         return RelKeywordViewHolder(RelkeywordItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+             handler)
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RelKeywordViewHolder, position: Int) {
         Log.d(TAG, "Adapter-onBindViewHolder() called")
         holder.bind(this.keywordList[position])
-        holder.itemView.setOnClickListener {
-            viewModel.apply {
-                keywordList[position].relKeyword?.let { it1 -> getBlogTotal(it1) }
-                keywordList[position].relKeyword?.let { it1 -> getRelData(it1) }
-                keywordList[position].relKeyword?.let { it1 -> getMonthRatioData(it1) }
-            }
-        }
     }
 
     override fun getItemCount(): Int {
