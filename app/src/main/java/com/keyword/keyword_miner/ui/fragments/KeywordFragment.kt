@@ -60,72 +60,77 @@ class KeywordFragment : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                keywordViewModel.currentBlogTotal.collectLatest {
-                    when(it){
-                        is MainUiState.success ->{
-                            var monthCnt = MonthCnt(it.data.blogData.map { it.date })
-                            Log.d("hchh", "KeywordFragment - onCreateView() - called${it.data.blogData.map { it.date }}")
-                            binding.apply {
-                                monthBlog.text=monthCnt
-                                total = it.data.total.toString()
-                                totalBlog.text=total
+                launch {
+                    keywordViewModel.currentBlogTotal.collectLatest {
+                        when (it) {
+                            is MainUiState.success -> {
+                                var monthCnt = MonthCnt(it.data.blogData.map { it.date })
+                                Log.d(
+                                    "hchh",
+                                    "KeywordFragment - onCreateView() - called${it.data.blogData.map { it.date }}"
+                                )
+                                binding.apply {
+                                    monthBlog.text = monthCnt
+                                    total = it.data.total.toString()
+                                    totalBlog.text = total
+                                }
+
                             }
 
-                        }
-                        is MainUiState.Error ->{
-                            Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
-                        }
-                        is MainUiState.Loading ->{
-
-                        }
-                    }
-                }
-            }
-        }
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                keywordViewModel.currentMonthRatio.collectLatest {
-                    when(it){
-                        is MainUiState.success ->{
-                            periodRadioData= it.data
-                            setChartView(binding)
-
-                        }
-                        is MainUiState.Error ->{
-                            Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
-                        }
-                        is MainUiState.Loading ->{
-
-                        }
-                    }
-                }
-            }
-        }
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                keywordViewModel.currentRelData.collectLatest {
-                    when(it){
-                        is MainUiState.success ->{
-                            binding.apply {
-                                Log.d("hhh", "KeywordFragment - onCreateView() - called ${it.data}")
-                                keywordName = it.data.get(0).relKeyword.toString()
-                                keyword.text = keywordName
-                                pcClick.text = it.data.get(0).monthlyPcQcCnt
-                                moClick.text = it.data.get(0).monthlyMobileQcCnt
-                                currentMonthCnt = (it.data.get(0).monthlyPcQcCnt!!.toInt() +it.data.get(0).monthlyMobileQcCnt!!.toInt()).toString()
+                            is MainUiState.Error -> {
+                                Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT)
+                                    .show()
                             }
 
-                        }
-                        is MainUiState.Error ->{
-                            Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
-                        }
-                        is MainUiState.Loading ->{
+                            is MainUiState.Loading -> {
 
+                            }
+                        }
+                    }
+                }
+                launch {
+                    keywordViewModel.currentMonthRatio.collectLatest {
+                        when(it){
+                            is MainUiState.success ->{
+                                periodRadioData= it.data
+                                setChartView(binding)
+
+                            }
+                            is MainUiState.Error ->{
+                                Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
+                            }
+                            is MainUiState.Loading ->{
+
+                            }
+                        }
+                    }
+                }
+                launch {
+                    keywordViewModel.currentRelData.collectLatest {
+                        when(it){
+                            is MainUiState.success ->{
+                                binding.apply {
+                                    Log.d("hhh", "KeywordFragment - onCreateView() - called ${it.data}")
+                                    keywordName = it.data.get(0).relKeyword.toString()
+                                    keyword.text = keywordName
+                                    pcClick.text = it.data.get(0).monthlyPcQcCnt
+                                    moClick.text = it.data.get(0).monthlyMobileQcCnt
+                                    currentMonthCnt = (it.data.get(0).monthlyPcQcCnt!!.toInt() +it.data.get(0).monthlyMobileQcCnt!!.toInt()).toString()
+                                }
+
+                            }
+                            is MainUiState.Error ->{
+                                Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
+                            }
+                            is MainUiState.Loading ->{
+
+                            }
                         }
                     }
                 }
             }
         }
+
 
 
         binding.storeBtn.setOnClickListener {

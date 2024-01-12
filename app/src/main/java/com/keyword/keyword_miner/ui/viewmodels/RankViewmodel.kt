@@ -9,6 +9,10 @@ import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,7 +26,12 @@ class RankViewmodel @Inject constructor(
     var currentRank = _currentRank.asStateFlow()
     fun getBlogRank(searchTerm : String){
         viewModelScope.launch {
-            _currentRank.value = MainUiState.success(getRankUsecase.invoke(searchTerm)!!)
+            viewModelScope.launch {
+                getRankUsecase.invoke(searchTerm)
+                    .onStart { _currentRank.update{MainUiState.Loading} }
+                    .catch { _currentRank.update { MainUiState.Error } }
+                    .collectLatest { value -> _currentRank.update { MainUiState.success(value!!) } }
+            }
         }
 
     }

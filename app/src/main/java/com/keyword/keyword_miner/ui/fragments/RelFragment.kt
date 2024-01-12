@@ -51,8 +51,11 @@ class RelFragment : Fragment() {
                                 adapter = keywordAdapter
                             }
                         }
-
-                        else -> {
+                        is MainUiState.Loading -> {
+                            Toast.makeText(getActivity(), "잠시만 기다려주세요", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is MainUiState.Error -> {
                             Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT)
                                 .show()
                         }

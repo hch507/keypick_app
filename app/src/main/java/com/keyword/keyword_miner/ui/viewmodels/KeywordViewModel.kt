@@ -15,6 +15,10 @@ import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,19 +42,29 @@ class KeywordViewModel @Inject constructor(
 
     fun getRelData(searchTerm: String) {
         viewModelScope.launch {
-            _currentRelData.value = MainUiState.success(relKeywordUsecase.invoke(searchTerm)!!)
+            relKeywordUsecase.invoke(searchTerm)
+                .onStart { _currentRelData.update { MainUiState.Loading } }
+                .catch { _currentRelData.update { MainUiState.Error } }
+                .collectLatest { value -> _currentRelData.update{MainUiState.success(value!!)}  }
         }
     }
 
     fun getMonthRatioData(searchTerm: String) {
         viewModelScope.launch {
-            _currentMonthRatio.value = MainUiState.success(monthRatioUsecase.invoke(searchTerm)!!)
+            monthRatioUsecase.invoke(searchTerm)
+                .onStart { _currentMonthRatio.update{MainUiState.Loading} }
+                .catch { _currentMonthRatio.update { MainUiState.Error } }
+                .collectLatest { value -> _currentMonthRatio.update { MainUiState.success(value!!) } }
+
         }
     }
 
     fun getBlogTotal(searchTerm: String) {
         viewModelScope.launch {
-            _currentBlogTotal.value = MainUiState.success(blogTotalUsecase.invoke(searchTerm)!!)
+            blogTotalUsecase.invoke(searchTerm)
+                .onStart { _currentBlogTotal.update{MainUiState.Loading} }
+                .catch { _currentBlogTotal.update { MainUiState.Error } }
+                .collectLatest { value -> _currentBlogTotal.update { MainUiState.success(value!!) } }
         }
     }
 

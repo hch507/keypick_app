@@ -22,15 +22,15 @@ import java.io.IOException
 import javax.inject.Inject
 
 class KeywordRepositoryImpl @Inject constructor(
-    private val relApiService :RelSearchRetrofit,
-    private val naverApiService : NaverRetrofit
-) : KeywordRepository{
+    private val relApiService: RelSearchRetrofit,
+    private val naverApiService: NaverRetrofit
+) : KeywordRepository {
     @RequiresApi(Build.VERSION_CODES.O)
-    override suspend fun getKeywordRel(searchTerm : String) : Flow<List<RelKeywordDataModel>>? {
-        API.updateTimestamp()
-        return flow{
+    override suspend fun getKeywordRel(searchTerm: String): Flow<List<RelKeywordDataModel>?> =
+        flow {
+            API.updateTimestamp()
             try {
-                relApiService.getRelKwdStatTest(
+                emit(relApiService.getRelKwdStatTest(
                     content_type = API.Content_Type,
                     x_timestamp = API.X_Timestamp,
                     api_key = API.X_API_KEY,
@@ -39,78 +39,70 @@ class KeywordRepositoryImpl @Inject constructor(
                         API.X_Timestamp,
                         Signature.method,
                         Signature.uri,
-                        API.X_secret),
-                    hintKeywords = searchTerm).body()?.keywordList?.let { MainMapper().mapperToRelkeyword(it)  }
-            }catch (e: IOException){
-                emptyList()
+                        API.X_secret
+                    ),
+                    hintKeywords = searchTerm
+                ).body()?.keywordList?.let {
+                    MainMapper().mapperToRelkeyword(it)
+                })
+
+            } catch (e: IOException) {
+                emptyList<RelKeywordDataModel>()
             }
         }
-//        val response = relApiService.getRelKwdStatTest(
-//            content_type = API.Content_Type,
-//            x_timestamp = API.X_Timestamp,
-//            api_key = API.X_API_KEY,
-//            x_customer = API.X_customer,
-//            x_signature = Signature.generate(
-//                API.X_Timestamp,
-//                Signature.method,
-//                Signature.uri,
-//                API.X_secret),
-//            hintKeywords = searchTerm)
-//
-//        val responseRelKeyword = response.body()?.keywordList
-//
-//        Log.d("hch", "getKeywordRel: ${responseRelKeyword} ")
-//        return responseRelKeyword?.let { MainMapper().mapperToRelkeyword(it) }
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override suspend fun getMonthRatio(searchTerm: String) : List<MonthRatioDataModel>?{
+    override suspend fun getMonthRatio(searchTerm: String): Flow<List<MonthRatioDataModel>?> =
+        flow {
 
-        val keywordGroups = listOf(
-            mapOf("groupName" to searchTerm, "keywords" to listOf(searchTerm))
-        )
-        val request = BlogKeywordParam(
-            Search_API.start_date, Search_API.end_date, Search_API.timeunit,
-            keywordGroups as List<Map<String, String?>>
-        )
+            val keywordGroups = listOf(
+                mapOf("groupName" to searchTerm, "keywords" to listOf(searchTerm))
+            )
+            val request = BlogKeywordParam(
+                Search_API.start_date, Search_API.end_date, Search_API.timeunit,
+                keywordGroups as List<Map<String, String?>>
+            )
+            try {
+                emit(
+                    naverApiService.getKeywordData(
+                        API.Content_Type,
+                        Search_API.Client_id,
+                        Search_API.Client_pw, request
+                    ).body()?.results.let { MainMapper().mapperToMonthRatio(it!!) })
+            } catch (e: IOException) {
+                emptyList<MonthRatioDataModel>()
+            }
+        }
 
-        val response = naverApiService.getKeywordData(
-            API.Content_Type,
-            Search_API.Client_id,
-            Search_API.Client_pw,request
-        )
+    override suspend fun getBlogTotal(searchTerm: String): Flow<BlogTotalDataModel?> = flow {
+        try {
+            emit(naverApiService.getBlogTotal(
+                client_id = Blog_API.CLIENT_ID,
+                client_secret = Blog_API.CLIENT_PW,
+                display = 100, searhTerm = searchTerm,
+                sort = Blog_API.SORT
+            ).body().let { MainMapper().mapperToBlogTotal(it!!) })
+        }catch (e: IOException){
+            emptyList<BlogTotalDataModel>()
+        }
 
-        val responseMonthRatio = response.body()?.results
-        Log.d("hch", "getMonthRatio: ${responseMonthRatio} ")
-
-        return responseMonthRatio?.let { MainMapper().mapperToMonthRatio(it) }
     }
 
-    override suspend fun getBlogTotal(searchTerm: String) : BlogTotalDataModel?{
-        val response = naverApiService.getBlogTotal(
-            client_id = Blog_API.CLIENT_ID,
-            client_secret = Blog_API.CLIENT_PW ,
-            display = 100 ,searhTerm =searchTerm,
-            sort=Blog_API.SORT
-        )
 
-        val responseBlogTotal = response.body()
+    override suspend fun getBlogRank(searchTerm: String): Flow<RankDataModel?> = flow {
+        try {
+            emit(
+                naverApiService.getBlogTotal(
+                    client_id = Blog_API.CLIENT_ID,
+                    client_secret = Blog_API.CLIENT_PW,
+                    display = 100, searhTerm = searchTerm,
+                    sort = Blog_API.SORT2
+                ).body().let { MainMapper().mapperToBlogRank(it!!) }
+            )
+        }catch (e:IOException){
+            emptyList<RankDataModel>()
+        }
 
-        Log.d("hch", "getBlogTotal: ${responseBlogTotal} ")
-        return responseBlogTotal?.let { MainMapper().mapperToBlogTotal(it) }
-    }
-
-    override suspend fun getBlogRank(searchTerm: String) : RankDataModel? {
-        val response = naverApiService.getBlogTotal(
-            client_id = Blog_API.CLIENT_ID,
-            client_secret = Blog_API.CLIENT_PW ,
-            display = 100 ,searhTerm =searchTerm,
-            sort=Blog_API.SORT2
-        )
-
-        val responseBlogTotal = response.body()
-        Log.d("hhh", "KeywordRepositoryImpl - getBlogRank() - called ${responseBlogTotal?.let { MainMapper().mapperToBlogRank(it) } }")
-        return responseBlogTotal?.let { MainMapper().mapperToBlogRank(it) }
     }
 
 

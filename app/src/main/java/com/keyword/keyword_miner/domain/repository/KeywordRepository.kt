@@ -8,11 +8,11 @@ import com.keyword.keyword_miner.domain.model.relkeyworddata.RelKeywordDataModel
 import kotlinx.coroutines.flow.Flow
 
 interface KeywordRepository {
-    suspend fun getKeywordRel(searchTerm : String) : Flow<List<RelKeywordDataModel>>?
+    suspend fun getKeywordRel(searchTerm : String) : Flow<List<RelKeywordDataModel>?>
 
-    suspend fun getMonthRatio(searchTerm: String) :List<MonthRatioDataModel>?
+    suspend fun getMonthRatio(searchTerm: String) :Flow<List<MonthRatioDataModel>?>
 
-    suspend fun getBlogTotal(searchTerm: String) : BlogTotalDataModel?
+    suspend fun getBlogTotal(searchTerm: String) : Flow<BlogTotalDataModel?>
 
-    suspend fun getBlogRank(searchterm : String) : RankDataModel?
+    suspend fun getBlogRank(searchterm : String) : Flow<RankDataModel?>
 }
