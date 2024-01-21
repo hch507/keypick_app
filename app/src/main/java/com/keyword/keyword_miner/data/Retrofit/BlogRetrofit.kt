@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface BlogRetrofit {
 
-    @GET("NVisitorgp4Ajax.nh")
+    @GET("NVisitorgp4Ajax.nhn")
     suspend fun getBlogData(
         @Query("blogId") blogId : String
     ): Response<UserBlog>

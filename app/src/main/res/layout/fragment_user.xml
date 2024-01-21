@@ -3,142 +3,124 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
         tools:context=".ui.fragments.UserFragment">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:paddingHorizontal="20dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="30dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
-                    android:fontFamily="@font/nanumsquareneo_deb"
-                    android:text="name"
-                    android:textColor="@color/black"
-                    android:textSize="27dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="좋은 하루 되세요^^"
-                    android:textSize="13dp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/nanumsquareneo_deb"
+                android:text="name"
+                android:textColor="@color/black"
+                android:textSize="27dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="23dp"
-                    android:layout_height="23dp"
-                    android:src="@drawable/statistics" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="최근 블로그 방문자 수"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
-
-
-            </LinearLayout>
-
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:gravity="right"
-                android:orientation="vertical">
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="좋은 하루 되세요^^"
+                android:textSize="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameTextView" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:src="@drawable/statistics"
+                app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                app:layout_constraintEnd_toStartOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="TODAY"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="최근 블로그 방문자 수"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
-                    <TextView
-                        android:id="@+id/today_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
-                </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="TODAY"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/todayTextView"
+                app:layout_constraintEnd_toStartOf="@+id/todayTextView"
+                app:layout_constraintTop_toTopOf="@+id/todayTextView" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <TextView
+                android:id="@+id/todayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="전날대비"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="전날대비"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/gapTextView"
+                app:layout_constraintEnd_toStartOf="@+id/gapTextView"
+                app:layout_constraintTop_toTopOf="@+id/gapTextView" />
 
-                    <TextView
-                        android:id="@+id/gap"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:fontFamily="@font/nanumsquareneo_brg"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
-                </LinearLayout>
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:id="@+id/gapTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/todayTextView" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
                 app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gapTextView"
                 app:strokeColor="@color/appbar"
                 app:strokeWidth="2dp">
 
                 <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/blog_chart_week"
+                    android:id="@+id/blogBarChart"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_gravity="center_horizontal"
@@ -149,13 +131,17 @@
             </com.google.android.material.card.MaterialCardView>
 
             <Button
-
-                android:id="@+id/recommend_btn"
+                android:id="@+id/recommendButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="@color/appbar"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="오늘의 추천 키워드 GO!" />
-        </LinearLayout>
+                android:text="오늘의 추천 키워드 GO!"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

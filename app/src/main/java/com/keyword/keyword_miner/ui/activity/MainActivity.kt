@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //search해서 넘기기
-        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.mainSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val intent = Intent(this@MainActivity, KeywordActivity::class.java)
@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                 if (userSearchInput != null) {
                     intent.putExtra("searchterm", userSearchInput)
                 }
-                binding.searchViewMain.setQuery("", false)
-                binding.searchViewMain.clearFocus()
+                binding.mainSearchView.setQuery("", false)
+                binding.mainSearchView.clearFocus()
                 startActivity(intent)
                 return false
             }

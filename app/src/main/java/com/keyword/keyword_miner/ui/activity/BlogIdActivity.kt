@@ -37,7 +37,9 @@ class BlogIdActivity : AppCompatActivity() {
         }
 
         binding.registerButton.setOnClickListener {
+
             userEmail = binding.blogID.text.toString()
+            Log.d("Login", "BlogIdActivity - onCreate() - called${userEmail}")
             if (userEmail != null) {
                 lifecycleScope.launch {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -82,3 +84,6 @@ class BlogIdActivity : AppCompatActivity() {
         }
     }
 }
+//
+//http://blog.naver.com/NVisitorgp4Ajax.nhn?blogId=primp
+//https://blog.naver.com/NVisitorgp4Ajax.nh?blogId=hch507

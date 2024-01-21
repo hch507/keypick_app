@@ -23,39 +23,35 @@ class RankFragment : Fragment() {
     lateinit var binding : FragmentRankBinding
     lateinit var userEmail : String
     lateinit var searchTerm : String
-
-
     val rankViewmodel : RankViewmodel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding=FragmentRankBinding.inflate(layoutInflater)
         userEmail=rankViewmodel.getUserEmail()
-        binding.name.text="${userEmail} 님의 블로그"
+        binding.nameTextView.text="${userEmail} 님의 블로그"
 
-        binding.search.setOnClickListener {
-            Log.d("HHH", "RankFragment - onCreateView() - called${binding.name.text}")
-            if(binding.postingKeyword.text!!.isEmpty()){
-                binding.inputKeyword.error ="키워드를 입력해주세요."
+        binding.searchButton.setOnClickListener {
+            if(binding.KeywordTextInputEditText.text!!.isEmpty()){
+                binding.keywordInputLayout.error ="키워드를 입력해주세요."
                 Toast.makeText(getActivity(),"키워드를 입력해주세요.",Toast.LENGTH_SHORT).show();
             }else {
-                binding.inputKeyword.apply {
+                binding.keywordInputLayout.apply {
                     error =null
                     isErrorEnabled=false
                 }
-                searchTerm = binding.postingKeyword.text.toString()
+                searchTerm = binding.KeywordTextInputEditText.text.toString()
                 rankViewmodel.getBlogRank(searchTerm)
                 lifecycleScope.launch{
                     viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                         rankViewmodel.currentRank.collectLatest {
-
                             when(it){
                                 is MainUiState.success ->{
                                     Log.d("hhh", "onCreateView: ${it.data} ")
                                     var index = getIndexWithKeyword(it.data.blogLink, userEmail!!)
                                     if (index != null) {
-                                        binding.ranking.text="${userEmail}님의 ${searchTerm} 키워드 관련 포스팅 글은 상위 랭크 ${index+1}번째에 위치해있습니다."
+                                        binding.rankingTextView.text="${userEmail}님의 ${searchTerm} 키워드 관련 포스팅 글은 상위 랭크 ${index+1}번째에 위치해있습니다."
                                     } else {
-                                        binding.ranking.text="아쉽게 100위안에 들지 못했습니다ㅠㅠ"
+                                        binding.rankingTextView.text="아쉽게 100위안에 들지 못했습니다ㅠㅠ"
                                     }
                                 }
                                 is MainUiState.Error -> {

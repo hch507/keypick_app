@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="com.keyword.keyword_miner.data.dto.KeywordSaveModel" />
@@ -19,127 +20,108 @@
         android:layout_margin="10dp"
         app:cardCornerRadius="30dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="vertical">
+            android:layout_height="120dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/keywordTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:fontFamily="@font/nanumsquareneo_deb"
+                android:padding="3dp"
+                android:text="@{data.keyword}"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="keyword" />
 
+            <ImageButton
+                android:id="@+id/deleteTextView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:backgroundTint="@color/white"
+                android:onClick="@{() -> handler.delete(data)}"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.961"
+                app:layout_constraintStart_toEndOf="@+id/keywordTextView"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/keyword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_deb"
-                    android:padding="3dp"
-                    android:text="@{data.keyword}"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.071"
-                    tools:text="keyword" />
-
-                <ImageButton
-                    android:id="@+id/item_clear"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:onClick="@{() -> handler.delete(data)}"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/ic_baseline_clear_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.961"
-                    app:layout_constraintStart_toEndOf="@+id/keyword"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/mobile"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/monthTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:padding="3dp"
+                android:text="월간 검색량 :"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/keywordTextView" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:padding="3dp"
-                    android:text="월간 검색량 :"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/month_cnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="@{data.monthCnt}"
-                    android:textColor="@color/black"
-                    tools:text="000" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/monthCntTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="@{data.monthCnt}"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/monthTextView"
+                app:layout_constraintStart_toEndOf="@+id/monthTextView"
+                app:layout_constraintTop_toTopOf="@+id/monthTextView"
+                tools:text="000" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:padding="3dp"
-                    android:text="총 블로그 수 :"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/blog_cnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="@{data.blogCnt}"
-                    android:textColor="@color/black"
-                    tools:text="000" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/totalTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="13dp"
-                android:gravity="right"
-                android:orientation="horizontal">
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:padding="3dp"
+                android:text="총 블로그 수 :"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/monthTextView" />
 
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:src="@drawable/pin" />
+            <TextView
+                android:id="@+id/blogCntTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="@{data.blogCnt}"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/totalTextView"
+                app:layout_constraintStart_toEndOf="@+id/totalTextView"
+                app:layout_constraintTop_toBottomOf="@+id/monthTextView"
+                tools:text="000" />
 
-                <TextView
-                    android:id="@+id/datetime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="3dp"
-                    tools:text="yyyy/mm/dd"
-                    android:text="@{data.datetime}" />
+            <ImageView
+
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/pin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dateTimeTextView"
+                app:layout_constraintTop_toTopOf="@+id/dateTimeTextView" />
+
+            <TextView
+                android:id="@+id/dateTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="3dp"
+                android:text="@{data.datetime}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="yyyy/mm/dd" />
 
 
-            </LinearLayout>
-        </LinearLayout>
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

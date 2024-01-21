@@ -31,6 +31,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.ui.common.chart.LineChartDrawer
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import kotlinx.coroutines.flow.collectLatest
@@ -45,12 +46,14 @@ import kotlin.collections.ArrayList
 class KeywordFragment : Fragment() {
 
     lateinit var periodRadioData : List<MonthRatioDataModel>
+    lateinit var keywordCnt : List<Double>
+    lateinit var keywordPeriod : List<String>
     lateinit var keywordName: String
     lateinit var currentMonthCnt: String
     lateinit var total : String
     lateinit var binding: FragmentKeywordBinding
     lateinit var helper: Roomhelper
-
+    var lineChartDrawer:LineChartDrawer = LineChartDrawer()
     val keywordViewModel by activityViewModels<KeywordViewModel>()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -70,9 +73,9 @@ class KeywordFragment : Fragment() {
                                     "KeywordFragment - onCreateView() - called${it.data.blogData.map { it.date }}"
                                 )
                                 binding.apply {
-                                    monthBlog.text = monthCnt
+                                    monthBlogTextVIew.text = monthCnt
                                     total = it.data.total.toString()
-                                    totalBlog.text = total
+                                    totalBlogTextView.text = total
                                 }
 
                             }
@@ -93,8 +96,10 @@ class KeywordFragment : Fragment() {
                         when(it){
                             is MainUiState.success ->{
                                 periodRadioData= it.data
-                                setChartView(binding)
-
+                                keywordCnt= periodRadioData.get(0).ratioData?.map { it.rate?.toDouble() ?: 0.0} ?: emptyList()
+                                keywordPeriod= periodRadioData.get(0).ratioData?.map { it.period.toString()} ?: emptyList()
+                                lineChartDrawer.setChart(binding.keywordLineChart , requireContext(), keywordCnt, keywordPeriod)
+//
                             }
                             is MainUiState.Error ->{
                                 Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
@@ -112,12 +117,11 @@ class KeywordFragment : Fragment() {
                                 binding.apply {
                                     Log.d("hhh", "KeywordFragment - onCreateView() - called ${it.data}")
                                     keywordName = it.data.get(0).relKeyword.toString()
-                                    keyword.text = keywordName
-                                    pcClick.text = it.data.get(0).monthlyPcQcCnt
-                                    moClick.text = it.data.get(0).monthlyMobileQcCnt
+                                    searchTextView.text = keywordName
+                                    pcMonthTextView.text = it.data.get(0).monthlyPcQcCnt
+                                    moMonthTextView.text = it.data.get(0).monthlyMobileQcCnt
                                     currentMonthCnt = (it.data.get(0).monthlyPcQcCnt!!.toInt() +it.data.get(0).monthlyMobileQcCnt!!.toInt()).toString()
                                 }
-
                             }
                             is MainUiState.Error ->{
                                 Toast.makeText(getActivity(), "서버와 통신이 실패하였습니다", Toast.LENGTH_SHORT).show()
@@ -130,116 +134,26 @@ class KeywordFragment : Fragment() {
                 }
             }
         }
-
-
-
-        binding.storeBtn.setOnClickListener {
-            val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
-            val storeList = KeywordSaveModel(keywordName,currentMonthCnt,total,date)
-//            insert(StoreList)
-            keywordViewModel.insertKeyword(storeList)
-            Log.d("insert", "KeywordFragment-onCreateView() called ${storeList}")
-            Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
-        }
-
-        return binding.root
-
-    }
-
-    private fun setChartView(view: FragmentKeywordBinding?) {
-        var chartWeek = binding.chartWeek
-        setWeek(chartWeek)
-        chartWeek.setOnChartValueSelectedListener(object: OnChartValueSelectedListener{
+        binding.keywordLineChart.setOnChartValueSelectedListener(object: OnChartValueSelectedListener{
             override fun onValueSelected(e: Entry, h: Highlight){
                 val xAxisLabel = e.x.let{
-                    chartWeek.xAxis.valueFormatter.getAxisLabel(it, chartWeek.xAxis)
+                    binding.keywordLineChart.xAxis.valueFormatter.getAxisLabel(it, binding.keywordLineChart.xAxis)
                 }
                 binding.date.text= xAxisLabel
             }
             override fun onNothingSelected() {
             }
         })
-    }
 
-    private fun setWeek(lineChart: LineChart) {
-        initBarChart(lineChart)
 
-        lineChart.setScaleEnabled(false) //Zoom In/Out
-
-//        val valueList : ArrayList<Double> = periodList[0].rate
-        val valueList : List<Double> =
-            periodRadioData.get(0).ratioData?.map { it.rate?.toDouble() ?: return } ?: return
-        //val entries: ArrayList<String> = PeriodList[0].period
-        val entries: ArrayList<Entry> = ArrayList()
-        val title = periodRadioData.get(0).title
-
-        //input data
-
-        for (i in 0 until valueList.size) {
-            val lineEntry = Entry(i.toFloat(), valueList[i].toFloat())
-            entries.add(lineEntry)
+        binding.storeButton.setOnClickListener {
+            val date = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
+            val storeList = KeywordSaveModel(keywordName,currentMonthCnt,total,date)
+            keywordViewModel.insertKeyword(storeList)
+            Log.d("insert", "KeywordFragment-onCreateView() called ${storeList}")
+            Toast.makeText(getActivity(), "저장되었습니다", Toast.LENGTH_SHORT).show();
         }
-
-
-        val lineDataSet = LineDataSet(entries, title)
-        lineDataSet.setDrawFilled(true)
-        lineDataSet.fillDrawable= ContextCompat.getDrawable(requireContext(), R.drawable.linechart)
-        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        lineDataSet.setColor(ContextCompat.getColor(requireContext(), R.color.white)); //LineChart에서 Line Color 설정
-        lineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.purple_line)); // LineChart에서 Line Circle Color 설정
-        lineDataSet.setCircleHoleColor(ContextCompat.getColor(requireContext(), R.color.white))
-        val data = LineData(lineDataSet)
-        lineChart.data = data
-//        lineChart.data.isHighlightEnabled = false
-        lineChart.invalidate()
-
-    }
-
-    private fun initBarChart(lineChart: LineChart) {
-//        val dateList: ArrayList<String> = periodList[0].period
-        val dateList: List<String> =
-            periodRadioData.get(0).ratioData?.map { it.period.toString()} ?:return
-        //hiding the grey background of the chart, default false if not set
-        lineChart.setDrawGridBackground(false )
-        //remove the bar shadow, default false if not set
-
-        //remove border of the chart, default false if not set
-        lineChart.setDrawBorders(false)
-
-        //remove the description label text located at the lower right corner
-        val description = Description()
-        description.setEnabled(false)
-        lineChart.setDescription(description)
-
-        //X, Y 바의 애니메이션 효과
-        lineChart.animateY(1000)
-        lineChart.animateX(1000)
-
-        //바텀 좌표 값
-        val xAxis: XAxis = lineChart.getXAxis()
-        //change the position of x-axis to the bottom
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        //set the horizontal distance of the grid line
-        xAxis.granularity = 1f
-        xAxis.textColor = Color.BLACK
-        //hiding the x-axis line, default true if not set
-        xAxis.setDrawAxisLine(false)
-        //hiding the vertical grid lines, default true if not set
-        xAxis.setDrawGridLines(true)
-
-        xAxis.valueFormatter = IndexAxisValueFormatter(dateList)
-        //좌측 값 hiding the left y-axis line, default true if not set
-        val leftAxis: YAxis = lineChart.getAxisLeft()
-        leftAxis.setDrawAxisLine(false)
-        leftAxis.textColor = Color.BLACK
-        xAxis.setLabelCount(4, true);
-
-        //바차트의 타이틀
-        val legend: Legend = lineChart.getLegend()
-        legend.textSize = 11f
-        legend.textColor = Color.BLACK
-        legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+        return binding.root
 
     }
 
