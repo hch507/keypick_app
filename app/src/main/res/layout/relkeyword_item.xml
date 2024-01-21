@@ -18,112 +18,145 @@
         android:layout_margin="10dp"
         app:cardCornerRadius="30dp">
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="110dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:padding="3dp"-->
+<!--                    android:text="#"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20dp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/relkeyword"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:text="@{reldata.relKeyword}"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20dp"-->
+<!--                    tools:text="RelKeyword" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/mobile"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingLeft="10dp">-->
+
+<!--                <TextView-->
+
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="4dp"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:padding="3dp"-->
+<!--                    android:text="월간 모바일 검색량 :"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/mobile_cnt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:text="@{reldata.monthlyMobileQcCnt}"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    tools:text="0000" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearLayout2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:padding="3dp"-->
+<!--                    android:text="월간 pc 검색량 :"-->
+<!--                    android:textColor="@color/black" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/pc_cnt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:text="@{reldata.monthlyPcQcCnt}"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    tools:text="0000" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearLayout3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingLeft="10dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/nanumsquareneo_brg"-->
+<!--                    android:padding="3dp"-->
+<!--                    android:text="Click!!"-->
+<!--                    android:textColor="@color/appbar"-->
+<!--                    android:onClick="@{() -> handler.onClick(reldata)}"/>-->
+
+
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:orientation="vertical">
+            android:layout_height="110dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tagTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:padding="3dp"
+                android:text="#"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:layout_marginStart="130dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:padding="3dp"
-                    android:text="#"
-                    android:textColor="@color/black"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/relkeyword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="@{reldata.relKeyword}"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    tools:text="RelKeyword" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mobile"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/relkeyword"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/nanumsquareneo_brg"
+                android:text="@{reldata.relKeyword}"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/tagTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="RelKeyword" />
 
-                android:orientation="horizontal"
-                android:paddingLeft="10dp">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:padding="3dp"
-                    android:text="월간 모바일 검색량 :"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/mobile_cnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="@{reldata.monthlyMobileQcCnt}"
-                    android:textColor="@color/black"
-                    tools:text="0000" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:padding="3dp"
-                    android:text="월간 pc 검색량 :"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/pc_cnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:text="@{reldata.monthlyPcQcCnt}"
-                    android:textColor="@color/black"
-                    tools:text="0000" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nanumsquareneo_brg"
-                    android:padding="3dp"
-                    android:text="Click!!"
-                    android:textColor="@color/appbar"
-                    android:onClick="@{() -> handler.onClick(reldata)}"/>
-
-
-            </LinearLayout>
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 </layout>

@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
 
-    </data>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.activity.NonLoginactivity">
-
+        android:layout_height="match_parent">
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/appbar"
             app:liftOnScroll="true"
-            app:liftOnScrollTargetViewId="@+id/recyclerview">
+            app:liftOnScrollTargetViewId="@+id/recyclerview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/top_app_bar"
@@ -40,7 +38,7 @@
                     android:paddingBottom="10dp">
 
                     <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchView_main"
+                        android:id="@+id/mainSearchView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusable="false"
@@ -49,36 +47,33 @@
                         app:iconifiedByDefault="false"
                         app:queryBackground="@drawable/searchview_backgroud"
                         app:queryHint="          검색어를 입력하시오" />
-
-
                 </LinearLayout>
             </com.google.android.material.appbar.MaterialToolbar>
-
         </com.google.android.material.appbar.AppBarLayout>
+        <TextView
+            android:id="@+id/nonLoginExplainTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="30dp"
+            android:fontFamily="@font/nanumsquareneo_deb"
+            android:text="블로그 아이디를 등록하시면 더 많은 서비스를 이용하실 수 있습니다."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="30dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/nanumsquareneo_deb"
-                android:text="블로그 아이디를 등록하시면 더 많은 서비스를 이용하실 수 있습니다."
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/return_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/appbar"
-                android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="블로그 ID 등록하기" />
-        </LinearLayout>
-    </LinearLayout>
+        <Button
+            android:id="@+id/returnButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/appbar"
+            android:fontFamily="@font/nanumsquareneo_brg"
+            android:text="블로그 ID 등록하기"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nonLoginExplainTextview" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

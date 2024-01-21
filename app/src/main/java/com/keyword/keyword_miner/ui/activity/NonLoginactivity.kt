@@ -16,7 +16,7 @@ class NonLoginactivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.mainSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val intent = Intent(this@NonLoginactivity, KeywordActivity::class.java)
@@ -35,7 +35,7 @@ class NonLoginactivity : AppCompatActivity() {
         })
 
 
-        binding.returnBtn.setOnClickListener {
+        binding.returnButton.setOnClickListener {
             intent = Intent(this@NonLoginactivity, BlogIdActivity::class.java)
             Log.d("HHH", "NonLoginactivity - onCreate() - called")
             startActivity(intent)

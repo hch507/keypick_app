@@ -36,7 +36,7 @@ class BlogIdActivity : AppCompatActivity() {
             return // 이후의 코드는 실행하지 않는다
         }
 
-        binding.registerBtn.setOnClickListener {
+        binding.registerButton.setOnClickListener {
             userEmail = binding.blogID.text.toString()
             if (userEmail != null) {
                 lifecycleScope.launch {
@@ -53,7 +53,7 @@ class BlogIdActivity : AppCompatActivity() {
                                         finish() // LoginActivity를 종료한다
                                     }
                                     is MainUiState.Error -> {
-                                        binding.inputBlog.error = "블로그아이디가 존재하지않습니다"
+                                        binding.blogTextIputLayout.error = "블로그아이디가 존재하지않습니다"
                                         Toast.makeText(
                                             this@BlogIdActivity,
                                             "블로그 아이디를 다시 확인해주세요",
@@ -70,7 +70,7 @@ class BlogIdActivity : AppCompatActivity() {
                 Toast.makeText(this, "블로그 아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.nonBtn.setOnClickListener {
+        binding.nonLoginButton.setOnClickListener {
             val intent = Intent(this, NonLoginactivity::class.java)
             startActivity(intent)
             finish() // LoginActivity를 종료한다
