@@ -28,6 +28,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.keyword.keyword_miner.ui.common.chart.BarChartDrawer
+import com.keyword.keyword_miner.ui.common.chart.ChartHelper
 import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
 import com.keyword.keyword_miner.utils.MainUiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +46,7 @@ class UserFragment : Fragment() {
     val userBlogViewModel: UserBlogViewModel by viewModels()
     lateinit var visitCnt: List<Double>
     lateinit var visitPeriod: List<String>
-    var barChart: BarChartDrawer = BarChartDrawer()
+    var barChart: ChartHelper<BarChart> = BarChartDrawer()
 
 
     val today = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())

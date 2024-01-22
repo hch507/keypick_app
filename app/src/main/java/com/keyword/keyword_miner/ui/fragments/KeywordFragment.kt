@@ -31,6 +31,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.keyword.keyword_miner.domain.model.monthRadioData.MonthRatioDataModel
+import com.keyword.keyword_miner.ui.common.chart.ChartHelper
 import com.keyword.keyword_miner.ui.common.chart.LineChartDrawer
 import com.keyword.keyword_miner.ui.viewmodels.KeywordViewModel
 import com.keyword.keyword_miner.utils.MainUiState
@@ -53,7 +54,7 @@ class KeywordFragment : Fragment() {
     lateinit var total : String
     lateinit var binding: FragmentKeywordBinding
     lateinit var helper: Roomhelper
-    var lineChartDrawer:LineChartDrawer = LineChartDrawer()
+    var lineChartDrawer:ChartHelper<LineChart> =LineChartDrawer()
     val keywordViewModel by activityViewModels<KeywordViewModel>()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
