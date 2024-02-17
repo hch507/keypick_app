@@ -10,6 +10,7 @@ class RelKeywordViewHolder(
     val binding: RelkeywordItemBinding,
     val handler: RelFragment.RelKeywordHandler
 ) : RecyclerView.ViewHolder(binding.root) {
+    // xml의
     fun bind(item: RelKeywordDataModel) {
         binding.reldata=item
         binding.handler=handler

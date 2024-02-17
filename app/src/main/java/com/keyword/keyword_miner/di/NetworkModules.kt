@@ -26,9 +26,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModules {
 
-    val gson : Gson = GsonBuilder()
-        .setLenient()
-        .create()
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class RelKeywordRetrofit

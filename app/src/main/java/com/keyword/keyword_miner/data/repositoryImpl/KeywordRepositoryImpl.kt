@@ -29,6 +29,7 @@ class KeywordRepositoryImpl @Inject constructor(
     override suspend fun getKeywordRel(searchTerm: String): Flow<List<RelKeywordDataModel>?> =
         flow {
             API.updateTimestamp()
+            Log.d("hchch", "getKeywordRel: ${API.X_Timestamp} ")
             try {
                 emit(relApiService.getRelKwdStatTest(
                     content_type = API.Content_Type,
@@ -54,7 +55,6 @@ class KeywordRepositoryImpl @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun getMonthRatio(searchTerm: String): Flow<List<MonthRatioDataModel>?> =
         flow {
-
             val keywordGroups = listOf(
                 mapOf("groupName" to searchTerm, "keywords" to listOf(searchTerm))
             )
@@ -62,6 +62,7 @@ class KeywordRepositoryImpl @Inject constructor(
                 Search_API.start_date, Search_API.end_date, Search_API.timeunit,
                 keywordGroups as List<Map<String, String?>>
             )
+            Log.d("hhh", "getMonthRatiobody:${request} ")
             try {
                 emit(
                     naverApiService.getKeywordData(
@@ -85,7 +86,6 @@ class KeywordRepositoryImpl @Inject constructor(
         }catch (e: IOException){
             emptyList<BlogTotalDataModel>()
         }
-
     }
 
 
@@ -99,12 +99,17 @@ class KeywordRepositoryImpl @Inject constructor(
                     sort = Blog_API.SORT2
                 ).body().let { MainMapper().mapperToBlogRank(it!!) }
             )
+            Log.d("Rank", "KeywordRepositoryImpl - getBlogRank() - ${
+                naverApiService.getBlogTotal(
+                    client_id = Blog_API.CLIENT_ID,
+                    client_secret = Blog_API.CLIENT_PW,
+                    display = 100, searhTerm = searchTerm,
+                    sort = Blog_API.SORT2
+                ).body()
+            }")
         }catch (e:IOException){
             emptyList<RankDataModel>()
         }
-
     }
-
-
 }
 

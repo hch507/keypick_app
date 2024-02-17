@@ -55,7 +55,7 @@ class RepositoryActivity : AppCompatActivity() {
                         is MainUiState.Error -> {
                             Toast.makeText(
                                 this@RepositoryActivity,
-                                "블로그 아이디를 다시 확인해주세요",
+                                "데이터를 가져오는데 실패하였습니다. 다시 시도해주세요.",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

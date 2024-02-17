@@ -42,9 +42,7 @@ class KeywordActivity : AppCompatActivity() {
 
         if (searchTerm != null) {
             Log.d("hch", "KeywordActivity - onCreate() - called")
-//            keywordViewModel.updateKeywordData(searchTerm)
             updateKeywordData(searchTerm)
-
         }
 
 
@@ -67,7 +65,7 @@ class KeywordActivity : AppCompatActivity() {
                 return false
             }
         })
-
+        //move repository
         kbinding.repository.setOnClickListener {
             intent = Intent(this@KeywordActivity, RepositoryActivity::class.java)
             startActivity(intent)
@@ -92,18 +90,6 @@ class KeywordActivity : AppCompatActivity() {
             getBlogTotal(searchTerm)
             getRelData(searchTerm)
             getMonthRatioData(searchTerm)
-        }
-    }
-    inner class RelKeywordHandler(){
-
-        fun onClick(relKeyword : RelKeywordDataModel){
-            keywordViewModel.apply {
-                relKeyword.relKeyword?.let { it1 ->
-                    getBlogTotal(it1)
-                    getRelData(it1)
-                    getMonthRatioData(it1)
-                }
-            }
         }
     }
 
