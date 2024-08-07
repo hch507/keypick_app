@@ -59,7 +59,7 @@
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
                 android:padding="3dp"
-                android:text="월간 검색량 :"
+                android:text="@string/repository_month"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/keywordTextView" />
@@ -83,7 +83,7 @@
                 android:layout_marginStart="2dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
                 android:padding="3dp"
-                android:text="총 블로그 수 :"
+                android:text="@string/repository_total_blog"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/monthTextView" />

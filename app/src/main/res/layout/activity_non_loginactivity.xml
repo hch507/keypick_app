@@ -26,7 +26,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/appbar"
                 app:contentInsetStart="0dp"
-                app:title="키워드 검색">
+                app:title="@string/toolbar_hint">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                         app:closeIcon="@drawable/ic_baseline_clear_24"
                         app:iconifiedByDefault="false"
                         app:queryBackground="@drawable/searchview_backgroud"
-                        app:queryHint="          검색어를 입력하시오" />
+                        app:queryHint="@string/toolbar" />
                 </LinearLayout>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquareneo_deb"
             android:paddingHorizontal="30dp"
-            android:text="블로그 아이디를 등록하시면 더 많은 서비스를 이용하실 수 있습니다."
+            android:text="@string/non_login_content"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +73,7 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/appbar"
             android:fontFamily="@font/nanumsquareneo_brg"
-            android:text="블로그 ID 등록하기"
+            android:text="@string/non_login_register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nonLoginExplainTextview" />

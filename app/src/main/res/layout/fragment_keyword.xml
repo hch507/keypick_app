@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanumsquareneo_brg"
                     android:padding="5dp"
-                    android:text="검색어 :"
+                    android:text="@string/keyword_search"
                     android:textColor="@color/black"
                     android:textSize="25dp" />
 
@@ -74,7 +74,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nanumsquareneo_deb"
-                            android:text="PC"
+                            android:text="@string/keyword_pc"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
 
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nanumsquareneo_brg"
-                            android:text="월 검색량 "
+                            android:text="@string/keyword_pc_unit"
                             android:textColor="@color/white"
                             android:textSize="13dp" />
 
@@ -130,7 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nanumsquareneo_deb"
-                            android:text="모바일"
+                            android:text="@string/keyword_mobile"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
 
@@ -139,7 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nanumsquareneo_brg"
-                            android:text="월 검색량 "
+                            android:text="@string/keyword_pc_unit"
                             android:textColor="@color/white"
                             android:textSize="13dp" />
 
@@ -187,7 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nanumsquareneo_deb"
-                            android:text="블로그"
+                            android:text="@string/keyword_blog"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
 
@@ -196,7 +196,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/nanumsquareneo_brg"
-                            android:text="수 "
+                            android:text="@string/keyword_blog_unit"
                             android:textColor="@color/white"
                             android:textSize="13dp" />
 
@@ -242,7 +242,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nanumsquareneo_deb"
-                            android:text="30일"
+                            android:text="@string/keyword_month"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
 
@@ -279,7 +279,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="3dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="키워드 분석"
+                android:text="@string/keyword_analyzer_title"
                 android:textColor="@color/black"
                 android:textSize="22dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="날짜"
+                android:text="@string/date"
                 android:textColor="#F41616"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -328,7 +328,7 @@
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/appbar"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="키워드 저장"
+                android:text="@string/keyword_save"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chartCardView" />

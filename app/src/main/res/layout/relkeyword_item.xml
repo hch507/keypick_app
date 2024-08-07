@@ -59,7 +59,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
                 android:padding="3dp"
-                android:text="월간 모바일 검색량 :"
+                android:text="@string/relkeyword_mobile_month"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tagTextView" />
@@ -83,7 +83,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/nanumsquareneo_brg"
                 android:padding="3dp"
-                android:text="월간 pc 검색량 :"
+                android:text="@string/relkeyword_pc_month"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/moTextView" />
@@ -106,7 +106,7 @@
                 android:fontFamily="@font/nanumsquareneo_brg"
                 android:onClick="@{() -> handler.onClick(reldata)}"
                 android:padding="3dp"
-                android:text="Click!!"
+                android:text="@string/click"
                 android:textColor="@color/appbar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

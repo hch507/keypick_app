@@ -24,7 +24,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/appbar"
                 app:contentInsetStart="0dp"
-                app:title="키워드 저장소">
+                app:title="@string/repository_title">
 
             </com.google.android.material.appbar.MaterialToolbar>
 

@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:fontFamily="@font/nanumsquareneo_deb"
-                android:text="name"
+                android:text="@string/name_default"
                 android:textColor="@color/black"
                 android:textSize="27dp"
                 android:layout_marginTop="40dp"
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="포스팅된 글의 랭킹이 궁금하신가요??"
+                android:text="@string/rank_title"
                 android:textSize="13dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameTextView"/>
@@ -46,7 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTextView"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="Posting Blog Keyword"
+                android:text="@string/rank_posting_title"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -60,12 +60,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView2"
-                android:hint="KEYWORD"
+                android:hint="@string/rank_hint"
                 android:outlineAmbientShadowColor="@color/appbar"
                 android:padding="5dp"
                 app:boxStrokeColor="@color/appbar"
                 app:endIconMode="clear_text"
-                app:helperText="포스팅 제목의 키워드를 입력해주세요"
+                app:helperText="@string/rank_input_helper"
                 app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -84,7 +84,7 @@
                 android:layout_margin="15dp"
                 android:backgroundTint="@color/appbar"
                 android:fontFamily="@font/nanumsquareneo_brg"
-                android:text="검색"
+                android:text="@string/rank_search"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/keywordInputLayout"/>
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumsquareneo_brg"
                 android:layout_marginTop="30dp"
-                android:text="검색 결과"
+                android:text="@string/rank_result"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchButton"
                 android:textColor="@color/black"
