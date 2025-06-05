@@ -42,7 +42,7 @@ class NetworkModules {
     @Singleton
     @NaverBlogRetrofit
     fun provideLoginRetrofit(): Retrofit {
-
+        Log.d("HTTP", "NetworkModules-provideLoginRetrofit() called")
         val client = OkHttpClient.Builder()
 
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
