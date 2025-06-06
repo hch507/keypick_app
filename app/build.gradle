@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace 'com.keyword.keyword_miner'
 
     defaultConfig {
@@ -34,7 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    composeOptions {
+    kotlin {
+        jvmToolchain(8) // ✅ Java 8과 확실히 맞추기
+    }
+    composeOptions {2
         kotlinCompilerExtensionVersion '1.5.11' // Kotlin 1.8.0과 호환되는 최신 Compose Compiler 버전 사용
     }
     buildFeatures{
@@ -118,6 +121,7 @@ dependencies {
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.activity:activity-compose:1.7.2'
-    implementation 'androidx.compose.material3:material3'  // Material3 테마 라이브러리
+    implementation 'androidx.compose.material3:material3'// Material3 테마 라이브러리
 
+    kapt "org.xerial:sqlite-jdbc:3.34.0"
 }
