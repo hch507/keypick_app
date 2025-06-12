@@ -3,10 +3,14 @@ package com.keyword.keyword_miner.ui.compose
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.keyword.keyword_miner.R
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.TextStyle
 
 val neoBold = FontFamily(
@@ -39,40 +44,47 @@ fun LoginScreen() {
         LoginTitle()
         Spacer(modifier = Modifier.height(60.dp))
         LoginBody(
-            blogId = blogId,
-            onBlogIdChange = {
+            blogId = blogId, onBlogIdChange = {
                 blogId = it
-            }
-        )
+            })
         Spacer(modifier = Modifier.height(30.dp))
-        LoginBottom(
-            onLoginClick = {
+        LoginBottom(onLoginClick = {
 
-            },
-            onNonLoginClick = {
+        }, onNonLoginClick = {
 
-            }
-        )
+        })
     }
 }
 
 @Composable
 fun LoginBottom(
-    onLoginClick: () -> Unit,
-    onNonLoginClick: () -> Unit
+    onLoginClick: () -> Unit, onNonLoginClick: () -> Unit
 ) {
-    Button(
-        onClick = {}
+    Column(
+        modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = stringResource(R.string.login_register))
+        Button(
+            onClick = {},
+            colors = ButtonDefaults.buttonColors(
+                contentColor = colorResource(R.color.white),
+                containerColor = colorResource(R.color.appbar)
+            ),
+            shape = RoundedCornerShape(15)
+        ) {
+            Text(text = stringResource(R.string.login_register))
+        }
+        Spacer(modifier = Modifier.height(5.dp))
+        Button(
+            onClick = {},
+            colors = ButtonDefaults.buttonColors(
+                contentColor = colorResource(R.color.white),
+                containerColor = colorResource(R.color.appbar)
+            ),
+            shape = RoundedCornerShape(15)
+        ) {
+            Text(text = stringResource(R.string.login_non_regsiter))
+        }
     }
-    Spacer(modifier = Modifier.height(5.dp))
-    Button(
-        onClick = {}
-    ) {
-        Text(text = stringResource(R.string.login_register))
-    }
-
 }
 
 @Composable
