@@ -28,6 +28,10 @@ import com.keyword.keyword_miner.R
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.TextStyle
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.keyword.keyword_miner.ui.viewmodels.UserBlogViewModel
+
 
 val neoBold = FontFamily(
     Font(R.font.nanumsquareneo_deb)
@@ -37,22 +41,23 @@ val neoRegular = FontFamily(
 )
 
 @Composable
-fun LoginScreen() {
-    var blogId by remember { mutableStateOf("") }
+fun LoginScreen(loginViewModel: UserBlogViewModel = hiltViewModel()) {
+    val blogId = loginViewModel.blogId
     Column(modifier = Modifier.fillMaxSize()) {
         Spacer(modifier = Modifier.height(180.dp))
         LoginTitle()
         Spacer(modifier = Modifier.height(60.dp))
         LoginBody(
-            blogId = blogId, onBlogIdChange = {
-                blogId = it
-            })
+            blogId = blogId, onBlogIdChange = { loginViewModel.onBlogIdChange(it) }
+        )
         Spacer(modifier = Modifier.height(30.dp))
-        LoginBottom(onLoginClick = {
+        LoginBottom(
+            onLoginClick = {
 
-        }, onNonLoginClick = {
+            },
+            onNonLoginClick = {
 
-        })
+            })
     }
 }
 
@@ -64,7 +69,7 @@ fun LoginBottom(
         modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = {},
+            onClick = onLoginClick,
             colors = ButtonDefaults.buttonColors(
                 contentColor = colorResource(R.color.white),
                 containerColor = colorResource(R.color.appbar)
@@ -75,7 +80,7 @@ fun LoginBottom(
         }
         Spacer(modifier = Modifier.height(5.dp))
         Button(
-            onClick = {},
+            onClick = onNonLoginClick,
             colors = ButtonDefaults.buttonColors(
                 contentColor = colorResource(R.color.white),
                 containerColor = colorResource(R.color.appbar)

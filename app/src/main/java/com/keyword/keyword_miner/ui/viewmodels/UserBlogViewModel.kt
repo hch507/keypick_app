@@ -1,5 +1,8 @@
 package com.keyword.keyword_miner.ui.viewmodels
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keyword.keyword_miner.data.dto.userBlog.UserBlog
@@ -20,6 +23,12 @@ class UserBlogViewModel @Inject constructor(
     private val _currentBlogCnt = MutableStateFlow<MainUiState<UserBlog>>(MainUiState.Loading)
     val currentBlogCnt = _currentBlogCnt.asStateFlow()
 
+    var blogId by mutableStateOf("")
+        private set
+
+    fun onBlogIdChange(newId : String){
+        blogId = newId
+    }
     fun getUserBlogData(userId : String){
         viewModelScope.launch {
             _currentBlogCnt.value =getUserBlogUsecase.invoke(userId)?.let { MainUiState.success(it) }?: MainUiState.Error
